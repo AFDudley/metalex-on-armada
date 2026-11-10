@@ -4,7 +4,7 @@ Status: draft for review, 2026-11-09.
 
 This document lists every requirement that the system must keep, in two parts:
 - **I-1 to I-65** come from MetaLeX's plan, *Build MetaLeX's private chain with recovery* (`mlx`), evidence as of 8 November 2026. Each row quotes the plan.
-- **R-1 to R-45** come from Armada's design.
+- **R-1 to R-46** come from Armada's design.
 
 **Acceptance.** MetaLeX accepts both lists as the requirements of the system. An objection names the ID that it concerns. Section numbers in the last columns refer to `system-design.md`. Terms follow `glossary.md`.
 
@@ -128,7 +128,7 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-59"></a>I-59 | Departure is limited to issuers with settled deals, drained escrows, no reserved units and resolved allocations | "Initially support only issuers with settled deals, drained escrows, no reserved units and resolved allocations." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Build | Departure scope (§5.5). |
 | <a id="I-60"></a>I-60 | The source freezes and retires the accepted epoch | "The source must freeze and retire the accepted epoch" | §3, "P2 recovery is operational; P3 adds enforceable departure" | Design | `finalizeDeparture` records the final root and the successor. The RootChain then accepts no further roots (§5.2, §5.5). |
 | <a id="I-61"></a>I-61 | Importer completeness and economic checks precede activation | "importer completeness and economic checks must precede activation" | §3, "P2 recovery is operational; P3 adds enforceable departure" | Build | The successor's watcher party runs its acceptance checks before it takes the state (§5.5). |
-| <a id="I-62"></a>I-62 | Every outstanding wrapper and pending message has one disposition, including late burns | "Outstanding wrappers and every pending message need one disposition, including late burns." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Build | Each wrapper note, pending lock or return, and open commitment gets one disposition in the successor's state (§5.5). |
+| <a id="I-62"></a>I-62 | Every outstanding wrapper and pending message has one disposition, including late burns | "Outstanding wrappers and every pending message need one disposition, including late burns." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Build | Each wrapper note, pending lock or return, and channel balance gets one disposition in the successor's state (§5.5). |
 | <a id="I-63"></a>I-63 | Old collateral is not released while successor backing is also created | "Old collateral cannot be released while successor backing is also created." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Build | The successor backs the outstanding wrapper notes. The old RootChain is Retired and unlocks nothing (§5.5, §10). |
 | <a id="I-64"></a>I-64 | New actions use fresh signature domains; old signatures remain evidence | "New actions use fresh signature domains; old signatures remain historical evidence." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Design | A successor has a new `chainid`, so new signature domains (§3). |
 
@@ -138,7 +138,7 @@ This document lists every requirement that the system must keep, in two parts:
 |---|---|---|---|---|---|
 | <a id="I-65"></a>I-65 | An independently hosted interface gets equivalent reads, submission, fees and treatment | "Equivalent authorized reads/submission, fees and treatment." | §5, Table 10 | Design | The party RPC is the one authority-scoped interface, for MetaLeX's app and any other (§8.1, §8.5). |
 
-## 2. From Armada's design (R-1 to R-45)
+## 2. From Armada's design (R-1 to R-46)
 
 These are the design requirements that Armada sets for the system. Each is written in the terms of `glossary.md`.
 
@@ -167,25 +167,26 @@ These are the design requirements that Armada sets for the system. Each is writt
 | <a id="R-21"></a>R-21 | A user signs its own requests to the party RPC, and the MetaLeX hub is not in the request path. | §8.1 |
 | <a id="R-22"></a>R-22 | The issuer sees every counterparty's private data. No counterparty sees another counterparty's private data. | §8.4 |
 | <a id="R-23"></a>R-23 | The zkEVM matters for completeness, but it is out of scope because of its operating cost. | §11 |
-| <a id="R-24"></a>R-24 | The payment token that the Cybercorps contracts pull is backed by armada-nitro channels with the watcher party. | §9.2 |
+| <a id="R-24"></a>R-24 | The ERC20 that the Cybercorps contracts pull is a view of armada-nitro. Each balance is USDC that a holder paid to the watcher party and has not withdrawn. | §9.2 |
 | <a id="R-25"></a>R-25 | A payment to the issuer ends as a note owned by the issuer's identity, and a payout record in the issuer state points to it. | §9.2, §9.4 |
 | <a id="R-26"></a>R-26 | Every signed act of the watcher party is a binding commitment, even if a later root fails to account for it. The zkEVM adds conservation; the signature already commits the watcher party to n shares for y USDC. | §9.2, §11 |
 | <a id="R-27"></a>R-27 | The watcher party is an entity. The MetaLeX hub is an entity distinct from MetaLeX, the company. | §2, §4 |
-| <a id="R-28"></a>R-28 | A conservation proof, verified off chain, shows conservation without the zkEVM. | §11 |
+| <a id="R-28"></a>R-28 | A conservation proof, verified off chain, shows conservation of the wrapper without the zkEVM. | §11 |
 | <a id="R-29"></a>R-29 | A hub names the wrapper factory in its asset list, so issuer wrappers need no per-token listing. | §10 |
 | <a id="R-30"></a>R-30 | Value moves as routed payments, which are atomic. No fronting and no hash lock. | §9.3 |
 | <a id="R-31"></a>R-31 | The party RPC's standard endpoint and the browser absorb most changes to MetaLeX's web app. Each watcher party does its own indexing. | §8.6 |
 | <a id="R-32"></a>R-32 | MetaLeX accepts the invariants, and the invariants show which come from MetaLeX's plan and which from the operator's design requirements. | `metalex/invariants.md` |
 | <a id="R-33"></a>R-33 | Most users use the website. Users who want to keep their records use Armada's mobile app, which contains the website and a watcher. Browser storage holds the same data, but it is more easily deleted. | §7, §8.3 |
 | <a id="R-34"></a>R-34 | The party custodian has no hot delegate. Roots finalize daily, so a threshold signature on each channel state costs no time that matters. | §4.1 |
-| <a id="R-35"></a>R-35 | A buyer's USDC stays in its channel until settlement. No app reads an issuer root, because the signatures are binding. | §9.2 |
+| <a id="R-35"></a>R-35 | A buyer's USDC stays in armada-nitro. Paying in moves it to the watcher party's allocation in the buyer's own channel. No app reads an issuer root, because the signatures are binding. | §9.2 |
 | <a id="R-36"></a>R-36 | MetaLeX is a plaintext audience through the MetaLeX hub. | §4.1, §8.4 |
 | <a id="R-37"></a>R-37 | The MetaLeX hub runs watchtowers for website users by default. The recovery operator may run them too. The mobile app runs its own. | §9.1 |
 | <a id="R-38"></a>R-38 | The party-key threshold is a two-thirds majority, a tunable parameter. Without MetaLeX core, an issuer's RootChain advances only while that issuer's watcher member is up. | §4.1 |
 | <a id="R-39"></a>R-39 | A departure uses the holders' own stores and the MetaLeX hub's copy of the state. Nothing is imported on L1. | §5.5 |
 | <a id="R-40"></a>R-40 | A payer whose write is refused gets no asset and has no L1 remedy. Its evidence goes to MetaLeX. | §8.5 |
-| <a id="R-41"></a>R-41 | The adjudicator works as normal. The settlement channel's state reaches L1 in the blob data, so payment-token conservation has a public input. | §9.2, §11 |
+| <a id="R-41"></a>R-41 | The adjudicator works as normal, and no channel state is published. | §9.2 |
 | <a id="R-42"></a>R-42 | Equivocation is the standard rule: two signed successors of one root. | §4.4 |
 | <a id="R-43"></a>R-43 | Publishing is aggregated: once per day, one root of party roots and the blobs of all parties, packed by size. | §6.2, §7 |
-| <a id="R-44"></a>R-44 | Third parties verify independently with a tool that pulls the state from the adjudicator and the blobs. | §11 |
+| <a id="R-44"></a>R-44 | Third parties verify the conservation proof independently, with a tool that reads a root and the wrapper's supply from L1. | §11 |
 | <a id="R-45"></a>R-45 | The EVM is the nimbus EVM. The server, the browser and the mobile app run one EVM, on the same runtime as Armada's light client. | §3 |
+| <a id="R-46"></a>R-46 | The issuer state reads armada-nitro through a system contract, the channel-balance contract. The watcher party updates it from co-signed states it receives over Nitro p2p. | §9.2 |

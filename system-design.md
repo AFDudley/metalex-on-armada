@@ -54,7 +54,7 @@ flowchart LR
  RC --> ER
  PP <-->|"notes fund channels, payouts are notes"| AN
  H ---|"channels"| HUB
- HUB ---|"channels, settlement channel"| WP
+ HUB ---|"channels, Nitro p2p"| WP
  WP -->|"party RPC: records, salts, proofs"| H
 ```
 
@@ -70,22 +70,21 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 
 **Run by each watcher party**
 
-- **Issuer state:** One EVM state per issuer: its Cybercorps companies, its payment token, its commit records and its payout records (§3).
+- **Issuer state:** One EVM state per issuer: its Cybercorps companies, its channel-balance contract and its payout records (§3).
 - **Watcher party:** An entity: the threshold signer that runs one issuer state and anchors it to L1. Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).
 - **Party custodian:** The watcher party's `HubCustodian`. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate (§4.1).
 - **Party RPC:** The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).
-- **Payment token:** The ERC20 that the Cybercorps contracts pull in the issuer state. Each unit is backed by an open commitment or by the watcher party's allocation in its settlement channel (§9.2).
-- **Settlement channel:** The watcher party's channel with the MetaLeX hub, an ordinary Nitro channel. Settled payments move into it, and pay-outs leave from it. Its latest co-signed state goes into each day's blob data (§9.2).
+- **Channel-balance contract:** A system contract in the issuer state with an ERC20 interface. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not yet withdrawn (§9.2).
 - **Party bond:** One armada-nitro channel per watcher party (§4.4).
 
 **Run by MetaLeX, or by anyone**
 
 - **MetaLeX hub:** An armada-nitro hub, and an entity distinct from MetaLeX, the company. As MetaLeX core it is a watcher member of every party. MetaLeX is a plaintext audience through it. It routes payments, runs watchtowers for website users, and supplies user IDs to each issuer state (§8.1, §9).
-- **Verifier tool:** A tool that reads the roots, the blobs and the adjudicator from L1. With it, any third party can check the conservation proof's inputs itself (§11).
+- **Verifier tool:** A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them (§11).
 
 ## 3. Issuer state
 
-**Contents.** One EVM state per issuer holds the issuer's Cybercorps companies: CyberCorp, BorgAuth, IssuanceManager, LETs, scrip, agreements, deals, rounds, LexScrow and MetaVesT. It also holds the payment token, the commit records and the payout records (§9). Every asset in it is one that the issuer's watcher party issues. The USDC behind the payment token stays in armada-nitro.
+**Contents.** One EVM state per issuer holds the issuer's Cybercorps companies: CyberCorp, BorgAuth, IssuanceManager, LETs, scrip, agreements, deals, rounds, LexScrow and MetaVesT. It also holds the channel-balance contract and the payout records (§9). Every asset in it is one that the issuer's watcher party issues. The USDC behind each balance stays in armada-nitro.
 
 **Which companies share one state.** `ParentCoFactory.deployCorp` deploys a CyberCorp. `ParentCoFactory.deployCorpContractFor` deploys a CyberCorp and signs its agreements in the same transaction (`cc` `src/ParentCoFactory.sol`). Which companies share one issuer state is a deployment parameter, to be settled with MetaLeX.
 
@@ -129,7 +128,7 @@ Each issuer has one watcher party, and MetaLeX's whole platform is the set of th
 1. **Sequence and execute** the issuer state. MetaLeX core does this by default.
 2. **Sign hard-final roots** with the party key (§6). A watcher member contributes its signature share only after it stores the batch durably, so at least t watcher members hold every hard-final batch.
 3. **Publish** each batch's blinded tree data in blobs (§7).
-4. **Settle in its channels:** record commitments as payment token, countersign at settlement, publish the settlement channel's latest co-signed state, and pay out against burns (§9). Mint and burn the issuer's wrapper (§10).
+4. **Keep the channel balances:** apply each co-signed state from Nitro p2p in its next batch. Pay each withdrawal through armada-nitro once its batch is hard final (§9.2). Mint and burn the issuer's wrapper (§10).
 5. **Publish a conservation proof** for each hard-final root (§11).
 6. **Run the party RPC**, which serves each holder its records, salts and proofs (§8.1).
 
@@ -170,7 +169,7 @@ stateDiagram-v2
 | SoftFinal → HardFinal | The RootChain accepts the batch's root (§6.1) |
 | SoftFinal → Discarded | The RootChain accepted a different successor of the same `prevRoot` |
 
-Only a hard-final batch affects anything outside the issuer state. Such effects are a settlement, a pay-out, a wrapper mint, a departure, or a proof given to a holder as final.
+Only a hard-final batch affects anything outside the issuer state. Such effects are a payment out of a withdrawal, a wrapper mint, a departure, or a proof given to a holder as final.
 
 ### 5.2 RootChain
 
@@ -185,11 +184,11 @@ An issuer with no transactions posts nothing.
 
 | State | Entry transition | Guard |
 |---|---|---|
-| Committed | The buyer signs a channel state that moves an amount of its allocation to the watcher party, and gives that state to the watcher party | The buyer's latest co-signed state allocates at least that amount to the buyer |
-| Recorded | The watcher party writes a commit record (`channelId`, state hash, amount) and mints the same amount of payment token to the buyer | A Committed amount not yet recorded |
-| Settled | In the batch whose root finalizes the step, the watcher party countersigns the committed state. A routed payment moves the amount into the settlement channel. The commit record closes. | That batch finalizes the step that pulled the payment token |
-| Released | The buyer and the watcher party co-sign a later state that leaves the amount with the buyer. The commit record closes, and the payment token is burned. | The step is voided or refunded |
-| Paid out | The holder burns payment token in a hard-final root. A routed payment moves the amount from the settlement channel to the holder. The watcher party writes a payout record (§9.2). | A Settled amount whose payment token the holder burned |
+| Committed | The buyer and the watcher party co-sign a state in the buyer's channel that moves the amount from the buyer's allocation to the watcher party's | An ordinary armada-nitro payment: the buyer's latest co-signed state allocates at least that amount to the buyer |
+| Credited | The watcher party applies the co-signed state in its next batch. The channel-balance contract credits the buyer, and the batch records the state's hash. | A Committed state not yet applied |
+| Withdrawn | The holder calls `withdraw` on the channel-balance contract, and its balance falls by the amount | The holder's own transaction, against its own balance |
+| Paid | The watcher party pays the amount to the holder through armada-nitro, and the issuer state records a payout record | The withdrawal's batch is hard final, and the withdrawal has no payout record yet |
+
 
 ### 5.4 Scrip lock
 
@@ -221,7 +220,7 @@ Each lock and return record binds the bindings of `mlx`'s `BridgeMessageV1`: iss
 | Retiring | `scheduleDeparture` on `IssuerEpochRegistry` | Signed by the party key. The successor's watcher party checks `mlx` §3's scope rules (settled deals, drained escrows, no reserved units, resolved allocations) before it accepts the state. |
 | Retired | `finalizeDeparture` | Signed by the party key. It records the old RootChain's final root and the successor's identity, and the old RootChain accepts no further roots. |
 
-No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapper note, pending lock or return, and open commitment gets one disposition in the successor's state.
+No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapper note, pending lock or return, and channel balance gets one disposition in the successor's state.
 
 ## 6. RootChain rules
 
@@ -247,14 +246,14 @@ Each party still signs only its own root and its own blob references. A party wi
 
 ## 7. Blob data: blinded, not encrypted
 
-Each root publishes, in blobs, the blinded position and blinded leaf of every slot whose value changed since the previous root. The blobs also carry the watcher party's latest co-signed settlement-channel state (§9.2). A slot that changed several times since the previous root appears once, with its final value. Interior nodes are not published: anyone with the archived leaves rebuilds the tree.
+Each root publishes, in blobs, the blinded position and blinded leaf of every slot whose value changed since the previous root. A slot that changed several times since the previous root appears once, with its final value. Interior nodes are not published: anyone with the archived leaves rebuilds the tree.
 
 | Property | Result |
 |---|---|
 | Binding | The party signature names the blob hashes, offsets and lengths (§6.1) |
 | Hiding | No key exists to steal or break. Learning a value needs a SHA-256 preimage that includes a 256-bit random salt. |
 | What stays visible | How many leaves changed per batch, when, and the size of the tree. A slot's position salt is fixed, so an observer can see that the same position changed again in a later batch. |
-| Who uses it | A holder that lost its own copy of its records, salts and proofs, or that got no update for a root (§8.2, §8.3). The verifier tool (§11). |
+| Who uses it | A holder that lost its own copy of its records, salts and proofs, or that got no update for a root (§8.2, §8.3) |
 | What it does not do | Rebuild a watcher member's state. Watcher members store the state themselves (§4.3). |
 
 Ethereum prunes blobs after about 18 days. Every watcher member archives the blob data, and anyone else may archive it too, because it reveals nothing. Each holder keeps its records, salts and latest proofs. Most holders use MetaLeX's website, which keeps them in browser storage. Holders who want durable records use Armada's mobile app, which contains the website and a watcher for the holder's own records. Browser storage holds the same data, but it is more easily deleted.
@@ -294,7 +293,7 @@ From these it computes a proof of each record against the last root. That proof 
 
 ### 8.4 Scope
 
-A holder sees its own records under the contracts' own authority: its LETs, scrip, payment token, endorsements, agreements and grants. It sees an asset's history only from the batch in which it first holds the asset. Earlier holders are other counterparties of the issuer, and no counterparty sees another counterparty's private data. Issuer officers see every counterparty's data. MetaLeX, through the MetaLeX hub, and the recovery operator see everything, as the named plaintext audiences.
+A holder sees its own records under the contracts' own authority: its LETs, scrip, channel balance, endorsements, agreements and grants. It sees an asset's history only from the batch in which it first holds the asset. Earlier holders are other counterparties of the issuer, and no counterparty sees another counterparty's private data. Issuer officers see every counterparty's data. MetaLeX, through the MetaLeX hub, and the recovery operator see everything, as the named plaintext audiences.
 
 ### 8.5 Methods and writes
 
@@ -315,7 +314,7 @@ MetaLeX's web app needs no new transport. The work splits between the party RPC 
 | The signature on each request (§8.1) | The browser, through the user's wallet |
 | Verification of each record against the issuer's root on L1 (§8.2), failing closed when a check or the authentication fails | The browser, through the WASM verifier and Armada's browser light client |
 
-The app's one new step is the payment commitment, which the user's Armada wallet signs (§9.2).
+The app's one new step is the payment in armada-nitro, which the user's Armada wallet co-signs (§9.2).
 
 ## 9. Value
 
@@ -336,23 +335,21 @@ Funding a channel needs a working hub: MetaLeX's or an issuer's.
 
 ### 9.2 The watcher party as a Nitro participant
 
-The Cybercorps contracts pull, hold and pay an ERC20 in the same EVM (`cc` `src/storage/LexScrowStorage.sol:251, 308`). In the issuer state that ERC20 is the payment token. The watcher party connects it to armada-nitro through its own channels. No contract and no app reads an issuer root to move USDC: the signatures are binding.
+The Cybercorps contracts pull, hold and pay an ERC20 in the same EVM (`cc` `src/storage/LexScrowStorage.sol:251, 308`). The USDC itself stays in armada-nitro. So the issuer state gets a view of it: the *channel-balance contract*, a system contract with an ERC20 interface. Each deal names it as `paymentToken`. Its balances are not a second asset. Each one is USDC that a holder committed to the watcher party in armada-nitro and has not yet withdrawn.
 
-**Channels.** Each buyer has a channel with the watcher party, funded through the hub (§9.3). The party custodian is the watcher party's participant in it.
+**Channels.** Each holder that pays or is paid has a channel with the watcher party, funded through a hub (§9.3). The party custodian is the watcher party's participant in it.
 
-**Paying in.** The buyer signs a channel state that moves the amount to the watcher party, and gives that state to the watcher party. The USDC stays in the buyer's channel. The watcher party writes a *commit record* and mints the same amount of payment token to the buyer.
+**Paying in.** The buyer and the watcher party co-sign a state that moves the amount from the buyer's allocation to the watcher party's. This is an ordinary armada-nitro payment. So the buyer cannot spend the amount again: it is no longer the buyer's allocation, and only a later co-signed state can change that. No separate lock is needed.
 
-**The buyer cannot take a commitment back.** The buyer could try to force-close the channel with an earlier state. The watcher party then answers the challenge with the committed state, which the buyer signed and which has a higher turn number. ForceMove's turn rule decides, and no root is read.
+**Crediting.** The watcher party receives the co-signed state over Nitro's p2p transport (`adr` ADR-0008) as soon as the buyer signs it. In its next batch, it applies the state, and the channel-balance contract credits the buyer. The batch records the state's hash, so every watcher member replays the batch to the same result. The watcher party reads L1 only for events on the adjudicator: deposits, challenges and conclusions.
 
-**Settlement.** In the batch whose root finalizes the step, the watcher party countersigns the committed state. A routed payment then moves the amount into the *settlement channel*, the watcher party's channel with the MetaLeX hub. The watcher party's signature on the root binds it to the shares, and its signature on the state completes the payment.
+**Inside the issuer state.** The Cybercorps contracts move balances like any ERC20. `signDealAndPay` pulls the buyer's balance into escrow, `finalizeEscrow` pays the issuer and MetaLeX, and `refundVoidedDeal` returns it to the buyer.
 
-**Release.** If the step is voided or refunded, the buyer and the watcher party co-sign a later state that leaves the amount with the buyer. The watcher party burns the payment token.
+**Withdrawal.** A holder withdraws by calling `withdraw` on the channel-balance contract. That is the holder's own transaction, and its balance falls by the amount. Once the batch is hard final, the watcher party pays the amount to the holder through armada-nitro, exactly once for each withdrawal. With each payment, the issuer state records a *payout record*: the withdrawal, the `channelId` and the hash of the co-signed state that paid it. The holder exits its channel to a fresh shielded note when it chooses, and unshields that note itself if it wants. So the issuer's RootChain points to the note, through the root.
 
-**Paying out.** A holder burns payment token. Against that burn in a hard-final root, a routed payment moves the amount from the settlement channel to the holder. With each pay-out, the issuer state records a *payout record*: the `channelId` and the hash of the co-signed state that paid it. The holder's channel exit mints its note from that state. So the issuer's RootChain points to the note, through the root.
+**Supply.** The sum of all balances, plus withdrawals not yet paid, equals what the watcher party received through applied states, less what it paid out. The watcher party holds that USDC as its own allocations in armada-nitro channels. Every credit, withdrawal and payment is a co-signed state or a transaction in a signed root, so each holder can prove its own part (§11).
 
-**Publication and supply.** Each day's blob data carries the settlement channel's latest co-signed state, and the party signature binds it through `blobRefs` (§6.1). The channel itself works like any Nitro channel on the adjudicator: funding, challenge, checkpoint and conclusion. Payment-token supply equals the open commit records plus the watcher party's allocation in the published settlement-channel state.
-
-**Exit.** Any participant exits with ForceMove and the latest co-signed state, as in any channel.
+**A buyer's challenge.** A buyer could force-close its channel with an earlier state, from before its payment. The watcher party, or a watchtower, answers the challenge with the later co-signed state. ForceMove's turn rule decides, and no root is read (§9.1).
 
 ### 9.3 Routed payments through the MetaLeX hub
 
@@ -362,13 +359,13 @@ A user that does not want the MetaLeX hub uses an issuer's hub, or a channel wit
 
 ### 9.4 A primary deal, step by step
 
-1. **The issuer proposes.** An issuer officer calls `DealManager.proposeDeal(certPrinter, paymentToken, paymentAmount, …)` (`cc` `src/DealManager.sol:144`), with the payment token as `paymentToken`. The issuer state creates the agreement and an `Escrow` (`LexScrowStorage.sol:184`): `corpAssets` holds the LET, and `buyerAssets` holds the payment.
-2. **The buyer commits payment.** The buyer's channel with the watcher party is funded through the MetaLeX hub. The buyer signs a state that moves the amount to the watcher party. The watcher party records the commitment and mints the payment token to the buyer (§9.2). The USDC stays in the buyer's channel.
-3. **The buyer signs and pays.** `signDealAndPay` (`DealManager.sol:231`) pulls the payment token into LexScrow with `safeTransferFrom` (`LexScrowStorage.sol:251`). The escrow becomes `PAID`.
-4. **The deal finalizes.** `finalizeDeal` (`DealManager.sol:271`) runs `finalizeEscrow` (`LexScrowStorage.sol:308`). It pays the payment token to `companyPayable()`, the issuer, and the fee to `getPlatformPayable()`, MetaLeX. It delivers the LET to the buyer, and legal title moves to the buyer that the latest endorsement names.
-5. **The batch is anchored and the payment settles.** The watcher members store the batch and sign it with the party key. In the same batch, the watcher party countersigns the buyer's committed state, and the amount moves into the settlement channel. MetaLeX core publishes the root in the daily run (§6.2).
-6. **The issuer is paid out.** The issuer burns its payment token. Against that burn in a hard-final root, a routed payment moves the amount from the settlement channel to the issuer. The issuer state records the payout record. The issuer's channel exit mints a note to the issuer's identity in the Armada pool. MetaLeX's fee leaves the same way.
-7. **Void.** `refundVoidedDeal` (`DealManager.sol:310`) returns the payment token to the buyer. The buyer and the watcher party co-sign a release state, and the payment token is burned. The USDC never left the buyer's channel.
+1. **The issuer proposes.** An issuer officer calls `DealManager.proposeDeal(certPrinter, paymentToken, paymentAmount, …)` (`cc` `src/DealManager.sol:144`), with the channel-balance contract as `paymentToken`. The issuer state creates the agreement and an `Escrow` (`LexScrowStorage.sol:184`): `corpAssets` holds the LET, and `buyerAssets` holds the payment.
+2. **The buyer pays in.** The buyer and the watcher party co-sign a state in the buyer's channel that moves the amount to the watcher party (§9.2). In its next batch, the watcher party credits the buyer's balance.
+3. **The buyer signs and pays.** `signDealAndPay` (`DealManager.sol:231`) pulls the buyer's balance into LexScrow with `safeTransferFrom` (`LexScrowStorage.sol:251`). The escrow becomes `PAID`.
+4. **The deal finalizes.** `finalizeDeal` (`DealManager.sol:271`) runs `finalizeEscrow` (`LexScrowStorage.sol:308`). It moves the balance to `companyPayable()`, the issuer, and the fee to `getPlatformPayable()`, MetaLeX. It delivers the LET to the buyer, and legal title moves to the buyer that the latest endorsement names.
+5. **The batch is anchored.** The watcher members store the batch and sign it with the party key. MetaLeX core publishes the root in the daily run (§6.2).
+6. **The issuer is paid.** The issuer withdraws its balance. Once that batch is hard final, the watcher party pays the issuer through armada-nitro, and the issuer state records the payout record. The issuer exits to a shielded note when it chooses. MetaLeX's fee leaves the same way.
+7. **Void.** `refundVoidedDeal` (`DealManager.sol:310`) returns the balance to the buyer. The buyer keeps it for another deal, or withdraws it.
 
 ## 10. Scrip as armada-nitro notes
 
@@ -405,34 +402,27 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 | A counterparty keeps its claim | Its claim is the operators' own signature on the agreement and the roots |
 | Anyone can check conservation | The conservation proof, below |
 
-**Conservation proof.** For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. Each identity has a public input on L1, and the proof reveals only totals:
+**Conservation proof.** For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. It covers the wrapper only. The USDC needs no such proof, because it never leaves armada-nitro, and armada-nitro conserves it (§9.2). The proof's public input is on L1, and it reveals only totals:
 
 | Asset | Identity | Public input on L1 |
 |---|---|---|
-| Payment token | Payment-token supply equals the open commit records plus the watcher party's allocation in the settlement channel | The published settlement-channel state, checked against the adjudicator (§9.2) |
 | Scrip | Locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R | The wrapper's `totalSupply()` |
 
-**Verifier tool.** Any third party can check the inputs itself. The tool reads the party roots from the aggregator, the blobs, and the adjudicator. For each settlement channel, it makes three checks against the adjudicator:
+**Verifier tool.** Any third party can check the proof itself. The tool reads the root from the aggregator and the wrapper's `totalSupply()` from L1, then verifies the proof against them.
 
-- Both participants co-signed the published state.
-- Its turn number is not below any state that the adjudicator holds for the channel.
-- Its allocations do not exceed the channel's holdings.
-
-It then checks the conservation proof against these inputs and the wrapper's supply.
-
-The proof shows the state at a root, not the transition that produced it. Its construction is an implementation question. Each open commit record is backed by a buyer-signed state that the watcher party holds, so it is binding (§9.2).
+The proof shows the state at a root, not the transition that produced it. Its construction is an implementation question.
 
 **What t colluding watcher members can do,** for example the issuer and MetaLeX: sign a root that misaccounts. L1 does not reject it. Each such root is signed evidence against them:
 
 | Misaccounting | Evidence the counterparty holds |
 |---|---|
 | A holder's LET or scrip is moved or voided without the holder's signature, or shares are issued that the contracts forbid | Its earlier proofs of what it held, and the signed roots that contradict them |
-| Payment token is minted with no commitment behind it, or a holder's payment token is moved | The signed agreement, the signed roots and its inclusion proofs: the operators' commitment to deliver n shares for y USDC. A mint with nothing behind it also fails the conservation proof. |
+| A channel balance is credited with no co-signed state behind it, or a holder's balance is moved or not paid | The holder's co-signed states, its inclusion proofs and the signed roots. The batch records the hash of every state it applies, so a credit with no state behind it is visible to every watcher member. |
 | Wrapper is minted with no locked scrip, or a hook added after a lock blocks the unlock | The signed lock, mint and return records. A mint with no lock also fails the conservation proof. |
 
 Misaccounting is limited to one issuer. It moves no value held in armada-nitro channels and notes.
 
-**What the zkEVM adds: conservation enforced on L1.** With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation that depends on channel states and on the wrapper on L1 still rests on the conservation proof. `zos` shows the technique: a REVM state transition proven with ZisK.
+**What the zkEVM adds: conservation enforced on L1.** With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation of the wrapper on L1 still rests on the conservation proof. `zos` shows the technique: a REVM state transition proven with ZisK.
 
 **If the zkEVM is added later:**
 - **Proof system.** Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option.
@@ -447,10 +437,10 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 | The issuer has no transactions | None | Nothing posted. Holders' proofs stay current. |
 | MetaLeX core stops | None in RootChain | The issuer and the recovery operator sequence and submit by the same rules (§6.2). Users route through an issuer's hub. Value in channels is unaffected. |
 | A hub refuses to route | None | The user uses another hub, or a channel with the watcher party directly. Value in its channel exits by ForceMove. |
-| Fewer than t watcher members are live | No hard finality, no settlements, no pay-outs | Holders keep their proofs against the last root and can prove what they own (§8.3). Value in channels exits by ForceMove. Open commitments stay open. |
+| Fewer than t watcher members are live | No hard finality, no payments out | Holders keep their proofs against the last root and can prove what they own (§8.3). Value in channels exits by ForceMove. Balances stay in the issuer state. |
 | The sequencer refuses a write | None | The payer gets no asset and has no L1 remedy. Its signed request and the refusal are its evidence to MetaLeX (§8.5). |
 | A lock is never wrapped, or a return is never unlocked | None on L1 | A watcher-party duty. The signed lock and return records are the holder's evidence (§5.4). |
-| t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if supply is broken, and the signed root is evidence against the operators (§11) |
+| t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if the wrapper's supply is broken, and the signed root is evidence against the operators (§11) |
 | The party key signs two successors of one root | None in RootChain | The RootChain accepts one successor per root. The party bond is slashed (§4.4). |
 
 ## 13. Dependencies
@@ -463,7 +453,7 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 | Hub role, channels over Waku, watchtower | On Armada's plan. Next. |
 | Wrapper factory and issuer wrapper ERC20 | New. Not built. |
 | Issuer RootChain, daily aggregator and IssuerEpochRegistry | New. Not built. |
-| Watcher-party harness: nimbus EVM, JMT, packed blobs, party RPC, commit and payout records | New. Not built. |
+| Watcher-party harness: nimbus EVM, JMT, packed blobs, party RPC, channel-balance contract, Nitro p2p client, payout records | New. Not built. |
 | nimbus in a browser | The WASM build of the verified proxy compiles, but stalls at its first `sync()` call; the cause is not known (`adr` ADR-0009 D9.2). The browser verifier depends on the fix. On Armada's plan. |
 | Conservation proof | New. Construction not chosen. |
 | Verifier tool | New. Not built. |
@@ -508,7 +498,7 @@ The EVM computes keccak for the `KECCAK256` opcode and for every mapping slot ke
 | Hub channel capacity | Peak payment value being routed |
 | People operating the watcher members' watchers | The number of parties and incidents. `mlx` assumed 40–80 hours per month for MetaLeX's own maintenance. |
 | L1 settlement | One blob transaction per day, which also calls the aggregator. More blob transactions only on a day whose data exceeds one transaction's blob limit. Channel and wrapper transactions as users make them. |
-| Blob data | Slots changed since the previous root × 64 bytes, plus one settlement-channel state per party. One blob costs 131,072 blob gas. |
+| Blob data | Slots changed since the previous root × 64 bytes. One blob costs 131,072 blob gas. |
 | Proving | One conservation proof per root, off chain (§11). No zkEVM. |
 
 ## Sources

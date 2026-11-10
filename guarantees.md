@@ -8,7 +8,7 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 
 ## 1. The parties
 
-- **Holder:** a buyer or other counterparty that holds an issuer's MetaLeX assets or payment token.
+- **Holder:** a buyer or other counterparty that holds an issuer's MetaLeX assets or a channel balance.
 - **Issuer:** the company. It is a watcher member of its own watcher party, and it receives payments through `companyPayable()`.
 - **Watcher party:** the threshold signer for one issuer. Its party key needs a two-thirds majority of its n watcher members, so n = 3 and t = 2 at the start. Through its custodian, it is an armada-nitro participant and the wrapper's minter (§4.1).
 - **MetaLeX hub:** an armada-nitro hub that routes payments and runs watchtowers for website users (§9). It is an entity distinct from MetaLeX. As MetaLeX core, it is a watcher member of every party.
@@ -28,20 +28,20 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 | Issuer | The full issuer state | It is a watcher member and stores the state (§4.3) |
 | Issuer | Its payout | The payout record names the channel state that paid it, and its note is in the Armada pool (§9.2) |
 | Wrapper holder | That its wrapper was minted against a lock | The watcher party's signed mint record and the lock in a hard-final root (§10) |
-| Anyone | That the payment token and the wrapper are conserved at each root | The verifier tool checks the conservation proof against the published settlement-channel states, the adjudicator and the wrapper's supply on L1 (§11) |
+| Anyone | That the wrapper is conserved at each root | The verifier tool checks the conservation proof against the root and the wrapper's supply on L1 (§11) |
 
 ## 3. What each party must trust
 
 ### Holder
 
-- **The watcher party,** for correct state transitions and for pay-out against a burn. If that trust fails, holders detect the change, and the signed root is evidence against the operators (§11). Value in the holder's channel exits by ForceMove. With the zkEVM, L1 would enforce correct transitions instead.
+- **The watcher party,** for correct state transitions and for payment of each withdrawal. If that trust fails, holders detect the change, and the signed root is evidence against the operators (§11). Value in the holder's channel exits by ForceMove. With the zkEVM, L1 would enforce correct transitions instead.
 - **The sequencer,** to include its writes. A payer whose write is refused gets no asset and has no remedy on L1. Its signed request and the refusal are its evidence to MetaLeX (§8.5).
 - **A watchtower,** while the holder is offline, to answer a stale-state challenge on its channel. The MetaLeX hub runs one for website users, the recovery operator may run one, and the mobile app runs its own (§9.1).
 - **A hub,** the MetaLeX hub or an issuer's, for routed payments to stay live. If one hub stops, the holder uses another hub, or a channel with the watcher party directly (§9.3).
 
 ### Issuer
 
-- **The other watcher members acting together,** for correct state transitions and pay-outs without the issuer's share, because t = 2. If that trust fails, the issuer detects the change, and the signed root is evidence against the operators (§11). The issuer also holds the full state as evidence.
+- **The other watcher members acting together,** for correct state transitions and payments without the issuer's share, because t = 2. If that trust fails, the issuer detects the change, and the signed root is evidence against the operators (§11). The issuer also holds the full state as evidence.
 
 ### Wrapper holder
 
@@ -49,9 +49,9 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 
 ### Where the money is at each step
 
-A buyer's USDC stays in its own channel until settlement, and the watcher party cannot take it before then. The watcher party holds only the buyer's signed commitment, which it countersigns at settlement (§9.2).
+The USDC never leaves armada-nitro. Paying in moves it to the watcher party's allocation in the buyer's own channel, with a state that both sign (§9.2). From then on, the buyer holds a channel balance in the issuer state. The watcher party's signatures bind it to pay that balance out on withdrawal.
 
-After settlement, the USDC is in the settlement channel, and its latest co-signed state is in each day's blob data. The issuer and MetaLeX hold payment token for it, and the watcher party's signatures bind it to pay out.
+A holder withdraws with its own transaction. Once that batch is hard final, the watcher party pays it through armada-nitro, and the holder exits to a shielded note when it chooses.
 
 Value in any channel exits by ForceMove with the latest co-signed state (§9.1). A routed payment is atomic, so no party has value in flight (§9.3).
 
@@ -80,8 +80,8 @@ No party is affected, because the MetaLeX hub is a separate entity.
 
 ### Fewer than t watcher members are live
 
-- **Holders:** no new roots and no pay-outs. Each holder can prove what it held at the last root (§8.3). Value in channels exits by ForceMove. Open commitments stay open.
-- **The issuer:** no new roots and no pay-outs. The issuer holds the full state.
+- **Holders:** no new roots and no payments out. Each holder can prove what it held at the last root (§8.3). Value in channels exits by ForceMove. Balances stay in the issuer state.
+- **The issuer:** no new roots and no payments out. The issuer holds the full state.
 - **The MetaLeX hub:** its routes to that watcher party stop.
 - **Wrapper holders:** no new mints or unlocks. Existing wrapper notes are not affected.
 
@@ -102,7 +102,7 @@ The wrapper holder has no remedy on L1. The signed lock and return records are i
 
 This is possible only because the zkEVM is out of scope (§11).
 
-- **Holders:** each holder detects it, and holds the signed root and its earlier proofs as evidence. Payment token with no commitment or settled USDC behind it fails the conservation proof.
+- **Holders:** each holder detects it, and holds the signed root and its earlier proofs as evidence. A channel balance with no co-signed state behind it is visible to every watcher member, because each batch records the states it applies.
 - **The issuer:** if it did not sign, it holds the full state as evidence.
 - **Wrapper holders:** a wrapper mint with no locked scrip fails the conservation proof.
 - **Not affected:** the MetaLeX hub, which only routes payments.

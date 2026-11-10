@@ -12,7 +12,7 @@ Each issuer gets its own EVM state. Three operators run it together: MetaLeX, an
 
 Operator keys run the system, but they hold no corporate authority. Corporate authority stays in the contracts, and no operator key can sign for a user.[^authority]
 
-Money does not live in the private state. It stays on Ethereum in armada-nitro, Armada's payment system: shielded notes, and payment channels funded from notes. A buyer's USDC stays in the buyer's own channel until the deal settles.[^value]
+Money does not live in the private state. It stays on Ethereum in armada-nitro, Armada's payment system: shielded notes, and payment channels funded from notes. A buyer pays by a signed armada-nitro payment in its own channel. The private state sees that payment only as a balance, and every payee is paid out in armada-nitro.[^value]
 
 ## What MetaLeX and its users get
 
@@ -31,7 +31,7 @@ Prividium proves every batch with a zkEVM on GPU hardware. This proposal does no
 
 - every root is a signed commitment that the operators cannot deny;
 - each holder checks its own records against every root;
-- a published conservation proof shows that no payment token or scrip exists without backing. Anyone can check it.
+- a published conservation proof shows that no wrapper token exists without locked scrip behind it. Anyone can check it.
 
 So a dishonest majority of operators could sign a wrong root, and Ethereum would accept it. But every holder would detect the change, and the signed root is evidence against those operators. Prividium's zkEVM would reject such a root. A zkEVM can be added later if MetaLeX wants that protection.[^trust]
 
@@ -50,7 +50,7 @@ On the same basis as MetaLeX's own cost tables, this design costs about $4,400 p
 ## What MetaLeX must decide
 
 1. Which companies share one issuer state.
-2. Whether to accept the requirements: the 65 from MetaLeX's plan, and the 45 from this design.[^accept]
+2. Whether to accept the requirements: the 65 from MetaLeX's plan, and the 46 from this design.[^accept]
 
 ## Notes
 
@@ -60,7 +60,7 @@ On the same basis as MetaLeX's own cost tables, this design costs about $4,400 p
 
 [^authority]: **Authority, [I-10 to I-13](invariants.md#I-10).** Infrastructure keys and data keys are separate from corporate authority. The recovery operator cannot invent balances, sign as a user or choose a beneficiary. Also [R-11](invariants.md#R-11): only an asset's holder can start an action against it. System design §4.1, §8.1.
 
-[^value]: **Value and payments, [R-5](invariants.md#R-5), [R-13](invariants.md#R-13), [R-24 to R-26](invariants.md#R-24), [R-29](invariants.md#R-29), [R-30](invariants.md#R-30), [R-35](invariants.md#R-35) and [R-41](invariants.md#R-41).** All value is armada-nitro notes and channels. The payment token is backed by buyer-signed commitments and the settlement channel. Routed payments are atomic, and every signed act binds the watcher party. System design §9.
+[^value]: **Value and payments, [R-5](invariants.md#R-5), [R-13](invariants.md#R-13), [R-24 to R-26](invariants.md#R-24), [R-29](invariants.md#R-29), [R-30](invariants.md#R-30), [R-35](invariants.md#R-35), [R-41](invariants.md#R-41) and [R-46](invariants.md#R-46).** All value is armada-nitro notes and channels. The issuer state sees USDC only as channel balances, which the watcher party updates from co-signed states it receives over Nitro p2p. Routed payments are atomic, and every signed act binds the watcher party. System design §9.
 
 [^privacy]: **Privacy and access, [I-34 to I-41](invariants.md#I-34).** One state per issuer, blinded blob data, and a party RPC scoped by the contracts' own authority. Nested calls are checked frame by frame. Also [R-4](invariants.md#R-4), [R-16](invariants.md#R-16), [R-22](invariants.md#R-22) and [R-36](invariants.md#R-36). System design §3, §7, §8.4, §8.5.
 
@@ -74,11 +74,11 @@ On the same basis as MetaLeX's own cost tables, this design costs about $4,400 p
 
 [^records]: **Issuer records, [I-52 to I-58](invariants.md#I-52).** The issuer holds its full state, logs and history. Completeness without the zkEVM is labeled attested, and no hash of guessable personal data is published. System design §3, §4.3, §7.
 
-[^departure]: **Departure, [I-59 to I-64](invariants.md#I-59).** An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapper note and open commitment gets one disposition in the new state. Also [R-39](invariants.md#R-39). System design §5.5.
+[^departure]: **Departure, [I-59 to I-64](invariants.md#I-59).** An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapper note and channel balance gets one disposition in the new state. Also [R-39](invariants.md#R-39). System design §5.5.
 
 [^parity]: **Interface parity, [I-65](invariants.md#I-65).** The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.
 
-[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** The zkEVM is out of scope because of its operating cost. A conservation proof and a public verifier tool take its place for supply. System design §11.
+[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** The zkEVM is out of scope because of its operating cost. A conservation proof and a public verifier tool take its place for the wrapper's supply. System design §11.
 
 [^data]: **Publishing, [R-8](invariants.md#R-8), [R-17](invariants.md#R-17), [R-18](invariants.md#R-18) and [R-43](invariants.md#R-43).** Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §14.
 

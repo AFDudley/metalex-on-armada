@@ -34,7 +34,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 |---|---|
 | **MetaLeX assets** | Everything a holder can have in the Cybercorps contracts: LETs, CyberScrip balances, agreements, round allocations and MetaVesT grants. `mlx` has no single term. |
 | **Issuer RootChain** | The L1 contract of one issuer. It stores the hard-final roots of that issuer's state, one successor per root. |
-| **Issuer state** | One EVM state per issuer: its Cybercorps company graph, its payment token and its payout records. Watcher members execute it. Every asset in it is one that the issuer's watcher party issues. |
+| **Issuer state** | One EVM state per issuer: its Cybercorps company graph, its channel-balance contract and its payout records. Watcher members execute it. Every asset in it is one that the issuer's watcher party issues. |
 | **Watcher party** | An entity: the threshold signer for one issuer. It runs the issuer state and anchors it to L1 through the issuer's RootChain. Through its custodian, it is an armada-nitro participant and the minter of the issuer's wrapper. One per issuer. |
 | **Watcher member** | One participant in a watcher party: MetaLeX core, the recovery operator or the issuer. Each runs its own watcher. |
 | **MetaLeX core** | The MetaLeX hub in its role as a watcher member of every party (R-6). The default sequencer. |
@@ -53,19 +53,17 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **MetaLeX hub** | An armada-nitro hub. An entity distinct from MetaLeX, the company (R-27), through which MetaLeX is a plaintext audience. It routes Nitro payments, runs watchtowers for website users, and supplies user IDs to each issuer state. It is not in the path of a user's request to the party RPC. |
 | **Self-help** | A holder proving its own records against any root from its salts, its values and the public blob data, with no watcher member |
 | **Party custodian** | The watcher party's `HubCustodian`. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate. |
-| **Payment token** | The ERC20 that the Cybercorps contracts pull in an issuer state (`paymentToken` in `DealManager`). Each unit is backed by an open commitment or by the watcher party's allocation in its settlement channel. |
-| **Commit record** | The issuer-state record of a buyer's commitment: the `channelId`, the hash of the buyer-signed state and the amount. It closes at settlement or release. |
-| **Settlement channel** | The watcher party's channel with the MetaLeX hub, an ordinary Nitro channel. Settled amounts move into it, pay-outs leave from it, and its latest co-signed state goes into each day's blob data. |
-| **Verifier tool** | A tool that reads the aggregator, the blobs and the adjudicator, so that any third party can check the conservation proof's inputs itself |
+| **Channel-balance contract** | A system contract in an issuer state with an ERC20 interface, and the `paymentToken` of every deal. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not withdrawn. The watcher party updates it from co-signed states it receives over Nitro p2p. |
+| **Verifier tool** | A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them |
 | **Checkpoint** | Recording a channel's latest co-signed state on the adjudicator, as in any Nitro channel |
 | **Watchtower** | A service that answers a stale-state challenge on a user's channel within the challenge window, with the user's latest co-signed state |
-| **Payout record** | The issuer-state record of a pay-out: the `channelId` and the hash of the co-signed channel state that paid it |
-| **Commit, settle, pay-out** | A buyer commits payment by signing a channel state that moves USDC to the watcher party; the USDC stays in its channel. The watcher party settles by countersigning that state and moving the amount into the settlement channel, in the batch that finalizes the step. A pay-out moves settled USDC from the settlement channel to a holder through a routed payment, against a burn of payment token. |
+| **Payout record** | The issuer-state record of a paid withdrawal: the withdrawal, the `channelId` and the hash of the co-signed channel state that paid it |
+| **Pay in, withdraw** | A holder pays in with a co-signed armada-nitro state that moves USDC to the watcher party's allocation, and its channel balance is credited. It withdraws with its own transaction, and the watcher party pays it through armada-nitro once that batch is hard final. |
 | **Routed payment** | One Nitro payment across several channels, through a hub, made atomic by guarantees and reclaim. The hub advances no value (Armada ADR-0021). |
 | **Scrip lock** | Canonical scrip locked in the issuer state against wrapper notes outside it. States: Locked, Wrapped, Returned, Unlocked. |
 | **Issuer wrapper** | An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool. |
 | **Wrapper factory** | The L1 factory that deploys each issuer's wrapper. A hub may name it in its asset list. |
-| **Conservation proof** | An off-chain zero-knowledge proof for each hard-final root. It shows two identities. Payment-token supply equals open commitments plus the published settlement-channel allocation. Locked scrip equals wrapper supply plus pending locks and returns. |
+| **Conservation proof** | An off-chain zero-knowledge proof for each hard-final root: locked scrip equals wrapper supply plus pending locks and returns. The USDC needs no such proof, because it never leaves armada-nitro. |
 | **Entry guard** | The rule that a scrip lock reverts unless the asset's force features are off and its implementation hash is the pinned one |
 | **Daily aggregation** | MetaLeX core's default publishing run: one blob transaction per day, with all parties' data packed by size. It calls the aggregator with a Merkle root of the day's party roots. |
 | **Daily aggregator** | The L1 contract that records the day's root of party roots and the hashes of published blobs |
