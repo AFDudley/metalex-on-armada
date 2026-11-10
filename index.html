@@ -67,8 +67,8 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </style></head>
 <body id="top">
 <header class="topbar"><a class="brand" href="#index" aria-label="Overview"><span class="wordmark">Armada × MetaLeX</span></a><span class="top-caption">Overview</span><div class="top-actions"><button class="button print-button" type="button">Print ↗</button><button class="button menu-button" type="button" aria-expanded="false" aria-controls="report-navigation">Contents ☰</button></div><div class="progress" aria-hidden="true"></div></header>
-<header class="cover"><div class="eyebrow">MetaLeX on Armada · Draft for review · November 2026</div><h1>MetaLeX on Armada</h1><p class="cover-subtitle">Guarantees · System design · Cost · Requirements for acceptance</p><div class="cover-meta"><div><b>Status</b>Draft for review. Not built.</div><div><b>Reading map</b>6 documents / 54 tables / 4 figures</div><a class="cover-jump" href="#guarantees">Read the documents ↓</a></div></header>
-<div class="layout"><aside class="sidebar" id="report-navigation" aria-label="Contents"><div class="toc-title">Documents</div><nav class="toc"><a href="#index" data-doc="index"><span>00</span>Overview</a><a href="#guarantees" data-doc="guarantees"><span>01</span>Guarantees</a><a class="sub" href="#guarantees--1-the-parties" data-doc="guarantees"><span>↳</span>1. The parties</a><a class="sub" href="#guarantees--2-what-each-party-can-check" data-doc="guarantees"><span>↳</span>2. What each party can check</a><a class="sub" href="#guarantees--3-what-each-party-must-trust" data-doc="guarantees"><span>↳</span>3. What each party must trust</a><a class="sub" href="#guarantees--4-failures" data-doc="guarantees"><span>↳</span>4. Failures</a><a href="#system-design" data-doc="system-design"><span>02</span>System design</a><a class="sub" href="#system-design--0-sources" data-doc="system-design"><span>↳</span>0. Sources</a><a class="sub" href="#system-design--1-requirements" data-doc="system-design"><span>↳</span>1. Requirements</a><a class="sub" href="#system-design--2-architecture" data-doc="system-design"><span>↳</span>2. Architecture</a><a class="sub" href="#system-design--3-issuer-state" data-doc="system-design"><span>↳</span>3. Issuer state</a><a class="sub" href="#system-design--4-watcher-parties" data-doc="system-design"><span>↳</span>4. Watcher parties</a><a class="sub" href="#system-design--5-state-machines" data-doc="system-design"><span>↳</span>5. State machines</a><a class="sub" href="#system-design--6-rootchain-rules" data-doc="system-design"><span>↳</span>6. RootChain rules</a><a class="sub" href="#system-design--7-blob-data-blinded-not-encrypted" data-doc="system-design"><span>↳</span>7. Blob data: blinded, not encrypted</a><a class="sub" href="#system-design--8-holders" data-doc="system-design"><span>↳</span>8. Holders</a><a class="sub" href="#system-design--9-value" data-doc="system-design"><span>↳</span>9. Value</a><a class="sub" href="#system-design--10-scrip-as-armada-nitro-notes-i-17-to-i-33" data-doc="system-design"><span>↳</span>10. Scrip as armada-nitro notes (I-17 to I-33)</a><a class="sub" href="#system-design--11-trust-without-the-zkevm" data-doc="system-design"><span>↳</span>11. Trust without the zkEVM</a><a class="sub" href="#system-design--12-failures-as-state-transitions" data-doc="system-design"><span>↳</span>12. Failures as state transitions</a><a class="sub" href="#system-design--13-dependencies" data-doc="system-design"><span>↳</span>13. Dependencies</a><a class="sub" href="#system-design--14-hash-function-choice-and-cost" data-doc="system-design"><span>↳</span>14. Hash function choice and cost</a><a href="#cost-comparison" data-doc="cost-comparison"><span>03</span>Cost comparison</a><a class="sub" href="#cost-comparison--1-basis" data-doc="cost-comparison"><span>↳</span>1. Basis</a><a class="sub" href="#cost-comparison--2-monthly-cost" data-doc="cost-comparison"><span>↳</span>2. Monthly cost</a><a class="sub" href="#cost-comparison--3-operational-complexity" data-doc="cost-comparison"><span>↳</span>3. Operational complexity</a><a class="sub" href="#cost-comparison--4-what-nothing-measured" data-doc="cost-comparison"><span>↳</span>4. What nothing measured</a><a href="#invariants" data-doc="invariants"><span>04</span>Requirements</a><a class="sub" href="#invariants--1-from-metalexs-plan-i-1-to-i-65" data-doc="invariants"><span>↳</span>1. From MetaLeX&#x27;s plan (I-1 to I-65)</a><a class="sub" href="#invariants--2-from-armadas-design-r-1-to-r-45" data-doc="invariants"><span>↳</span>2. From Armada&#x27;s design (R-1 to R-45)</a><a href="#invariant-review" data-doc="invariant-review"><span>05</span>Review of MetaLeX&#x27;s plan</a><a class="sub" href="#invariant-review--source-and-method" data-doc="invariant-review"><span>↳</span>Source and method</a><a class="sub" href="#invariant-review--summary" data-doc="invariant-review"><span>↳</span>Summary</a><a class="sub" href="#invariant-review--open-point-1-the-rule-that-moves-submission-authority" data-doc="invariant-review"><span>↳</span>Open point 1: the rule that moves submission authority</a><a class="sub" href="#invariant-review--open-point-2-the-guard-on-entry-to-the-bridge" data-doc="invariant-review"><span>↳</span>Open point 2: the guard on entry to the bridge</a><a class="sub" href="#invariant-review--open-point-3-the-meaning-of-the-login-sentence" data-doc="invariant-review"><span>↳</span>Open point 3: the meaning of the login sentence</a><a class="sub" href="#invariant-review--pairs-that-look-like-conflicts" data-doc="invariant-review"><span>↳</span>Pairs that look like conflicts</a><a href="#glossary" data-doc="glossary"><span>06</span>Glossary</a><a class="sub" href="#glossary--1-metalex-terms" data-doc="glossary"><span>↳</span>1. MetaLeX terms</a><a class="sub" href="#glossary--2-terms-of-this-design" data-doc="glossary"><span>↳</span>2. Terms of this design</a><a class="sub" href="#glossary--3-proof-and-data-terms" data-doc="glossary"><span>↳</span>3. Proof and data terms</a><a class="sub" href="#glossary--4-armada-terms-used-here" data-doc="glossary"><span>↳</span>4. Armada terms used here</a><a class="sub" href="#glossary--5-word-collisions" data-doc="glossary"><span>↳</span>5. Word collisions</a></nav><p class="sidebar-foot">Armada<br>9 November 2026<br>Draft for review</p></aside>
+<header class="cover"><div class="eyebrow">MetaLeX on Armada · Draft for review · November 2026</div><h1>MetaLeX on Armada</h1><p class="cover-subtitle">Summary · System design · Guarantees · Cost · Requirements</p><div class="cover-meta"><div><b>Status</b>Draft for review. Not built.</div><div><b>Reading map</b>7 documents / 48 tables / 4 figures</div><a class="cover-jump" href="#summary">Read the summary ↓</a></div></header>
+<div class="layout"><aside class="sidebar" id="report-navigation" aria-label="Contents"><div class="toc-title">Documents</div><nav class="toc"><a href="#index" data-doc="index"><span>00</span>Overview</a><a href="#summary" data-doc="summary"><span>01</span>Summary</a><a class="sub" href="#summary--the-proposal" data-doc="summary"><span>↳</span>The proposal</a><a class="sub" href="#summary--what-metalex-and-its-users-get" data-doc="summary"><span>↳</span>What MetaLeX and its users get</a><a class="sub" href="#summary--how-it-differs-from-prividium" data-doc="summary"><span>↳</span>How it differs from Prividium</a><a class="sub" href="#summary--what-it-costs" data-doc="summary"><span>↳</span>What it costs</a><a class="sub" href="#summary--what-metalex-must-trust" data-doc="summary"><span>↳</span>What MetaLeX must trust</a><a class="sub" href="#summary--what-metalex-must-decide" data-doc="summary"><span>↳</span>What MetaLeX must decide</a><a href="#system-design" data-doc="system-design"><span>02</span>System design</a><a class="sub" href="#system-design--1-requirements" data-doc="system-design"><span>↳</span>1. Requirements</a><a class="sub" href="#system-design--2-architecture" data-doc="system-design"><span>↳</span>2. Architecture</a><a class="sub" href="#system-design--3-issuer-state" data-doc="system-design"><span>↳</span>3. Issuer state</a><a class="sub" href="#system-design--4-watcher-parties" data-doc="system-design"><span>↳</span>4. Watcher parties</a><a class="sub" href="#system-design--5-state-machines" data-doc="system-design"><span>↳</span>5. State machines</a><a class="sub" href="#system-design--6-rootchain-rules" data-doc="system-design"><span>↳</span>6. RootChain rules</a><a class="sub" href="#system-design--7-blob-data-blinded-not-encrypted" data-doc="system-design"><span>↳</span>7. Blob data: blinded, not encrypted</a><a class="sub" href="#system-design--8-holders" data-doc="system-design"><span>↳</span>8. Holders</a><a class="sub" href="#system-design--9-value" data-doc="system-design"><span>↳</span>9. Value</a><a class="sub" href="#system-design--10-scrip-as-armada-nitro-notes" data-doc="system-design"><span>↳</span>10. Scrip as armada-nitro notes</a><a class="sub" href="#system-design--11-trust-without-the-zkevm" data-doc="system-design"><span>↳</span>11. Trust without the zkEVM</a><a class="sub" href="#system-design--12-failures-as-state-transitions" data-doc="system-design"><span>↳</span>12. Failures as state transitions</a><a class="sub" href="#system-design--13-dependencies" data-doc="system-design"><span>↳</span>13. Dependencies</a><a class="sub" href="#system-design--14-hash-function-choice-and-cost" data-doc="system-design"><span>↳</span>14. Hash function choice and cost</a><a class="sub" href="#system-design--sources" data-doc="system-design"><span>↳</span>Sources</a><a href="#guarantees" data-doc="guarantees"><span>03</span>Guarantees</a><a class="sub" href="#guarantees--1-the-parties" data-doc="guarantees"><span>↳</span>1. The parties</a><a class="sub" href="#guarantees--2-what-each-party-can-check" data-doc="guarantees"><span>↳</span>2. What each party can check</a><a class="sub" href="#guarantees--3-what-each-party-must-trust" data-doc="guarantees"><span>↳</span>3. What each party must trust</a><a class="sub" href="#guarantees--4-failures" data-doc="guarantees"><span>↳</span>4. Failures</a><a href="#cost-comparison" data-doc="cost-comparison"><span>04</span>Cost comparison</a><a class="sub" href="#cost-comparison--1-basis" data-doc="cost-comparison"><span>↳</span>1. Basis</a><a class="sub" href="#cost-comparison--2-monthly-cost" data-doc="cost-comparison"><span>↳</span>2. Monthly cost</a><a class="sub" href="#cost-comparison--3-operational-complexity" data-doc="cost-comparison"><span>↳</span>3. Operational complexity</a><a class="sub" href="#cost-comparison--4-what-nothing-measured" data-doc="cost-comparison"><span>↳</span>4. What nothing measured</a><a href="#invariants" data-doc="invariants"><span>05</span>Requirements</a><a class="sub" href="#invariants--1-from-metalexs-plan-i-1-to-i-65" data-doc="invariants"><span>↳</span>1. From MetaLeX&#x27;s plan (I-1 to I-65)</a><a class="sub" href="#invariants--2-from-armadas-design-r-1-to-r-45" data-doc="invariants"><span>↳</span>2. From Armada&#x27;s design (R-1 to R-45)</a><a href="#invariant-review" data-doc="invariant-review"><span>06</span>Review of MetaLeX&#x27;s plan</a><a class="sub" href="#invariant-review--source-and-method" data-doc="invariant-review"><span>↳</span>Source and method</a><a class="sub" href="#invariant-review--summary" data-doc="invariant-review"><span>↳</span>Summary</a><a class="sub" href="#invariant-review--open-point-1-the-rule-that-moves-submission-authority" data-doc="invariant-review"><span>↳</span>Open point 1: the rule that moves submission authority</a><a class="sub" href="#invariant-review--open-point-2-the-guard-on-entry-to-the-bridge" data-doc="invariant-review"><span>↳</span>Open point 2: the guard on entry to the bridge</a><a class="sub" href="#invariant-review--open-point-3-the-meaning-of-the-login-sentence" data-doc="invariant-review"><span>↳</span>Open point 3: the meaning of the login sentence</a><a class="sub" href="#invariant-review--pairs-that-look-like-conflicts" data-doc="invariant-review"><span>↳</span>Pairs that look like conflicts</a><a href="#glossary" data-doc="glossary"><span>07</span>Glossary</a><a class="sub" href="#glossary--1-metalex-terms" data-doc="glossary"><span>↳</span>1. MetaLeX terms</a><a class="sub" href="#glossary--2-terms-of-this-design" data-doc="glossary"><span>↳</span>2. Terms of this design</a><a class="sub" href="#glossary--3-proof-and-data-terms" data-doc="glossary"><span>↳</span>3. Proof and data terms</a><a class="sub" href="#glossary--4-armada-terms-used-here" data-doc="glossary"><span>↳</span>4. Armada terms used here</a><a class="sub" href="#glossary--5-word-collisions" data-doc="glossary"><span>↳</span>5. Word collisions</a></nav><p class="sidebar-foot">Armada<br>9 November 2026<br>Draft for review</p></aside>
 <main class="main" id="report">
 <article class="doc" id="index" data-title="Overview">
 <div class="prelude"><div class="section-index">Document 00</div><h1>MetaLeX on Armada</h1>
@@ -81,6 +81,10 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="#summary">Summary</a></td>
+<td>The proposal on one page: what MetaLeX gets, how it differs from Prividium, what it costs, what MetaLeX must trust and decide. Read this first.</td>
+</tr>
 <tr>
 <td><a href="#guarantees">Guarantees</a></td>
 <td>For each party: what it can check, what it must trust, and what happens to it when another party fails</td>
@@ -107,383 +111,106 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </tbody>
 </table></div></div>
-</article><article class="doc" id="guarantees" data-title="Guarantees">
-<div class="prelude"><div class="section-index">Document 01</div><h1>Guarantees by party</h1>
-<p>Status: draft, 2026-11-09.</p>
-<p>For each party: what it can check itself, what it must trust, and what happens to it when another party fails. Section numbers refer to <a href="#system-design">System design</a>. Terms follow <a href="#glossary">Glossary</a>. The zkEVM is out of scope (§11), so every statement below holds with roots accepted on the party signature alone.</p>
+</article><article class="doc" id="summary" data-title="Summary">
+<div class="prelude"><div class="section-index">Document 01</div><h1>Summary</h1>
+<p>Status: draft, 2026-11-09. Not built.</p>
 </div>
-<section class="report-section"><div class="section-index">Guarantees · 01</div><h2 id="guarantees--1-the-parties"><a class="section-link" href="#guarantees--1-the-parties">1. The parties</a></h2>
-<div class="table-hint"><span>Table 02</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 02" tabindex="0"><table>
-<thead>
-<tr>
-<th>Party</th>
-<th>What it is</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Holder</strong></td>
-<td>A buyer or other counterparty that holds MetaLeX assets or payment token of an issuer</td>
-</tr>
-<tr>
-<td><strong>Issuer</strong></td>
-<td>The company. It is a watcher member of its own watcher party, and it receives payments through <code>companyPayable()</code>.</td>
-</tr>
-<tr>
-<td><strong>Watcher party</strong></td>
-<td>An entity: the threshold signer for one issuer. Its party key needs a two-thirds majority of its n watcher members, with n = 3 and t = 2 initially. Through its custodian it is an armada-nitro participant and the wrapper's minter (§4.1).</td>
-</tr>
-<tr>
-<td><strong>MetaLeX hub</strong></td>
-<td>An entity distinct from MetaLeX. An armada-nitro hub that routes payments and runs watchtowers for website users (§9). As MetaLeX core, it is a watcher member of every party (R-6).</td>
-</tr>
-<tr>
-<td><strong>MetaLeX</strong></td>
-<td>The company. It receives the platform fee through <code>getPlatformPayable()</code>. It is a named plaintext audience through the MetaLeX hub (I-35, R-36).</td>
-</tr>
-<tr>
-<td><strong>Recovery operator</strong></td>
-<td>The independent watcher member that <code>mlx</code> names (§4.1)</td>
-</tr>
-<tr>
-<td><strong>Wrapper holder</strong></td>
-<td>A holder of the issuer's wrapper, as notes or unshielded (§10)</td>
-</tr>
-</tbody>
-</table></div>
+<section class="report-section"><div class="section-index">Summary · 01</div><h2 id="summary--the-proposal"><a class="section-link" href="#summary--the-proposal">The proposal</a></h2>
+<p>MetaLeX wants to run its Cybercorps contracts privately, with an independent operator who can recover every issuer's records. MetaLeX's own plan does this with one shared private chain on ZKsync Prividium. This proposal does it differently, with the same contracts and no changes to them.</p>
+<p>Each issuer gets its own EVM state. Three operators run it together: MetaLeX, an independent recovery operator, and the issuer. This group is the issuer's <em>watcher party</em>. Once a day, the watcher party posts a fingerprint of the state, its <em>root</em>, to a contract on Ethereum. Any two of the three operators can sign a root, so no single operator can stop an issuer or change its records alone.</p>
+<p>Money does not live in the private state. It stays on Ethereum in armada-nitro, Armada's payment system: shielded notes, and payment channels funded from notes. A buyer's USDC stays in the buyer's own channel until the deal settles.</p>
 </section>
-<section class="report-section"><div class="section-index">Guarantees · 02</div><h2 id="guarantees--2-what-each-party-can-check"><a class="section-link" href="#guarantees--2-what-each-party-can-check">2. What each party can check</a></h2>
-<div class="table-hint"><span>Table 03</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 03" tabindex="0"><table>
-<thead>
-<tr>
-<th>Party</th>
-<th>Can check itself</th>
-<th>How</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Holder</td>
-<td>Each of its records at each root</td>
-<td>Inclusion and non-inclusion proofs against roots read through a light client (§8.2)</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>Any change to its records, even when the party RPC is silent</td>
-<td>Its verifier checks every new root, and reads the blobs when no update arrives (§8.2)</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>That no change to its records is unexplained</td>
-<td>Every change between consecutive roots matches a log in <code>eventsRoot</code> (§8.2)</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>The code that holds its records</td>
-<td>The root commits to each contract's code hash (§8.2)</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>That its channel value is safe</td>
-<td>It holds its latest co-signed channel state (§9.1)</td>
-</tr>
-<tr>
-<td>Issuer</td>
-<td>The full issuer state</td>
-<td>It is a watcher member and stores the state (§4.3)</td>
-</tr>
-<tr>
-<td>Issuer</td>
-<td>Its payout</td>
-<td>The payout record names the channel state that paid it, and its note is in the Armada pool (§9.2)</td>
-</tr>
-<tr>
-<td>Wrapper holder</td>
-<td>That its wrapper was minted against a lock</td>
-<td>The watcher party's signed mint record and the lock in a hard-final root (§10)</td>
-</tr>
-<tr>
-<td>Anyone</td>
-<td>That the payment token and the wrapper are conserved at each root</td>
-<td>The verifier tool: the conservation proof, against the published settlement-channel states, the adjudicator and the wrapper's supply on L1 (§11)</td>
-</tr>
-</tbody>
-</table></div>
+<section class="report-section"><div class="section-index">Summary · 02</div><h2 id="summary--what-metalex-and-its-users-get"><a class="section-link" href="#summary--what-metalex-and-its-users-get">What MetaLeX and its users get</a></h2>
+<ul>
+<li><strong>Privacy between issuers.</strong> Each issuer's records are in a separate state. No issuer can read another issuer's data through any interface.</li>
+<li><strong>Recovery without MetaLeX.</strong> The recovery operator and the issuer hold the full state, and either can continue with the other.</li>
+<li><strong>Self-help for holders.</strong> Each holder keeps proofs of its own records. If every operator fails, a holder can still prove what it owns, from its own records, public blob data and Ethereum.</li>
+<li><strong>Safe money.</strong> No operator can take a user's funds. A user can always exit a channel on Ethereum with its latest signed state.</li>
+<li><strong>Departure.</strong> An issuer can leave for a new set of operators. Its holders prove their records to the new operators.</li>
+</ul>
 </section>
-<section class="report-section"><div class="section-index">Guarantees · 03</div><h2 id="guarantees--3-what-each-party-must-trust"><a class="section-link" href="#guarantees--3-what-each-party-must-trust">3. What each party must trust</a></h2>
-<div class="table-hint"><span>Table 04</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 04" tabindex="0"><table>
-<thead>
-<tr>
-<th>Party</th>
-<th>Must trust</th>
-<th>For what</th>
-<th>If that trust fails</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Holder</td>
-<td>The watcher party</td>
-<td>Correct state transitions, and pay-out against a burn. With the zkEVM, L1 would enforce correct transitions instead (§11).</td>
-<td>Holders detect the change. The signed root is evidence against the operators (§11). Value in its channel exits by ForceMove.</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>The sequencer</td>
-<td>Inclusion of its writes</td>
-<td>A payer whose write is refused gets no asset and has no L1 remedy. Its signed request and the refusal are its evidence to MetaLeX (§8.5).</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>A watchtower, while it is offline</td>
-<td>An answer to a stale-state challenge on its channel</td>
-<td>The MetaLeX hub runs one for website users, the recovery operator may run one, and the mobile app runs its own (§9.1)</td>
-</tr>
-<tr>
-<td>Holder</td>
-<td>A hub, the MetaLeX hub or an issuer's</td>
-<td>Liveness of routed payments</td>
-<td>It uses another hub, or a channel with the watcher party directly (§9.3)</td>
-</tr>
-<tr>
-<td>Issuer</td>
-<td>The other watcher members, acting together</td>
-<td>Correct state transitions and pay-outs without the issuer's share, because t = 2</td>
-<td>The issuer detects the change, and the signed root is evidence against the operators (§11). The issuer also holds the full state as evidence.</td>
-</tr>
-<tr>
-<td>Wrapper holder</td>
-<td>The watcher party</td>
-<td>That each mint reflects locked scrip, and that each lock is wrapped and each return unlocked. With the zkEVM, L1 would enforce correct mints instead (§11).</td>
-<td>The conservation proof fails publicly for a mint with no lock. The signed lock, mint and return records are evidence against the operators (§11).</td>
-</tr>
-</tbody>
-</table></div>
-<p>A buyer's USDC stays in its own channel until settlement, and the watcher party cannot take it before then. It holds only the buyer's signed commitment, which it countersigns at settlement (§9.2). After settlement, the USDC is in the settlement channel, whose latest co-signed state is in each day's blob data. The issuer and MetaLeX hold payment token for it, and the watcher party's signatures bind it to pay out. Value in any channel exits by ForceMove with the latest co-signed state (§9.1). A routed payment is atomic, so no party has value in flight (§9.3).</p>
+<section class="report-section"><div class="section-index">Summary · 03</div><h2 id="summary--how-it-differs-from-prividium"><a class="section-link" href="#summary--how-it-differs-from-prividium">How it differs from Prividium</a></h2>
+<p>Prividium proves every batch with a zkEVM on GPU hardware. This proposal does not, because those provers cost the most to operate. It relies on three things instead:</p>
+<ul>
+<li>every root is a signed commitment that the operators cannot deny;</li>
+<li>each holder checks its own records against every root;</li>
+<li>a published conservation proof shows that no payment token or scrip exists without backing. Anyone can check it.</li>
+</ul>
+<p>So a dishonest majority of operators could sign a wrong root, and Ethereum would accept it. But every holder would detect the change, and the signed root is evidence against those operators. Prividium's zkEVM would reject such a root. A zkEVM can be added later if MetaLeX wants that protection.</p>
+<p>Prividium keeps transaction data and state off chain, in the operators' databases. So a Prividium holder needs an operator to read or prove its records. In this proposal, a holder does not.</p>
 </section>
-<section class="report-section"><div class="section-index">Guarantees · 04</div><h2 id="guarantees--4-failures"><a class="section-link" href="#guarantees--4-failures">4. Failures</a></h2>
-<p>Each row is one failure. Each cell states the effect of that failure on one party. "None" means the party is not affected.</p>
-<div class="table-hint"><span>Table 05</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 05" tabindex="0"><table>
-<thead>
-<tr>
-<th>Failure</th>
-<th>Effect on holders</th>
-<th>Effect on the issuer</th>
-<th>Effect on the MetaLeX hub</th>
-<th>Effect on wrapper holders</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>The issuer stops</td>
-<td>None. MetaLeX core and the recovery operator continue the RootChain.</td>
-<td>The issuer is the party that stopped.</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr>
-<td>The recovery operator stops</td>
-<td>None. MetaLeX core and the issuer continue the RootChain.</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr>
-<td>The MetaLeX hub stops</td>
-<td>The issuer and the recovery operator continue the RootChain, so it advances only while the issuer's watcher member is up. Holders route through an issuer's hub, or use a channel with the watcher party directly. Website users lose the default watchtower. The recovery operator's watchtower, if it runs one, continues.</td>
-<td>The issuer and the recovery operator continue the RootChain. The issuer is paid out through its own hub or a direct channel.</td>
-<td>The hub is the party that stopped.</td>
-<td>None</td>
-</tr>
-<tr>
-<td>MetaLeX, the company, stops</td>
-<td>None. The MetaLeX hub is a separate entity.</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr>
-<td>Fewer than t watcher members are live</td>
-<td>No new roots and no pay-outs. Each holder can prove what it held at the last root (§8.3). Value in channels exits by ForceMove. Open commitments stay open.</td>
-<td>No new roots and no pay-outs. The issuer holds the full state.</td>
-<td>Its routes to that watcher party stop.</td>
-<td>No new mints or unlocks. Existing wrapper notes are not affected.</td>
-</tr>
-<tr>
-<td>The issuer, the MetaLeX hub and the recovery operator all stop</td>
-<td>Self-help: each holder proves its records from its own store and the archived blobs against the last root (§8.3). Value in channels exits by ForceMove.</td>
-<td>The issuer is one of the parties that stopped.</td>
-<td>The hub is one of the parties that stopped.</td>
-<td>No new mints or unlocks. Existing wrapper notes are not affected.</td>
-</tr>
-<tr>
-<td>The sequencer refuses a write</td>
-<td>The payer gets no asset and has no L1 remedy. Its signed request and the refusal are its evidence to MetaLeX (§8.5).</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr>
-<td>A lock is never wrapped, or a return is never unlocked</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>The holder has no L1 remedy. The signed lock and return records are its evidence (§5.4).</td>
-</tr>
-<tr>
-<td>t watcher members sign a root that misaccounts. This is possible only without the zkEVM (§11).</td>
-<td>Each holder detects it, and holds the signed root and its earlier proofs as evidence. Payment token with no commitment or settled USDC behind it fails the conservation proof (§11).</td>
-<td>If the issuer did not sign, it holds the full state as evidence.</td>
-<td>None. The hub only routes payments.</td>
-<td>A wrapper mint with no locked scrip fails the conservation proof.</td>
-</tr>
-<tr>
-<td>The party key signs two successors of one root. The party bond is slashed (§4.4).</td>
-<td>None. The RootChain accepts one successor per root (§6.1).</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-</tr>
-</tbody>
-</table></div></section>
+<section class="report-section"><div class="section-index">Summary · 04</div><h2 id="summary--what-it-costs"><a class="section-link" href="#summary--what-it-costs">What it costs</a></h2>
+<p>On the same basis as MetaLeX's own cost tables, this design costs about $4,400 per month. That includes $1,449 that the issuers pay for their own watcher members. Prividium's three scenarios cost $4,600, $7,700 and $11,300 per month. The cost comparison gives every line.</p>
+</section>
+<section class="report-section"><div class="section-index">Summary · 05</div><h2 id="summary--what-metalex-must-trust"><a class="section-link" href="#summary--what-metalex-must-trust">What MetaLeX must trust</a></h2>
+<ul>
+<li><strong>The operators,</strong> for correct records. A wrong record is detectable and provable, but Ethereum does not block it.</li>
+<li><strong>The sequencer,</strong> to accept writes. A refused write has no remedy on Ethereum. The user's evidence goes to MetaLeX.</li>
+<li><strong>A watchtower,</strong> to protect an offline user's channel. The MetaLeX hub runs one for website users.</li>
+</ul>
+</section>
+<section class="report-section"><div class="section-index">Summary · 06</div><h2 id="summary--what-metalex-must-decide"><a class="section-link" href="#summary--what-metalex-must-decide">What MetaLeX must decide</a></h2>
+<ol>
+<li>Which companies share one issuer state.</li>
+<li>Whether to accept the requirements: the 65 from MetaLeX's plan, and the 45 from this design.</li>
+</ol></section>
 </article><article class="doc" id="system-design" data-title="System design">
 <div class="prelude"><div class="section-index">Document 02</div><h1>MetaLeX on Armada: system design</h1>
 <p>Status: draft for review, 2026-11-09. Not built.</p>
-<p>MetaLeX's Cybercorps contracts run unchanged in one issuer state per issuer. The issuer's watcher party executes that state and anchors it to Ethereum L1 through the issuer's RootChain. The watcher party is also an ordinary armada-nitro participant. Value stays in armada-nitro: shielded notes in the Armada pool, and channels funded from notes. A buyer's USDC stays in the buyer's channel until the watcher party countersigns the payment at settlement. Scrip leaves the issuer state as notes of the issuer's wrapper token. <a href="#invariants">Requirements</a> lists the requirements that this document holds. Terms follow <a href="#glossary">Glossary</a>.</p>
+<p>MetaLeX's Cybercorps contracts run unchanged, but not on one shared chain. Each issuer gets its own EVM state, the <em>issuer state</em>. A small group of operators, the issuer's <em>watcher party</em>, runs that state. The group has three <em>watcher members</em>: MetaLeX, an independent recovery operator, and the issuer.</p>
+<p>Once a day, the watcher party posts a fingerprint of the state, its <em>root</em>, to an Ethereum contract: the issuer's <em>RootChain</em>. Each holder keeps proofs of its own records against those roots. So a holder can show what it owns, even if every operator fails.</p>
+<p>Money does not live in the issuer state. It stays in <em>armada-nitro</em>, Armada's payment system on Ethereum. There, value is either a shielded <em>note</em> in the Armada pool, or a balance in a payment <em>channel</em> that a note funds. A buyer's USDC stays in the buyer's own channel until the deal settles. Scrip that leaves the issuer state becomes notes of an issuer-specific token, the issuer's <em>wrapper</em>.</p>
+<p>The design has no zkEVM and no GPU prover, because proving every root costs too much to operate (§11). It relies on three other things instead:</p>
+<ul>
+<li>signed commitments that the operators cannot deny;</li>
+<li>proofs that each holder checks itself;</li>
+<li>a conservation proof that anyone can check.</li>
+</ul>
+<p>Short citations such as <code>cc</code> or <code>mlx</code> refer to the sources at the end. <a href="#invariants">Requirements</a> lists the requirements that this document holds. Terms follow <a href="#glossary">Glossary</a>.</p>
 </div>
-<section class="report-section"><div class="section-index">System design · 01</div><h2 id="system-design--0-sources"><a class="section-link" href="#system-design--0-sources">0. Sources</a></h2>
-<div class="table-hint"><span>Table 06</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 06" tabindex="0"><table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Source</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mlx</code></td>
-<td>MetaLeX Engineering, <em>Build MetaLeX's private chain with recovery</em>, standalone edition, evidence as of 8 November 2026. Cited by section and table.</td>
-</tr>
-<tr>
-<td><code>review</code></td>
-<td><a href="#invariant-review">Review of MetaLeX's plan</a>: Armada's review of <code>mlx</code>. No contradictions, three open points.</td>
-</tr>
-<tr>
-<td><code>cc</code></td>
-<td><a href="https://github.com/MetaLex-Tech/cybercorps-contracts"><code>MetaLex-Tech/cybercorps-contracts</code></a> at <code>8789081be696cc334f9b7b193b3c3eba17c8122b</code>, the commit that <code>mlx</code> analyses. Cited by file and line.</td>
-</tr>
-<tr>
-<td><code>nitro</code></td>
-<td>armada-nitro at <code>295b6c2e</code>. Cited by file and line.</td>
-</tr>
-<tr>
-<td><code>adr</code></td>
-<td>Armada <code>engineering/09-architecture-decisions.md</code>, including ADR-0021</td>
-</tr>
-<tr>
-<td><code>p15</code></td>
-<td>Armada <code>engineering/15-hub-yield-and-swaps.md</code>: invariants I1–I7 of hub channels</td>
-</tr>
-<tr>
-<td><code>t2</code></td>
-<td>Armada <code>engineering/T2-watcher-substrate.md</code> and <a href="#glossary">Glossary</a>: watcher parties</td>
-</tr>
-<tr>
-<td><code>nimbus</code></td>
-<td><a href="https://github.com/status-im/nimbus-eth1"><code>status-im/nimbus-eth1</code></a>: the nimbus EVM (<code>execution_chain/evm/</code>) and the verified proxy. Armada builds from its fork <code>AFDudley/nimbus-eth1</code>.</td>
-</tr>
-<tr>
-<td><code>zos</code></td>
-<td><a href="https://github.com/matter-labs/zksync-os-zisk"><code>matter-labs/zksync-os-zisk</code></a>: a REVM state transition proven with ZisK</td>
-</tr>
-</tbody>
-</table></div>
-</section>
-<section class="report-section"><div class="section-index">System design · 02</div><h2 id="system-design--1-requirements"><a class="section-link" href="#system-design--1-requirements">1. Requirements</a></h2>
+<section class="report-section"><div class="section-index">System design · 01</div><h2 id="system-design--1-requirements"><a class="section-link" href="#system-design--1-requirements">1. Requirements</a></h2>
 <ol>
-<li>Run the unchanged Cybercorps contracts (I-1 to I-3, R-1).</li>
-<li>Keep each issuer's records readable only by MetaLeX, the recovery operator and the issuer (I-34, I-35).</li>
-<li>Let a holder prove its own MetaLeX assets against L1, and help itself if the issuer, MetaLeX and the recovery operator all fail (R-15).</li>
-<li>Keep all value in armada-nitro: shielded notes and channels (R-5, R-14).</li>
-<li>Let scrip leave the issuer state as armada-nitro notes, with MetaLeX's accounting (I-17 to I-33).</li>
-<li>Define every component as a typed state machine with guarded transitions. No fallback paths (R-12).</li>
-<li>Let no party other than an asset holder start an action against that holder's assets (R-11).</li>
+<li>Run the unchanged Cybercorps contracts.</li>
+<li>Keep each issuer's records readable only by MetaLeX, the recovery operator and the issuer.</li>
+<li>Let a holder prove its own MetaLeX assets against L1, and help itself if the issuer, MetaLeX and the recovery operator all fail.</li>
+<li>Keep all value in armada-nitro: shielded notes and channels.</li>
+<li>Let scrip leave the issuer state as armada-nitro notes, with MetaLeX's accounting.</li>
+<li>Define every component as a typed state machine with guarded transitions. No fallback paths.</li>
+<li>Let no party other than an asset holder start an action against that holder's assets.</li>
 </ol>
 </section>
-<section class="report-section"><div class="section-index">System design · 03</div><h2 id="system-design--2-architecture"><a class="section-link" href="#system-design--2-architecture">2. Architecture</a></h2>
+<section class="report-section"><div class="section-index">System design · 02</div><h2 id="system-design--2-architecture"><a class="section-link" href="#system-design--2-architecture">2. Architecture</a></h2>
 <figure class="figure"><div class="diagram-scroll" tabindex="0" role="region" aria-label="Figure 01"><svg id="mermaid-1" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1787.16px; background-color: transparent;" viewBox="-2.984375 0 1787.15625 743" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-1{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1 .error-icon{fill:#552222;}#mermaid-1 .error-text{fill:#552222;stroke:#552222;}#mermaid-1 .edge-thickness-normal{stroke-width:1px;}#mermaid-1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1 .marker{fill:#333333;stroke:#333333;}#mermaid-1 .marker.cross{stroke:#333333;}#mermaid-1 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-1 p{margin:0;}#mermaid-1 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#mermaid-1 .cluster-label text{fill:#333;}#mermaid-1 .cluster-label span{color:#333;}#mermaid-1 .cluster-label span p{background-color:transparent;}#mermaid-1 .label text,#mermaid-1 span{fill:#333;color:#333;}#mermaid-1 .node rect,#mermaid-1 .node circle,#mermaid-1 .node ellipse,#mermaid-1 .node polygon,#mermaid-1 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-1 .rough-node .label text,#mermaid-1 .node .label text,#mermaid-1 .image-shape .label,#mermaid-1 .icon-shape .label{text-anchor:middle;}#mermaid-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1 .rough-node .label,#mermaid-1 .node .label,#mermaid-1 .image-shape .label,#mermaid-1 .icon-shape .label{text-align:center;}#mermaid-1 .node.clickable{cursor:pointer;}#mermaid-1 .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#mermaid-1 .arrowheadPath{fill:#333333;}#mermaid-1 .edgePaths .path{stroke:#333333;stroke-width:1px;}#mermaid-1 .flowchart-link{stroke:#333333;fill:none;}#mermaid-1 .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#mermaid-1 .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#mermaid-1 .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#mermaid-1 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-1 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaid-1 .cluster text{fill:#333;}#mermaid-1 .cluster span{color:#333;}#mermaid-1 .node .collapsed-indicator{fill:#aaaa33;stroke:none;opacity:0.6;}#mermaid-1 .node .collapsed-separator{stroke:#aaaa33;stroke-width:0.75px;}#mermaid-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-1 rect.text{fill:none;stroke-width:0;}#mermaid-1 .icon-shape,#mermaid-1 .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#mermaid-1 .icon-shape p,#mermaid-1 .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#mermaid-1 .icon-shape .label rect,#mermaid-1 .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#mermaid-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1 .node .neo-node{stroke:#9370DB;}#mermaid-1 [data-look="neo"].node rect,#mermaid-1 [data-look="neo"].cluster rect,#mermaid-1 [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-1 [data-look="neo"].swimlane.cluster rect{filter:none;}#mermaid-1 [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#mermaid-1 [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-1 [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#mermaid-1 [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-1 [data-look="neo"].node circle .state-start{fill:#000000;}#mermaid-1 [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-1 [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-1 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="mermaid-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="mermaid-1_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="mermaid-1_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"><g class="cluster" id="mermaid-1-WP" data-look="classic"><rect style="" x="5.015625" y="352" width="315.96875" height="383"/><g class="cluster-label" transform="translate(9.015625, 352)"><foreignObject width="307.96875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="nodeLabel"><p>Watcher party for issuer X (party custodian)</p></span></div></foreignObject></g></g><g class="cluster" id="mermaid-1-L1" data-look="classic"><rect style="" x="8" y="8" width="1768.171875" height="324"/><g class="cluster-label" transform="translate(846.28125, 8)"><foreignObject width="91.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="nodeLabel"><p>Ethereum L1</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path d="M293,403.839L297.167,403.032C301.333,402.226,309.667,400.613,334.667,346.973C359.667,293.333,401.333,187.667,442.333,134.833C483.333,82,523.667,82,543.833,82L564,82" id="mermaid-1-L_CORE_AG_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CORE_AG_0" data-points="W3sieCI6MjkzLCJ5Ijo0MDMuODM4NzA5Njc3NDE5MzN9LHsieCI6MzE4LCJ5IjozOTl9LHsieCI6NDQzLCJ5Ijo4Mn0seyJ4Ijo1NjgsInkiOjgyfV0=" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M828,82L840.764,82C853.529,82,879.057,82,903.919,82C928.781,82,952.977,82,965.074,82L977.172,82" id="mermaid-1-L_AG_RC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_AG_RC_0" data-points="W3sieCI6ODI4LCJ5Ijo4Mn0seyJ4Ijo5MDQuNTg1OTM3NSwieSI6ODJ9LHsieCI6OTgxLjE3MTg3NSwieSI6ODJ9XQ==" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M249.766,186L261.138,186C272.51,186,295.255,186,327.461,186C359.667,186,401.333,186,444.637,190.23C487.94,194.459,532.879,202.918,555.349,207.148L577.819,211.378" id="mermaid-1-L_WF_WR_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_WF_WR_0" data-points="W3sieCI6MjQ5Ljc2NTYyNSwieSI6MTg2fSx7IngiOjMxOCwieSI6MTg2fSx7IngiOjQ0MywieSI6MTg2fSx7IngiOjU4MS43NSwieSI6MjEyLjExNzY0NzA1ODgyMzU0fV0=" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M814.25,234L829.306,234C844.362,234,874.474,234,910.734,234C946.995,234,989.404,234,1010.608,234L1031.813,234" id="mermaid-1-L_WR_PP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_WR_PP_0" data-points="W3sieCI6ODE0LjI1LCJ5IjoyMzR9LHsieCI6OTA0LjU4NTkzNzUsInkiOjIzNH0seyJ4IjoxMDM1LjgxMjUsInkiOjIzNH1d" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M1241.172,82L1262.005,82C1282.839,82,1324.505,82,1365.505,82C1406.505,82,1446.839,82,1467.005,82L1487.172,82" id="mermaid-1-L_RC_ER_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_RC_ER_0" data-points="W3sieCI6MTI0MS4xNzE4NzUsInkiOjgyfSx7IngiOjEzNjYuMTcxODc1LCJ5Ijo4Mn0seyJ4IjoxNDkxLjE3MTg3NSwieSI6ODJ9XQ==" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M1190.531,234L1219.805,234C1249.078,234,1307.625,234,1357.065,234C1406.505,234,1446.839,234,1467.005,234L1487.172,234" id="mermaid-1-L_PP_AN_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_PP_AN_0" data-points="W3sieCI6MTE4Ni41MzEyNSwieSI6MjM0fSx7IngiOjEzNjYuMTcxODc1LCJ5IjoyMzR9LHsieCI6MTQ5MS4xNzE4NzUsInkiOjIzNH1d" data-look="classic" marker-start="url(#mermaid-1_flowchart-v2-pointStart)" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M824.055,529L837.477,529C850.898,529,877.742,529,912.663,533.475C947.583,537.95,990.581,546.899,1012.079,551.374L1033.578,555.849" id="mermaid-1-L_H_HUB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_H_HUB_0" data-points="W3sieCI6ODI0LjA1NDY4NzUsInkiOjUyOX0seyJ4Ijo5MDQuNTg1OTM3NSwieSI6NTI5fSx7IngiOjEwMzMuNTc4MTI1LCJ5Ijo1NTUuODQ5MTg1MDM5NTE4OX1d" data-look="classic"/><path d="M320.984,270.629L341.32,270.024C361.656,269.419,402.328,268.21,445.128,264.698C487.928,261.186,532.855,255.372,555.319,252.465L577.783,249.557" id="mermaid-1-L_WP_WR_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_WP_WR_0" data-points="W3sieCI6MzIwLjk4NDM3NSwieSI6NDE2LjYwMjg3Mjk4Mzg3MDk1fSx7IngiOjMxOCwieSI6NDE5fSx7IngiOjQ0MywieSI6MjY3fSx7IngiOjU4MS43NSwieSI6MjQ5LjA0NDExNzY0NzA1ODh9XQ==" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/><path d="M1033.578,588.151L1012.079,592.626C990.581,597.101,947.583,606.05,891.654,610.525C835.724,615,766.862,615,689.931,615C613,615,528,615,465.164,615C402.328,615,361.656,615,341.32,615L320.984,615" id="mermaid-1-L_HUB_WP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HUB_WP_0" data-points="W3sieCI6MTAzMy41NzgxMjUsInkiOjU4OC4xNTA4MTQ5NjA0ODExfSx7IngiOjkwNC41ODU5Mzc1LCJ5Ijo2MTV9LHsieCI6Njk4LCJ5Ijo2MTV9LHsieCI6NDQzLCJ5Ijo2MTV9LHsieCI6MzE4LCJ5Ijo2MTV9LHsieCI6MzIwLjk4NDM3NSwieSI6NjE2LjM3NjY2MzMwNjQ1MTZ9XQ==" data-look="classic"/><path d="M320.984,529L341.32,529C361.656,529,402.328,529,443.488,529C484.648,529,526.297,529,547.121,529L567.945,529" id="mermaid-1-L_WP_H_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_WP_H_0" data-points="W3sieCI6MzIwLjk4NDM3NSwieSI6NTI4LjcyMDgxNjUzMjI1OH0seyJ4IjozMTgsInkiOjUyOX0seyJ4Ijo0NDMsInkiOjUyOX0seyJ4Ijo1NzEuOTQ1MzEyNSwieSI6NTI5fV0=" data-look="classic" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"/></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(443, 82)"><g class="label" data-id="L_CORE_AG_0" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>daily: aggregated roots, packed blobs</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(904.5859375, 82)"><g class="label" data-id="L_AG_RC_0" transform="translate(-51.5859375, -12)"><foreignObject width="103.171875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>inclusion proof</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(443, 186)"><g class="label" data-id="L_WF_WR_0" transform="translate(-27.578125, -12)"><foreignObject width="55.15625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>deploys</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_WR_PP_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_RC_ER_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1366.171875, 234)"><g class="label" data-id="L_PP_AN_0" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>notes fund channels, payouts are notes</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(904.5859375, 529)"><g class="label" data-id="L_H_HUB_0" transform="translate(-32.0234375, -12)"><foreignObject width="64.046875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>channels</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(451.84497, 265.85536)"><g class="label" data-id="L_WP_WR_0" transform="translate(-82.703125, -12)"><foreignObject width="165.40625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>mints wrapper as notes</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(678.66357, 615)"><g class="label" data-id="L_HUB_WP_0" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>channels, settlement channel</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(446.46484, 529)"><g class="label" data-id="L_WP_H_0" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>party RPC: records, salts, proofs</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="mermaid-1-flowchart-AG-0" data-look="classic" transform="translate(698, 82)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Daily aggregator: one root of party roots, blob hashes</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-RC-1" data-look="classic" transform="translate(1111.171875, 82)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Issuer RootChain: party-signed roots</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-WF-2" data-look="classic" transform="translate(163, 186)"><rect class="basic label-container" style="" x="-86.765625" y="-27" width="173.53125" height="54"/><g class="label" style="" transform="translate(-56.765625, -12)"><rect/><foreignObject width="113.53125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Wrapper factory</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-WR-3" data-look="classic" transform="translate(698, 234)"><rect class="basic label-container" style="" x="-116.25" y="-27" width="232.5" height="54"/><g class="label" style="" transform="translate(-86.25, -12)"><rect/><foreignObject width="172.5" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Issuer wrapper (ERC20)</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-ER-4" data-look="classic" transform="translate(1621.171875, 82)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>IssuerEpochRegistry: departure records</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-AN-5" data-look="classic" transform="translate(1621.171875, 234)"><rect class="basic label-container" style="" x="-130" y="-63" width="260" height="126"/><g class="label" style="" transform="translate(-100, -48)"><rect/><foreignObject width="200" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>ArmadaNitroAdjudicator: channels, routed payments, checkpoints, party bonds</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-PP-6" data-look="classic" transform="translate(1111.171875, 234)"><rect class="basic label-container" style="" x="-75.359375" y="-27" width="150.71875" height="54"/><g class="label" style="" transform="translate(-45.359375, -12)"><rect/><foreignObject width="90.71875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Armada pool</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-CORE-7" data-look="classic" transform="translate(163, 429)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>MetaLeX core watcher member: sequencer</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-REC-8" data-look="classic" transform="translate(163, 557)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"/><g class="label" style="" transform="translate(-100, -24)"><rect/><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Recovery-operator watcher member</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-ISS-9" data-look="classic" transform="translate(163, 673)"><rect class="basic label-container" style="" x="-121.140625" y="-27" width="242.28125" height="54"/><g class="label" style="" transform="translate(-91.140625, -12)"><rect/><foreignObject width="182.28125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Issuer X watcher member</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-HUB-10" data-look="classic" transform="translate(1111.171875, 572)"><rect class="basic label-container" style="" x="-77.59375" y="-27" width="155.1875" height="54"/><g class="label" style="" transform="translate(-47.59375, -12)"><rect/><foreignObject width="95.1875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>MetaLeX hub</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-1-flowchart-H-11" data-look="classic" transform="translate(698, 529)"><rect class="basic label-container" style="" x="-126.0546875" y="-27" width="252.109375" height="54"/><g class="label" style="" transform="translate(-96.0546875, -12)"><rect/><foreignObject width="192.109375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Holders and counterparties</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="mermaid-1-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="mermaid-1-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div><figcaption>Figure 01</figcaption></figure>
-<div class="table-hint"><span>Table 07</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 07" tabindex="0"><table>
-<thead>
-<tr>
-<th>Component</th>
-<th>What it is</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Issuer RootChain</strong></td>
-<td>An L1 contract, one per issuer. It stores the hard-final roots of the issuer state, one successor per root, each accepted on the party signature (§6).</td>
-</tr>
-<tr>
-<td><strong>Daily aggregator</strong></td>
-<td>An L1 contract. Once per day it records one Merkle root over every party's signed root, and the hashes of the blobs that carry their data (§6.2).</td>
-</tr>
-<tr>
-<td><strong>Issuer state</strong></td>
-<td>One EVM state per issuer: its Cybercorps companies, its payment token, its commit records and its payout records (§3)</td>
-</tr>
-<tr>
-<td><strong>Watcher party</strong></td>
-<td>An entity: the threshold signer that runs one issuer state and anchors it to L1 (R-27). Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).</td>
-</tr>
-<tr>
-<td><strong>Party custodian</strong></td>
-<td>The watcher party's <code>HubCustodian</code>. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate (§4.1).</td>
-</tr>
-<tr>
-<td><strong>Payment token</strong></td>
-<td>The ERC20 that the Cybercorps contracts pull in the issuer state. Each unit is backed by an open commitment or by the watcher party's allocation in its settlement channel (§9.2).</td>
-</tr>
-<tr>
-<td><strong>Settlement channel</strong></td>
-<td>The watcher party's channel with the MetaLeX hub, an ordinary Nitro channel. Settled payments move into it, and pay-outs leave from it. Its latest co-signed state goes into each day's blob data (§9.2).</td>
-</tr>
-<tr>
-<td><strong>Verifier tool</strong></td>
-<td>A tool that reads the roots, the blobs and the adjudicator from L1, so that any third party can check the conservation proof's inputs itself (§11)</td>
-</tr>
-<tr>
-<td><strong>MetaLeX hub</strong></td>
-<td>An armada-nitro hub, and an entity distinct from MetaLeX, the company (R-27). As MetaLeX core it is a watcher member of every party (R-6). MetaLeX is a plaintext audience through it (R-36). It routes payments, runs watchtowers for website users, and supplies user IDs to each issuer state (§8.1, §9).</td>
-</tr>
-<tr>
-<td><strong>Issuer wrapper</strong></td>
-<td>An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool (§10).</td>
-</tr>
-<tr>
-<td><strong>Wrapper factory</strong></td>
-<td>The L1 factory that deploys each issuer's wrapper. A hub names it in its asset list (§10).</td>
-</tr>
-<tr>
-<td><strong>Party RPC</strong></td>
-<td>The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).</td>
-</tr>
-<tr>
-<td><strong>Party bond</strong></td>
-<td>One armada-nitro channel per watcher party (§4.4)</td>
-</tr>
-<tr>
-<td><strong>IssuerEpochRegistry</strong></td>
-<td>An L1 contract that records each departure: the old RootChain's final root and the successor's identity (§5.5)</td>
-</tr>
-</tbody>
-</table></div>
+<p>The parts of the system are on Ethereum L1, in each watcher party, or with MetaLeX.</p>
+<p><strong>On Ethereum L1</strong></p>
+<ul>
+<li><strong>Issuer RootChain:</strong> An L1 contract, one per issuer. It stores the hard-final roots of the issuer state, one successor per root, each accepted on the party signature (§6).</li>
+<li><strong>Daily aggregator:</strong> An L1 contract. Once per day it records one Merkle root over every party's signed root, and the hashes of the blobs that carry their data (§6.2).</li>
+<li><strong>IssuerEpochRegistry:</strong> An L1 contract that records each departure: the old RootChain's final root and the successor's identity (§5.5).</li>
+<li><strong>Issuer wrapper:</strong> An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool (§10).</li>
+<li><strong>Wrapper factory:</strong> The L1 factory that deploys each issuer's wrapper. A hub names it in its asset list (§10).</li>
+</ul>
+<p><strong>Run by each watcher party</strong></p>
+<ul>
+<li><strong>Issuer state:</strong> One EVM state per issuer: its Cybercorps companies, its payment token, its commit records and its payout records (§3).</li>
+<li><strong>Watcher party:</strong> An entity: the threshold signer that runs one issuer state and anchors it to L1. Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).</li>
+<li><strong>Party custodian:</strong> The watcher party's <code>HubCustodian</code>. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate (§4.1).</li>
+<li><strong>Party RPC:</strong> The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).</li>
+<li><strong>Payment token:</strong> The ERC20 that the Cybercorps contracts pull in the issuer state. Each unit is backed by an open commitment or by the watcher party's allocation in its settlement channel (§9.2).</li>
+<li><strong>Settlement channel:</strong> The watcher party's channel with the MetaLeX hub, an ordinary Nitro channel. Settled payments move into it, and pay-outs leave from it. Its latest co-signed state goes into each day's blob data (§9.2).</li>
+<li><strong>Party bond:</strong> One armada-nitro channel per watcher party (§4.4).</li>
+</ul>
+<p><strong>Run by MetaLeX, or by anyone</strong></p>
+<ul>
+<li><strong>MetaLeX hub:</strong> An armada-nitro hub, and an entity distinct from MetaLeX, the company. As MetaLeX core it is a watcher member of every party. MetaLeX is a plaintext audience through it. It routes payments, runs watchtowers for website users, and supplies user IDs to each issuer state (§8.1, §9).</li>
+<li><strong>Verifier tool:</strong> A tool that reads the roots, the blobs and the adjudicator from L1. With it, any third party can check the conservation proof's inputs itself (§11).</li>
+</ul>
 </section>
-<section class="report-section"><div class="section-index">System design · 04</div><h2 id="system-design--3-issuer-state"><a class="section-link" href="#system-design--3-issuer-state">3. Issuer state</a></h2>
+<section class="report-section"><div class="section-index">System design · 03</div><h2 id="system-design--3-issuer-state"><a class="section-link" href="#system-design--3-issuer-state">3. Issuer state</a></h2>
 <p><strong>Contents.</strong> One EVM state per issuer holds the issuer's Cybercorps companies: CyberCorp, BorgAuth, IssuanceManager, LETs, scrip, agreements, deals, rounds, LexScrow and MetaVesT. It also holds the payment token, the commit records and the payout records (§9). Every asset in it is one that the issuer's watcher party issues. The USDC behind the payment token stays in armada-nitro.</p>
 <p><strong>Which companies share one state.</strong> <code>ParentCoFactory.deployCorp</code> deploys a CyberCorp. <code>ParentCoFactory.deployCorpContractFor</code> deploys a CyberCorp and signs its agreements in the same transaction (<code>cc</code> <code>src/ParentCoFactory.sol</code>). Which companies share one issuer state is a deployment parameter, to be settled with MetaLeX.</p>
 <p><strong>Execution.</strong> Each watcher member runs the state in the nimbus EVM, embedded in its harness, from one pinned commit of Armada's nimbus-eth1 fork (<code>nimbus</code>). The harness fixes these values:</p>
-<div class="table-hint"><span>Table 08</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 08" tabindex="0"><table>
+<div class="table-hint"><span>Table 02</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 02" tabindex="0"><table>
 <thead>
 <tr>
 <th>Value</th>
@@ -493,11 +220,11 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <tbody>
 <tr>
 <td><code>chainid</code></td>
-<td>Unique per issuer, never used by a public chain. EIP-712 domains therefore never collide (I-4).</td>
+<td>Unique per issuer, never used by a public chain. EIP-712 domains therefore never collide.</td>
 </tr>
 <tr>
 <td>Hardfork and precompiles</td>
-<td>One pinned spec that matches MetaLeX's compiler target (I-3)</td>
+<td>One pinned spec that matches MetaLeX's compiler target</td>
 </tr>
 <tr>
 <td><code>timestamp</code></td>
@@ -511,7 +238,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 <p><strong>Why the nimbus EVM.</strong> Armada's client already runs nimbus on every target. The verified proxy builds natively, as <code>libverifproxy.a</code> for iOS and Android, and as WASM (<code>adr</code> ADR-0009). The nimbus EVM is Nim in the same codebase. So the harness, the mobile app's watcher and the browser verifier run one EVM and one runtime, beside the light client they already contain. The nimbus EVM executes against an in-memory ledger, as the verified proxy's <code>eth_call</code> does (<code>nimbus</code> <code>execution_chain/evm/async_evm.nim</code>).</p>
 <p><strong>State tree.</strong> The harness does not use nimbus's own Merkle Patricia trie for the root. After each block it reads the changed slots from the ledger and commits the state in a Jellyfish Merkle Tree (JMT). A JMT is a 256-bit binary sparse Merkle tree in which empty and single-leaf subtrees collapse, so a proof has about log₂(number of keys) hashes. It proves inclusion and non-inclusion. The tree is blinded:</p>
-<div class="table-hint"><span>Table 09</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 09" tabindex="0"><table>
+<div class="table-hint"><span>Table 03</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 03" tabindex="0"><table>
 <thead>
 <tr>
 <th>Part</th>
@@ -535,44 +262,13 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 <p><strong>Events.</strong> Besides the state root, each batch commits to <code>eventsRoot</code>: every log of the batch, in order. It is the same commitment as Ethereum's <code>receiptsRoot</code> and Starknet's <code>event_commitment</code>. Holders read their history from it (§8).</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 05</div><h2 id="system-design--4-watcher-parties"><a class="section-link" href="#system-design--4-watcher-parties">4. Watcher parties</a></h2>
+<section class="report-section"><div class="section-index">System design · 04</div><h2 id="system-design--4-watcher-parties"><a class="section-link" href="#system-design--4-watcher-parties">4. Watcher parties</a></h2>
 <p>A watcher party is "a bonded federation of service providers serving one data need, and here also the execution venue" (<code>t2</code>, Armada's glossary). On the money side it provides "netting + non-custodial settlement … over Nitro channels" (<code>t2</code>, "Clearing (Nitro)"). No watcher party exists yet: "No bonding, no DKG ceremony, and no signer set exist" (<code>t2</code>, T2.4).</p>
 <h3 id="system-design--41-composition"><a class="section-link" href="#system-design--41-composition">4.1 Composition</a></h3>
-<div class="table-hint"><span>Table 10</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 10" tabindex="0"><table>
-<thead>
-<tr>
-<th>Rule</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Parties</td>
-<td>One watcher party per issuer. MetaLeX's whole platform is the set of these parties (R-2).</td>
-</tr>
-<tr>
-<td>Watcher members</td>
-<td>MetaLeX core, the recovery operator, the issuer (n = 3)</td>
-</tr>
-<tr>
-<td>MetaLeX core</td>
-<td>The MetaLeX hub in its role as a watcher member of every party (R-6). The default sequencer. MetaLeX is a plaintext audience through it (I-35, R-36).</td>
-</tr>
-<tr>
-<td>Party key</td>
-<td>One FROST threshold key per party. The threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2, and no signing set needs MetaLeX's share (R-38).</td>
-</tr>
-<tr>
-<td>Party custodian</td>
-<td><code>HubCustodian</code> under the party key: the watcher party's EIP-1271 identity in its channels and the wrapper's minter (<code>nitro</code> <code>src/HubCustodian.sol</code>; <code>adr</code> ADR-0016 D16.2). It signs every channel state with the party key. It has no hot delegate, because roots finalize daily and a threshold signature per state costs no time that matters (R-34).</td>
-</tr>
-<tr>
-<td>Sequencing key</td>
-<td>Each watcher member's key for soft-final signatures, pinned in the RootChain</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>Liveness.</strong> The system's liveness never depends on the MetaLeX hub: any t watcher members continue the RootChain and the pay-outs without it. With n = 3 and MetaLeX core down, an issuer's RootChain advances only while that issuer's watcher member is up (R-6, R-38).</p>
+<p>Each issuer has one watcher party, and MetaLeX's whole platform is the set of these parties. A watcher party has three watcher members: MetaLeX core, the recovery operator and the issuer (n = 3). MetaLeX core is the MetaLeX hub in its role as a watcher member of every party. It sequences by default, and MetaLeX is a plaintext audience through it.</p>
+<p><strong>Keys.</strong> Each party has one FROST threshold key, the <em>party key</em>. Its threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2. So any two watcher members can sign, and no signing set needs MetaLeX's share. Each watcher member also has a <em>sequencing key</em> for soft-final signatures, which the RootChain pins.</p>
+<p><strong>Custodian.</strong> On L1, the party acts through its <em>party custodian</em>: a <code>HubCustodian</code> under the party key (<code>nitro</code> <code>src/HubCustodian.sol</code>; <code>adr</code> ADR-0016 D16.2). It is the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the party key, and it has no hot delegate. A hot delegate would only save signing time. Roots finalize daily, so a threshold signature on each state costs no time that matters.</p>
+<p><strong>Liveness.</strong> The system's liveness never depends on the MetaLeX hub: any t watcher members continue the RootChain and the pay-outs without it. With n = 3 and MetaLeX core down, an issuer's RootChain advances only while that issuer's watcher member is up.</p>
 <h3 id="system-design--42-duties"><a class="section-link" href="#system-design--42-duties">4.2 Duties</a></h3>
 <ol>
 <li><strong>Sequence and execute</strong> the issuer state. MetaLeX core does this by default.</li>
@@ -586,7 +282,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p>Each watcher member stores the full state and history itself: every block, receipt, log, salt and position salt. L1 does not rebuild a watcher member's state, because the blobs are blinded. A party continues as long as t of its watcher members hold the state.</p>
 <h3 id="system-design--44-bond"><a class="section-link" href="#system-design--44-bond">4.4 Bond</a></h3>
 <p>Each party bonds through one armada-nitro channel. Its participants are the party custodian and a slashing arbiter. The arbiter is an EIP-1271 participant that signs only a state with a valid fault proof. So no one can slash the bond without such a proof. The watcher members fund the bond, and how they share a slash is their own agreement.</p>
-<div class="table-hint"><span>Table 11</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 11" tabindex="0"><table>
+<div class="table-hint"><span>Table 04</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 04" tabindex="0"><table>
 <thead>
 <tr>
 <th>Fault</th>
@@ -613,11 +309,11 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 </section>
-<section class="report-section"><div class="section-index">System design · 06</div><h2 id="system-design--5-state-machines"><a class="section-link" href="#system-design--5-state-machines">5. State machines</a></h2>
-<p>Each component is a typed state machine. Each target state has exactly one entry transition, with its guard. A transition whose guard fails reverts and changes nothing. There are no fallback paths (R-12).</p>
+<section class="report-section"><div class="section-index">System design · 05</div><h2 id="system-design--5-state-machines"><a class="section-link" href="#system-design--5-state-machines">5. State machines</a></h2>
+<p>Each component is a typed state machine. Each target state has exactly one entry transition, with its guard. A transition whose guard fails reverts and changes nothing. There are no fallback paths.</p>
 <h3 id="system-design--51-batch"><a class="section-link" href="#system-design--51-batch">5.1 Batch</a></h3>
 <figure class="figure"><div class="diagram-scroll" tabindex="0" role="region" aria-label="Figure 02"><svg id="mermaid-2" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="statediagram" style="max-width: 1037.11px; background-color: transparent;" viewBox="0 0 1037.1136474609375 166" role="graphics-document document" aria-roledescription="stateDiagram"><style>#mermaid-2{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-2 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-2 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-2 .error-icon{fill:#552222;}#mermaid-2 .error-text{fill:#552222;stroke:#552222;}#mermaid-2 .edge-thickness-normal{stroke-width:1px;}#mermaid-2 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-2 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-2 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-2 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-2 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-2 .marker{fill:#333333;stroke:#333333;}#mermaid-2 .marker.cross{stroke:#333333;}#mermaid-2 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-2 p{margin:0;}#mermaid-2 defs [id$="-barbEnd"]{fill:#333333;stroke:#333333;}#mermaid-2 g.stateGroup text{fill:#9370DB;stroke:none;font-size:10px;}#mermaid-2 g.stateGroup text{fill:#333;stroke:none;font-size:10px;}#mermaid-2 g.stateGroup .state-title{font-weight:bolder;fill:#131300;}#mermaid-2 g.stateGroup rect{fill:#ECECFF;stroke:#9370DB;}#mermaid-2 g.stateGroup line{stroke:#333333;stroke-width:1;}#mermaid-2 .transition{stroke:#333333;stroke-width:1;fill:none;}#mermaid-2 .stateGroup .composit{fill:white;border-bottom:1px;}#mermaid-2 .stateGroup .alt-composit{fill:#e0e0e0;border-bottom:1px;}#mermaid-2 .state-note{stroke:#aaaa33;fill:#fff5ad;}#mermaid-2 .state-note text{fill:black;stroke:none;font-size:10px;}#mermaid-2 .stateLabel .box{stroke:none;stroke-width:0;fill:#ECECFF;opacity:0.5;}#mermaid-2 .edgeLabel .label rect{fill:#ECECFF;opacity:0.5;}#mermaid-2 .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#mermaid-2 .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#mermaid-2 .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#mermaid-2 .edgeLabel .label text{fill:#333;}#mermaid-2 .label div .edgeLabel{color:#333;}#mermaid-2 .stateLabel text{fill:#131300;font-size:10px;font-weight:bold;}#mermaid-2 .node circle.state-start{fill:#333333;stroke:#333333;}#mermaid-2 .node .fork-join{fill:#333333;stroke:#333333;}#mermaid-2 .node circle.state-end{fill:#9370DB;stroke:white;stroke-width:1.5;}#mermaid-2 .end-state-inner{fill:white;stroke-width:1.5;}#mermaid-2 .node rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-2 .node polygon{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-2 [id$="-barbEnd"]{fill:#333333;}#mermaid-2 .statediagram-cluster rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-2 .cluster-label,#mermaid-2 .nodeLabel{color:#131300;}#mermaid-2 .statediagram-cluster rect.outer{rx:5px;ry:5px;}#mermaid-2 .statediagram-state .divider{stroke:#9370DB;}#mermaid-2 .statediagram-state .title-state{rx:5px;ry:5px;}#mermaid-2 .statediagram-cluster.statediagram-cluster .inner{fill:white;}#mermaid-2 .statediagram-cluster.statediagram-cluster-alt .inner{fill:#f0f0f0;}#mermaid-2 .statediagram-cluster .inner{rx:0;ry:0;}#mermaid-2 .statediagram-state rect.basic{rx:5px;ry:5px;}#mermaid-2 .statediagram-state rect.divider{stroke-dasharray:10,10;fill:#f0f0f0;}#mermaid-2 .note-edge{stroke-dasharray:5;}#mermaid-2 .statediagram-note rect{fill:#fff5ad;stroke:#aaaa33;stroke-width:1px;rx:0;ry:0;}#mermaid-2 .statediagram-note rect{fill:#fff5ad;stroke:#aaaa33;stroke-width:1px;rx:0;ry:0;}#mermaid-2 .statediagram-note text{fill:black;}#mermaid-2 .statediagram-note .nodeLabel{color:black;}#mermaid-2 .statediagram .edgeLabel{color:red;}#mermaid-2 [id$="-dependencyStart"],#mermaid-2 [id$="-dependencyEnd"]{fill:#333333;stroke:#333333;stroke-width:1;}#mermaid-2 .statediagramTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-2 [data-look="neo"].statediagram-cluster rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1;}#mermaid-2 [data-look="neo"].statediagram-cluster rect.outer{rx:5px;ry:5px;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-2 .node .neo-node{stroke:#9370DB;}#mermaid-2 [data-look="neo"].node rect,#mermaid-2 [data-look="neo"].cluster rect,#mermaid-2 [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-2 [data-look="neo"].swimlane.cluster rect{filter:none;}#mermaid-2 [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#mermaid-2 [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-2 [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#mermaid-2 [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-2 [data-look="neo"].node circle .state-start{fill:#000000;}#mermaid-2 [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-2 [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#mermaid-2 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><defs><marker id="mermaid-2_stateDiagram-barbEnd" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z"/></marker></defs><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M22,77L38.1,77C54.201,77,86.401,77,118.602,77C150.802,77,183.003,77,199.103,77L215.203,77" id="mermaid-2-edge0" class="edge-thickness-normal edge-pattern-solid transition" style="fill:none;;;fill:none" data-edge="true" data-et="edge" data-id="edge0" data-points="W3sieCI6MjIsInkiOjc3fSx7IngiOjExOC42MDE1NjI1LCJ5Ijo3N30seyJ4IjoyMTUuMjAzMTI1LCJ5Ijo3N31d" data-look="classic" marker-end="url(#mermaid-2_stateDiagram-barbEnd)"/><path d="M297.922,77L318.755,77C339.589,77,381.255,77,422.922,77C464.589,77,506.255,77,527.089,77L547.922,77" id="mermaid-2-edge1" class="edge-thickness-normal edge-pattern-solid transition" style="fill:none;;;fill:none" data-edge="true" data-et="edge" data-id="edge1" data-points="W3sieCI6Mjk3LjkyMTg3NSwieSI6Nzd9LHsieCI6NDIyLjkyMTg3NSwieSI6Nzd9LHsieCI6NTQ3LjkyMTg3NSwieSI6Nzd9XQ==" data-look="classic" marker-end="url(#mermaid-2_stateDiagram-barbEnd)"/><path d="M627.063,66.18L647.896,60.483C668.729,54.787,710.396,43.393,752.285,37.697C794.174,32,836.286,32,857.342,32L878.398,32" id="mermaid-2-edge2" class="edge-thickness-normal edge-pattern-solid transition" style="fill:none;;;fill:none" data-edge="true" data-et="edge" data-id="edge2" data-points="W3sieCI6NjI3LjA2MjUsInkiOjY2LjE3OTkxOTI5NzQxMjc3fSx7IngiOjc1Mi4wNjI1LCJ5IjozMn0seyJ4Ijo4NzguMzk4NDM3NSwieSI6MzJ9XQ==" data-look="classic" marker-end="url(#mermaid-2_stateDiagram-barbEnd)"/><path d="M627.063,87.82L647.896,93.517C668.729,99.213,710.396,110.607,752.063,116.303C793.729,122,835.396,122,856.229,122L877.063,122" id="mermaid-2-edge3" class="edge-thickness-normal edge-pattern-solid transition" style="fill:none;;;fill:none" data-edge="true" data-et="edge" data-id="edge3" data-points="W3sieCI6NjI3LjA2MjUsInkiOjg3LjgyMDA4MDcwMjU4NzIzfSx7IngiOjc1Mi4wNjI1LCJ5IjoxMjJ9LHsieCI6ODc3LjA2MjUsInkiOjEyMn1d" data-look="classic" marker-end="url(#mermaid-2_stateDiagram-barbEnd)"/><path d="M963.758,32L968.147,32C972.536,32,981.315,32,990.362,38.548C999.409,45.097,1008.724,58.194,1013.382,64.742L1018.039,71.29" id="mermaid-2-edge4" class="edge-thickness-normal edge-pattern-solid transition" style="fill:none;;;fill:none" data-edge="true" data-et="edge" data-id="edge4" data-points="W3sieCI6OTYzLjc1NzgxMjUsInkiOjMyfSx7IngiOjk5MC4wOTM3NSwieSI6MzJ9LHsieCI6MTAxOC4wMzkzMTgxNTk3NzUyLCJ5Ijo3MS4yOTAyOTQzNDQyODQxNn1d" data-look="classic" marker-end="url(#mermaid-2_stateDiagram-barbEnd)"/><path d="M965.094,122L969.26,122C973.427,122,981.76,122,990.585,115.452C999.409,108.903,1008.724,95.806,1013.382,89.258L1018.039,82.71" id="mermaid-2-edge5" class="edge-thickness-normal edge-pattern-solid transition" style="fill:none;;;fill:none" data-edge="true" data-et="edge" data-id="edge5" data-points="W3sieCI6OTY1LjA5Mzc1LCJ5IjoxMjJ9LHsieCI6OTkwLjA5Mzc1LCJ5IjoxMjJ9LHsieCI6MTAxOC4wMzkzMTgxNTk3NzUyLCJ5Ijo4Mi43MDk3MDU2NTU3MTU4NH1d" data-look="classic" marker-end="url(#mermaid-2_stateDiagram-barbEnd)"/></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(118.6015625, 77)"><g class="label" data-id="edge0" transform="translate(-71.6015625, -12)"><foreignObject width="143.203125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>sequencer executes</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(422.921875, 77)"><g class="label" data-id="edge1" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>sequencer signs batch commitment</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(752.0625, 32)"><g class="label" data-id="edge2" transform="translate(-100, -24)"><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>the RootChain accepts its root</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(752.0625, 122)"><g class="label" data-id="edge3" transform="translate(-100, -36)"><foreignObject width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>the RootChain accepts another successor of the same root</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="edge4" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="edge5" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="mermaid-2-state-root_start-0" data-look="classic" transform="translate(15, 77)"><circle class="state-start" r="7" width="14" height="14"/></g><g class="node  statediagram-state" id="mermaid-2-state-Executed-1" data-look="classic" transform="translate(256.5625, 77)"><rect class="basic label-container" style="" rx="5" ry="5" x="-41.359375" y="-20" width="82.71875" height="40"/><g class="label" style="" transform="translate(-33.359375, -12)"><rect/><foreignObject width="66.71875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel markdown-node-label"><p>Executed</p></span></div></foreignObject></g></g><g class="node  statediagram-state" id="mermaid-2-state-SoftFinal-3" data-look="classic" transform="translate(587.4921875, 77)"><rect class="basic label-container" style="" rx="5" ry="5" x="-39.5703125" y="-20" width="79.140625" height="40"/><g class="label" style="" transform="translate(-31.5703125, -12)"><rect/><foreignObject width="63.140625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel markdown-node-label"><p>SoftFinal</p></span></div></foreignObject></g></g><g class="node  statediagram-state" id="mermaid-2-state-HardFinal-4" data-look="classic" transform="translate(921.078125, 32)"><rect class="basic label-container" style="" rx="5" ry="5" x="-42.6796875" y="-20" width="85.359375" height="40"/><g class="label" style="" transform="translate(-34.6796875, -12)"><rect/><foreignObject width="69.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel markdown-node-label"><p>HardFinal</p></span></div></foreignObject></g></g><g class="node  statediagram-state" id="mermaid-2-state-Discarded-5" data-look="classic" transform="translate(921.078125, 122)"><rect class="basic label-container" style="" rx="5" ry="5" x="-44.015625" y="-20" width="88.03125" height="40"/><g class="label" style="" transform="translate(-36.015625, -12)"><rect/><foreignObject width="72.03125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel markdown-node-label"><p>Discarded</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-2-state-root_end-5" data-look="classic" transform="translate(1022.1003966331482, 77)"><g class="outer-path"><path d="M7 0 C7 0.40517908122283747, 6.964012880168563 0.816513743121899, 6.893654271085456 1.2155372436685123 C6.823295662002349 1.6145607442151257, 6.716427752933756 2.013397210557766, 6.5778483455013586 2.394141003279681 C6.439268938068961 2.7748847960015954, 6.26476736710249 3.149104622578984, 6.062177826491071 3.4999999999999996 C5.859588285879653 3.8508953774210153, 5.622755194947063 4.189128084166967, 5.362311101832846 4.499513267805774 C5.10186700871863 4.809898451444582, 4.809898451444583 5.10186700871863, 4.499513267805775 5.362311101832846 C4.189128084166968 5.622755194947063, 3.8508953774210166 5.859588285879652, 3.500000000000001 6.06217782649107 C3.149104622578985 6.264767367102489, 2.7748847960015963 6.439268938068961, 2.3941410032796817 6.5778483455013586 C2.013397210557767 6.716427752933756, 1.6145607442151264 6.823295662002349, 1.2155372436685128 6.893654271085456 C0.8165137431218992 6.964012880168563, 0.4051790812228379 7, 4.286263797015736e-16 7 C-0.405179081222837 7, -0.8165137431218985 6.964012880168563, -1.2155372436685121 6.893654271085456 C-1.6145607442151257 6.823295662002349, -2.0133972105577667 6.716427752933756, -2.394141003279681 6.5778483455013586 C-2.774884796001595 6.439268938068961, -3.149104622578983 6.26476736710249, -3.4999999999999982 6.062177826491071 C-3.8508953774210135 5.859588285879653, -4.189128084166966 5.6227551949470636, -4.499513267805773 5.362311101832848 C-4.809898451444581 5.101867008718632, -5.101867008718628 4.809898451444586, -5.3623111018328435 4.499513267805779 C-5.622755194947059 4.189128084166971, -5.859588285879649 3.8508953774210206, -6.062177826491068 3.5000000000000053 C-6.264767367102486 3.14910462257899, -6.439268938068958 2.774884796001602, -6.577848345501356 2.394141003279688 C-6.716427752933754 2.0133972105577738, -6.823295662002347 1.614560744215134, -6.893654271085454 1.215537243668521 C-6.9640128801685615 0.816513743121908, -6.999999999999999 0.4051790812228472, -7 1.0183126166254463e-14 C-7.000000000000001 -0.40517908122282686, -6.964012880168565 -0.8165137431218878, -6.893654271085459 -1.215537243668501 C-6.823295662002352 -1.6145607442151142, -6.716427752933759 -2.0133972105577542, -6.577848345501363 -2.394141003279669 C-6.439268938068967 -2.7748847960015834, -6.264767367102496 -3.149104622578972, -6.062177826491078 -3.4999999999999876 C-5.859588285879661 -3.8508953774210033, -5.6227551949470715 -4.1891280841669545, -5.362311101832856 -4.499513267805763 C-5.10186700871864 -4.809898451444571, -4.809898451444594 -5.10186700871862, -4.499513267805787 -5.362311101832836 C-4.189128084166979 -5.622755194947053, -3.850895377421028 -5.859588285879643, -3.5000000000000133 -6.062177826491062 C-3.1491046225789985 -6.264767367102482, -2.774884796001611 -6.439268938068954, -2.3941410032796973 -6.577848345501353 C-2.0133972105577835 -6.716427752933752, -1.6145607442151435 -6.823295662002345, -1.2155372436685306 -6.893654271085453 C-0.8165137431219176 -6.9640128801685615, -0.40517908122285695 -6.999999999999999, -1.9937625952807352e-14 -7 C0.4051790812228171 -7.000000000000001, 0.8165137431218781 -6.964012880168565, 1.2155372436684913 -6.89365427108546 C1.6145607442151044 -6.823295662002354, 2.013397210557745 -6.716427752933763, 2.3941410032796595 -6.5778483455013665 C2.774884796001574 -6.43926893806897, 3.149104622578963 -6.2647673671025, 3.499999999999979 -6.062177826491083 C3.8508953774209953 -5.859588285879665, 4.189128084166947 -5.622755194947077, 4.499513267805756 -5.362311101832862 C4.809898451444564 -5.1018670087186475, 5.101867008718613 -4.809898451444602, 5.362311101832829 -4.499513267805796 C5.622755194947046 -4.189128084166989, 5.859588285879637 -3.8508953774210393, 6.062177826491056 -3.500000000000025 C6.2647673671024755 -3.1491046225790105, 6.439268938068949 -2.774884796001623, 6.577848345501348 -2.3941410032797092 C6.716427752933747 -2.0133972105577955, 6.823295662002342 -1.6145607442151562, 6.893654271085451 -1.2155372436685434 C6.96401288016856 -0.8165137431219307, 6.982275711847575 -0.2025895406114567, 7 -3.2800750208310675e-14 C7.017724288152425 0.2025895406113911, 7.017724288152424 -0.2025895406114242, 7 0" stroke="none" stroke-width="0" fill="#ECECFF" style=""/><path d="M7 0 C7 0.40517908122283747, 6.964012880168563 0.816513743121899, 6.893654271085456 1.2155372436685123 C6.823295662002349 1.6145607442151257, 6.716427752933756 2.013397210557766, 6.5778483455013586 2.394141003279681 C6.439268938068961 2.7748847960015954, 6.26476736710249 3.149104622578984, 6.062177826491071 3.4999999999999996 C5.859588285879653 3.8508953774210153, 5.622755194947063 4.189128084166967, 5.362311101832846 4.499513267805774 C5.10186700871863 4.809898451444582, 4.809898451444583 5.10186700871863, 4.499513267805775 5.362311101832846 C4.189128084166968 5.622755194947063, 3.8508953774210166 5.859588285879652, 3.500000000000001 6.06217782649107 C3.149104622578985 6.264767367102489, 2.7748847960015963 6.439268938068961, 2.3941410032796817 6.5778483455013586 C2.013397210557767 6.716427752933756, 1.6145607442151264 6.823295662002349, 1.2155372436685128 6.893654271085456 C0.8165137431218992 6.964012880168563, 0.4051790812228379 7, 4.286263797015736e-16 7 C-0.405179081222837 7, -0.8165137431218985 6.964012880168563, -1.2155372436685121 6.893654271085456 C-1.6145607442151257 6.823295662002349, -2.0133972105577667 6.716427752933756, -2.394141003279681 6.5778483455013586 C-2.774884796001595 6.439268938068961, -3.149104622578983 6.26476736710249, -3.4999999999999982 6.062177826491071 C-3.8508953774210135 5.859588285879653, -4.189128084166966 5.6227551949470636, -4.499513267805773 5.362311101832848 C-4.809898451444581 5.101867008718632, -5.101867008718628 4.809898451444586, -5.3623111018328435 4.499513267805779 C-5.622755194947059 4.189128084166971, -5.859588285879649 3.8508953774210206, -6.062177826491068 3.5000000000000053 C-6.264767367102486 3.14910462257899, -6.439268938068958 2.774884796001602, -6.577848345501356 2.394141003279688 C-6.716427752933754 2.0133972105577738, -6.823295662002347 1.614560744215134, -6.893654271085454 1.215537243668521 C-6.9640128801685615 0.816513743121908, -6.999999999999999 0.4051790812228472, -7 1.0183126166254463e-14 C-7.000000000000001 -0.40517908122282686, -6.964012880168565 -0.8165137431218878, -6.893654271085459 -1.215537243668501 C-6.823295662002352 -1.6145607442151142, -6.716427752933759 -2.0133972105577542, -6.577848345501363 -2.394141003279669 C-6.439268938068967 -2.7748847960015834, -6.264767367102496 -3.149104622578972, -6.062177826491078 -3.4999999999999876 C-5.859588285879661 -3.8508953774210033, -5.6227551949470715 -4.1891280841669545, -5.362311101832856 -4.499513267805763 C-5.10186700871864 -4.809898451444571, -4.809898451444594 -5.10186700871862, -4.499513267805787 -5.362311101832836 C-4.189128084166979 -5.622755194947053, -3.850895377421028 -5.859588285879643, -3.5000000000000133 -6.062177826491062 C-3.1491046225789985 -6.264767367102482, -2.774884796001611 -6.439268938068954, -2.3941410032796973 -6.577848345501353 C-2.0133972105577835 -6.716427752933752, -1.6145607442151435 -6.823295662002345, -1.2155372436685306 -6.893654271085453 C-0.8165137431219176 -6.9640128801685615, -0.40517908122285695 -6.999999999999999, -1.9937625952807352e-14 -7 C0.4051790812228171 -7.000000000000001, 0.8165137431218781 -6.964012880168565, 1.2155372436684913 -6.89365427108546 C1.6145607442151044 -6.823295662002354, 2.013397210557745 -6.716427752933763, 2.3941410032796595 -6.5778483455013665 C2.774884796001574 -6.43926893806897, 3.149104622578963 -6.2647673671025, 3.499999999999979 -6.062177826491083 C3.8508953774209953 -5.859588285879665, 4.189128084166947 -5.622755194947077, 4.499513267805756 -5.362311101832862 C4.809898451444564 -5.1018670087186475, 5.101867008718613 -4.809898451444602, 5.362311101832829 -4.499513267805796 C5.622755194947046 -4.189128084166989, 5.859588285879637 -3.8508953774210393, 6.062177826491056 -3.500000000000025 C6.2647673671024755 -3.1491046225790105, 6.439268938068949 -2.774884796001623, 6.577848345501348 -2.3941410032797092 C6.716427752933747 -2.0133972105577955, 6.823295662002342 -1.6145607442151562, 6.893654271085451 -1.2155372436685434 C6.96401288016856 -0.8165137431219307, 6.982275711847575 -0.2025895406114567, 7 -3.2800750208310675e-14 C7.017724288152425 0.2025895406113911, 7.017724288152424 -0.2025895406114242, 7 0" stroke="#333333" stroke-width="2" fill="none" stroke-dasharray="0 0" style=""/><g><path d="M2.5 0 C2.5 0.14470681472244193, 2.487147457203058 0.29161205111496386, 2.46201938253052 0.4341204441673258 C2.436891307857982 0.5766288372196877, 2.3987241974763416 0.7190704323420595, 2.3492315519647713 0.8550503583141718 C2.299738906453201 0.991030284286284, 2.2374169168223177 1.124680222349637, 2.165063509461097 1.2499999999999998 C2.092710102099876 1.3753197776503625, 2.0081268553382365 1.496117172916774, 1.915111107797445 1.6069690242163481 C1.8220953602566536 1.7178208755159223, 1.7178208755159226 1.8220953602566536, 1.6069690242163484 1.915111107797445 C1.4961171729167742 2.0081268553382365, 1.375319777650363 2.0927101020998755, 1.2500000000000002 2.1650635094610964 C1.1246802223496375 2.2374169168223172, 0.9910302842862845 2.2997389064532, 0.8550503583141721 2.349231551964771 C0.7190704323420597 2.3987241974763416, 0.576628837219688 2.436891307857982, 0.43412044416732604 2.46201938253052 C0.291612051114964 2.487147457203058, 0.14470681472244212 2.5, 1.5308084989341916e-16 2.5 C-0.1447068147224418 2.5, -0.2916120511149638 2.487147457203058, -0.43412044416732576 2.46201938253052 C-0.5766288372196877 2.436891307857982, -0.7190704323420595 2.3987241974763416, -0.8550503583141718 2.3492315519647713 C-0.991030284286284 2.299738906453201, -1.124680222349637 2.2374169168223177, -1.2499999999999996 2.165063509461097 C-1.375319777650362 2.092710102099876, -1.4961171729167733 2.008126855338237, -1.6069690242163475 1.9151111077974459 C-1.7178208755159217 1.8220953602566548, -1.822095360256653 1.7178208755159234, -1.9151111077974443 1.6069690242163495 C-2.0081268553382357 1.4961171729167755, -2.0927101020998746 1.3753197776503645, -2.1650635094610955 1.250000000000002 C-2.2374169168223164 1.1246802223496395, -2.2997389064531992 0.9910302842862865, -2.34923155196477 0.8550503583141743 C-2.3987241974763407 0.7190704323420621, -2.436891307857981 0.5766288372196907, -2.4620193825305194 0.434120444167329 C-2.487147457203058 0.29161205111496724, -2.5 0.14470681472244545, -2.5 3.636830773662308e-15 C-2.5 -0.14470681472243818, -2.4871474572030587 -0.2916120511149599, -2.4620193825305208 -0.4341204441673218 C-2.436891307857983 -0.5766288372196837, -2.398724197476343 -0.7190704323420553, -2.3492315519647726 -0.8550503583141675 C-2.2997389064532023 -0.9910302842862798, -2.23741691682232 -1.1246802223496328, -2.165063509461099 -1.2499999999999956 C-2.092710102099878 -1.3753197776503583, -2.00812685533824 -1.4961171729167695, -1.9151111077974488 -1.606969024216344 C-1.8220953602566576 -1.7178208755159183, -1.7178208755159263 -1.82209536025665, -1.6069690242163523 -1.9151111077974416 C-1.4961171729167784 -2.0081268553382334, -1.3753197776503672 -2.0927101020998724, -1.2500000000000047 -2.1650635094610937 C-1.1246802223496422 -2.237416916822315, -0.9910302842862897 -2.299738906453198, -0.8550503583141776 -2.3492315519647686 C-0.7190704323420656 -2.3987241974763394, -0.5766288372196942 -2.4368913078579806, -0.43412044416733236 -2.462019382530519 C-0.29161205111497057 -2.4871474572030574, -0.1447068147224489 -2.4999999999999996, -7.120580697431198e-15 -2.5 C0.14470681472243463 -2.5000000000000004, 0.29161205111495647 -2.487147457203059, 0.4341204441673183 -2.4620193825305217 C0.5766288372196802 -2.436891307857984, 0.7190704323420518 -2.3987241974763442, 0.8550503583141642 -2.349231551964774 C0.9910302842862766 -2.2997389064532037, 1.1246802223496295 -2.2374169168223212, 1.2499999999999925 -2.165063509461101 C1.3753197776503554 -2.0927101020998804, 1.4961171729167668 -2.008126855338242, 1.6069690242163412 -1.915111107797451 C1.7178208755159157 -1.82209536025666, 1.8220953602566472 -1.7178208755159294, 1.915111107797439 -1.6069690242163557 C2.0081268553382308 -1.496117172916782, 2.09271010209987 -1.3753197776503712, 2.1650635094610915 -1.2500000000000089 C2.237416916822313 -1.1246802223496466, 2.299738906453196 -0.9910302842862939, 2.3492315519647673 -0.855050358314182 C2.3987241974763385 -0.71907043234207, 2.4368913078579792 -0.5766288372196986, 2.462019382530518 -0.4341204441673369 C2.487147457203057 -0.29161205111497523, 2.4936698970884197 -0.07235340736123454, 2.5 -1.1714553645825241e-14 C2.5063301029115803 0.07235340736121111, 2.50633010291158 -0.07235340736122292, 2.5 0" stroke="none" stroke-width="0" fill="#9370DB" style=""/><path d="M2.5 0 C2.5 0.14470681472244193, 2.487147457203058 0.29161205111496386, 2.46201938253052 0.4341204441673258 C2.436891307857982 0.5766288372196877, 2.3987241974763416 0.7190704323420595, 2.3492315519647713 0.8550503583141718 C2.299738906453201 0.991030284286284, 2.2374169168223177 1.124680222349637, 2.165063509461097 1.2499999999999998 C2.092710102099876 1.3753197776503625, 2.0081268553382365 1.496117172916774, 1.915111107797445 1.6069690242163481 C1.8220953602566536 1.7178208755159223, 1.7178208755159226 1.8220953602566536, 1.6069690242163484 1.915111107797445 C1.4961171729167742 2.0081268553382365, 1.375319777650363 2.0927101020998755, 1.2500000000000002 2.1650635094610964 C1.1246802223496375 2.2374169168223172, 0.9910302842862845 2.2997389064532, 0.8550503583141721 2.349231551964771 C0.7190704323420597 2.3987241974763416, 0.576628837219688 2.436891307857982, 0.43412044416732604 2.46201938253052 C0.291612051114964 2.487147457203058, 0.14470681472244212 2.5, 1.5308084989341916e-16 2.5 C-0.1447068147224418 2.5, -0.2916120511149638 2.487147457203058, -0.43412044416732576 2.46201938253052 C-0.5766288372196877 2.436891307857982, -0.7190704323420595 2.3987241974763416, -0.8550503583141718 2.3492315519647713 C-0.991030284286284 2.299738906453201, -1.124680222349637 2.2374169168223177, -1.2499999999999996 2.165063509461097 C-1.375319777650362 2.092710102099876, -1.4961171729167733 2.008126855338237, -1.6069690242163475 1.9151111077974459 C-1.7178208755159217 1.8220953602566548, -1.822095360256653 1.7178208755159234, -1.9151111077974443 1.6069690242163495 C-2.0081268553382357 1.4961171729167755, -2.0927101020998746 1.3753197776503645, -2.1650635094610955 1.250000000000002 C-2.2374169168223164 1.1246802223496395, -2.2997389064531992 0.9910302842862865, -2.34923155196477 0.8550503583141743 C-2.3987241974763407 0.7190704323420621, -2.436891307857981 0.5766288372196907, -2.4620193825305194 0.434120444167329 C-2.487147457203058 0.29161205111496724, -2.5 0.14470681472244545, -2.5 3.636830773662308e-15 C-2.5 -0.14470681472243818, -2.4871474572030587 -0.2916120511149599, -2.4620193825305208 -0.4341204441673218 C-2.436891307857983 -0.5766288372196837, -2.398724197476343 -0.7190704323420553, -2.3492315519647726 -0.8550503583141675 C-2.2997389064532023 -0.9910302842862798, -2.23741691682232 -1.1246802223496328, -2.165063509461099 -1.2499999999999956 C-2.092710102099878 -1.3753197776503583, -2.00812685533824 -1.4961171729167695, -1.9151111077974488 -1.606969024216344 C-1.8220953602566576 -1.7178208755159183, -1.7178208755159263 -1.82209536025665, -1.6069690242163523 -1.9151111077974416 C-1.4961171729167784 -2.0081268553382334, -1.3753197776503672 -2.0927101020998724, -1.2500000000000047 -2.1650635094610937 C-1.1246802223496422 -2.237416916822315, -0.9910302842862897 -2.299738906453198, -0.8550503583141776 -2.3492315519647686 C-0.7190704323420656 -2.3987241974763394, -0.5766288372196942 -2.4368913078579806, -0.43412044416733236 -2.462019382530519 C-0.29161205111497057 -2.4871474572030574, -0.1447068147224489 -2.4999999999999996, -7.120580697431198e-15 -2.5 C0.14470681472243463 -2.5000000000000004, 0.29161205111495647 -2.487147457203059, 0.4341204441673183 -2.4620193825305217 C0.5766288372196802 -2.436891307857984, 0.7190704323420518 -2.3987241974763442, 0.8550503583141642 -2.349231551964774 C0.9910302842862766 -2.2997389064532037, 1.1246802223496295 -2.2374169168223212, 1.2499999999999925 -2.165063509461101 C1.3753197776503554 -2.0927101020998804, 1.4961171729167668 -2.008126855338242, 1.6069690242163412 -1.915111107797451 C1.7178208755159157 -1.82209536025666, 1.8220953602566472 -1.7178208755159294, 1.915111107797439 -1.6069690242163557 C2.0081268553382308 -1.496117172916782, 2.09271010209987 -1.3753197776503712, 2.1650635094610915 -1.2500000000000089 C2.237416916822313 -1.1246802223496466, 2.299738906453196 -0.9910302842862939, 2.3492315519647673 -0.855050358314182 C2.3987241974763385 -0.71907043234207, 2.4368913078579792 -0.5766288372196986, 2.462019382530518 -0.4341204441673369 C2.487147457203057 -0.29161205111497523, 2.4936698970884197 -0.07235340736123454, 2.5 -1.1714553645825241e-14 C2.5063301029115803 0.07235340736121111, 2.50633010291158 -0.07235340736122292, 2.5 0" stroke="#9370DB" stroke-width="2" fill="none" stroke-dasharray="0 0" style=""/></g></g></g></g></g></g><defs><filter id="mermaid-2-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="mermaid-2-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs></svg></div><figcaption>Figure 02</figcaption></figure>
-<div class="table-hint"><span>Table 12</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 12" tabindex="0"><table>
+<div class="table-hint"><span>Table 05</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 05" tabindex="0"><table>
 <thead>
 <tr>
 <th>Transition</th>
@@ -641,7 +337,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 <p>Only a hard-final batch affects anything outside the issuer state. Such effects are a settlement, a pay-out, a wrapper mint, a departure, or a proof given to a holder as final.</p>
 <h3 id="system-design--52-rootchain"><a class="section-link" href="#system-design--52-rootchain">5.2 RootChain</a></h3>
-<div class="table-hint"><span>Table 13</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 13" tabindex="0"><table>
+<div class="table-hint"><span>Table 06</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 06" tabindex="0"><table>
 <thead>
 <tr>
 <th>State</th>
@@ -658,13 +354,13 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <tr>
 <td>Retired</td>
 <td><code>finalizeDeparture</code> on <code>IssuerEpochRegistry</code> (§5.5)</td>
-<td>The RootChain is at its final root. It accepts no further roots (I-60).</td>
+<td>The RootChain is at its final root. It accepts no further roots.</td>
 </tr>
 </tbody>
 </table></div>
 <p>An issuer with no transactions posts nothing.</p>
 <h3 id="system-design--53-payment"><a class="section-link" href="#system-design--53-payment">5.3 Payment</a></h3>
-<div class="table-hint"><span>Table 14</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 14" tabindex="0"><table>
+<div class="table-hint"><span>Table 07</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 07" tabindex="0"><table>
 <thead>
 <tr>
 <th>State</th>
@@ -701,7 +397,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="system-design--54-scrip-lock"><a class="section-link" href="#system-design--54-scrip-lock">5.4 Scrip lock</a></h3>
-<div class="table-hint"><span>Table 15</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 15" tabindex="0"><table>
+<div class="table-hint"><span>Table 08</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 08" tabindex="0"><table>
 <thead>
 <tr>
 <th>State</th>
@@ -733,8 +429,8 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <p><code>setRestrictionHook</code> stays callable after a lock (<code>cc</code> <code>src/CyberScrip.sol:146-149</code>). A hook added later that blocks an unlock is a misaccounting, and the signed lock and return records are the holder's evidence (§11).</p>
-<p>Each lock and return record binds the bindings of <code>mlx</code>'s <code>BridgeMessageV1</code>: issuer (<code>chainid</code>), epoch, direction, asset, holder, note key, amount, nonce and source event (I-28). <code>mlx</code> §2's six statuses map onto the states:</p>
-<div class="table-hint"><span>Table 16</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 16" tabindex="0"><table>
+<p>Each lock and return record binds the bindings of <code>mlx</code>'s <code>BridgeMessageV1</code>: issuer (<code>chainid</code>), epoch, direction, asset, holder, note key, amount, nonce and source event. <code>mlx</code> §2's six statuses map onto the states:</p>
+<div class="table-hint"><span>Table 09</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 09" tabindex="0"><table>
 <thead>
 <tr>
 <th><code>mlx</code> status</th>
@@ -769,7 +465,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="system-design--55-issuer-epoch"><a class="section-link" href="#system-design--55-issuer-epoch">5.5 Issuer epoch</a></h3>
-<div class="table-hint"><span>Table 17</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 17" tabindex="0"><table>
+<div class="table-hint"><span>Table 10</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 10" tabindex="0"><table>
 <thead>
 <tr>
 <th>State</th>
@@ -795,9 +491,9 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </tbody>
 </table></div>
-<p>No import happens on L1 (R-39). The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapper note, pending lock or return, and open commitment gets one disposition in the successor's state (I-62).</p>
+<p>No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapper note, pending lock or return, and open commitment gets one disposition in the successor's state.</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 07</div><h2 id="system-design--6-rootchain-rules"><a class="section-link" href="#system-design--6-rootchain-rules">6. RootChain rules</a></h2>
+<section class="report-section"><div class="section-index">System design · 06</div><h2 id="system-design--6-rootchain-rules"><a class="section-link" href="#system-design--6-rootchain-rules">6. RootChain rules</a></h2>
 <h3 id="system-design--61-root-acceptance"><a class="section-link" href="#system-design--61-root-acceptance">6.1 Root acceptance</a></h3>
 <p>The RootChain accepts a root, directly or by inclusion proof from the daily aggregator (§6.2), only if all of these hold:</p>
 <ol>
@@ -806,18 +502,18 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <li><strong>Blob binding.</strong> <code>blobRefs</code> lists the versioned hashes of the blobs that carry this party's data, with its offset and length in each. Every hash is one that the aggregator recorded as published, or one in the root's own blob transaction.</li>
 </ol>
 <p>The RootChain only stores roots. It checks no validity proof (§11) and acts on no message.</p>
-<h3 id="system-design--62-daily-aggregation-r-43"><a class="section-link" href="#system-design--62-daily-aggregation-r-43">6.2 Daily aggregation (R-43)</a></h3>
+<h3 id="system-design--62-daily-aggregation"><a class="section-link" href="#system-design--62-daily-aggregation">6.2 Daily aggregation</a></h3>
 <p>By default, MetaLeX core publishes all parties' roots of the day in one run:</p>
 <ol>
 <li><strong>Blobs, packed by size.</strong> The blob data of every party with changes is concatenated and split into blobs. One blob transaction holds up to Ethereum's per-transaction blob limit; a day that needs more uses more blob transactions.</li>
 <li><strong>One aggregation call.</strong> The first blob transaction calls the aggregator. It records the versioned hashes of the day's blobs and one Merkle root over the day's signed party roots.</li>
 <li><strong>Lazy RootChain reads.</strong> A RootChain reads its root from the aggregator by inclusion proof only when an L1 action needs it, for example a departure. Holders check the inclusion proof off chain (§8.2).</li>
 </ol>
-<p>Each party still signs only its own root and its own blob references. A party with no changes is absent from the day's tree, and posts nothing (R-17). Any t watcher members of a party may submit their root directly to their RootChain, in their own blob transaction, by the same rules. That is the same transition, not a second path.</p>
+<p>Each party still signs only its own root and its own blob references. A party with no changes is absent from the day's tree, and posts nothing. Any t watcher members of a party may submit their root directly to their RootChain, in their own blob transaction, by the same rules. That is the same transition, not a second path.</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 08</div><h2 id="system-design--7-blob-data-blinded-not-encrypted"><a class="section-link" href="#system-design--7-blob-data-blinded-not-encrypted">7. Blob data: blinded, not encrypted</a></h2>
+<section class="report-section"><div class="section-index">System design · 07</div><h2 id="system-design--7-blob-data-blinded-not-encrypted"><a class="section-link" href="#system-design--7-blob-data-blinded-not-encrypted">7. Blob data: blinded, not encrypted</a></h2>
 <p>Each root publishes, in blobs, the blinded position and blinded leaf of every slot whose value changed since the previous root. The blobs also carry the watcher party's latest co-signed settlement-channel state (§9.2). A slot that changed several times since the previous root appears once, with its final value. Interior nodes are not published: anyone with the archived leaves rebuilds the tree.</p>
-<div class="table-hint"><span>Table 18</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 18" tabindex="0"><table>
+<div class="table-hint"><span>Table 11</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 11" tabindex="0"><table>
 <thead>
 <tr>
 <th>Property</th>
@@ -847,9 +543,9 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </tbody>
 </table></div>
-<p>Ethereum prunes blobs after about 18 days. Every watcher member archives the blob data, and anyone else may archive it too, because it reveals nothing. Each holder keeps its records, salts and latest proofs. Most holders use MetaLeX's website, which keeps them in browser storage. Holders who want durable records use Armada's mobile app, which contains the website and a watcher for the holder's own records. Browser storage holds the same data, but it is more easily deleted (R-33).</p>
+<p>Ethereum prunes blobs after about 18 days. Every watcher member archives the blob data, and anyone else may archive it too, because it reveals nothing. Each holder keeps its records, salts and latest proofs. Most holders use MetaLeX's website, which keeps them in browser storage. Holders who want durable records use Armada's mobile app, which contains the website and a watcher for the holder's own records. Browser storage holds the same data, but it is more easily deleted.</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 09</div><h2 id="system-design--8-holders"><a class="section-link" href="#system-design--8-holders">8. Holders</a></h2>
+<section class="report-section"><div class="section-index">System design · 08</div><h2 id="system-design--8-holders"><a class="section-link" href="#system-design--8-holders">8. Holders</a></h2>
 <h3 id="system-design--81-the-party-rpc"><a class="section-link" href="#system-design--81-the-party-rpc">8.1 The party RPC</a></h3>
 <p>Each watcher party runs its own RPC, in MetaLeX's sense of the word: the private, authenticated endpoint that <code>mlx</code> puts in front of the chain ("Private RPC/policy enforcement", Table 02). It is the only interface to the issuer state. Any watcher member may run an endpoint of it. MetaLeX core runs one by default.</p>
 <p>For each hard-final batch that changes a holder's records, the party RPC gives the holder:
@@ -857,7 +553,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 - the logs that touch the holder's records;
 - a proof of each record against the new root.</p>
 <p>A holder subscribes for these, or fetches them. Every item verifies against a root on L1.</p>
-<p><strong>Authentication (R-20, R-21).</strong> The issuer state gets user IDs from the MetaLeX hub. A user signs each request to the party RPC with its wallet key, through MetaLeX's existing wallet login (<code>mlx</code> §4: the Privy-aware wallet abstraction). The party RPC checks the signature against the ID in the issuer state, and scopes the request by the contracts' authority for that address (§8.4). The hub is not in the request path, so a user reads its records while MetaLeX core is down. Authentication establishes identity only. Rights stay in the contracts (I-5, I-10).</p>
+<p><strong>Authentication.</strong> The issuer state gets user IDs from the MetaLeX hub. A user signs each request to the party RPC with its wallet key, through MetaLeX's existing wallet login (<code>mlx</code> §4: the Privy-aware wallet abstraction). The party RPC checks the signature against the ID in the issuer state, and scopes the request by the contracts' authority for that address (§8.4). The hub is not in the request path, so a user reads its records while MetaLeX core is down. Authentication establishes identity only. Rights stay in the contracts.</p>
 <h3 id="system-design--82-verification"><a class="section-link" href="#system-design--82-verification">8.2 Verification</a></h3>
 <ol>
 <li><strong>Read the root</strong> from the RootChain through a light client: Armada's nimbus verified proxy.</li>
@@ -873,14 +569,14 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 - the archived blob data, from which it rebuilds the tree.</p>
 <p>From these it computes a proof of each record against the last root. That proof shows what the holder owned. If the issuer departs to a successor, the holder proves its records to the successor's watcher party with the same proof, off L1 (§5.5).</p>
 <h3 id="system-design--84-scope"><a class="section-link" href="#system-design--84-scope">8.4 Scope</a></h3>
-<p>A holder sees its own records under the contracts' own authority: its LETs, scrip, payment token, endorsements, agreements and grants. It sees an asset's history only from the batch in which it first holds the asset. Earlier holders are other counterparties of the issuer, and no counterparty sees another counterparty's private data (R-22). Issuer officers see every counterparty's data. MetaLeX, through the MetaLeX hub, and the recovery operator see everything, as the named plaintext audiences (I-35, R-36).</p>
+<p>A holder sees its own records under the contracts' own authority: its LETs, scrip, payment token, endorsements, agreements and grants. It sees an asset's history only from the batch in which it first holds the asset. Earlier holders are other counterparties of the issuer, and no counterparty sees another counterparty's private data. Issuer officers see every counterparty's data. MetaLeX, through the MetaLeX hub, and the recovery operator see everything, as the named plaintext audiences.</p>
 <h3 id="system-design--85-methods-and-writes"><a class="section-link" href="#system-design--85-methods-and-writes">8.5 Methods and writes</a></h3>
 <p>The party RPC serves MetaLeX's app with <code>eth_sendRawTransaction</code>, <code>eth_getTransactionReceipt</code>, <code>eth_call</code> and <code>eth_getLogs</code>, each scoped by the contracts' authority (§8.4, <code>mlx</code> §4, A1). It adds methods for records, salts, proofs and history subscription. It has no unscoped method.</p>
-<p>Writes go to the sequencer. Before sequencing, the harness executes each transaction with an inspector that checks every CALL, DELEGATECALL and CREATE frame against the policy (I-39). A transaction with a denied frame is not included.</p>
-<p>The sequencer can also refuse a write. A payer whose write is refused gets no asset and has no remedy on L1. Its signed request and the refusal are its evidence to MetaLeX (R-40).</p>
+<p>Writes go to the sequencer. Before sequencing, the harness executes each transaction with an inspector that checks every CALL, DELEGATECALL and CREATE frame against the policy. A transaction with a denied frame is not included.</p>
+<p>The sequencer can also refuse a write. A payer whose write is refused gets no asset and has no remedy on L1. Its signed request and the refusal are its evidence to MetaLeX.</p>
 <h3 id="system-design--86-the-web-apps-endpoint-and-indexing"><a class="section-link" href="#system-design--86-the-web-apps-endpoint-and-indexing">8.6 The web app's endpoint and indexing</a></h3>
 <p>MetaLeX's web app needs no new transport. The work splits between the party RPC and the browser:</p>
-<div class="table-hint"><span>Table 19</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 19" tabindex="0"><table>
+<div class="table-hint"><span>Table 12</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 12" tabindex="0"><table>
 <thead>
 <tr>
 <th>Part</th>
@@ -890,7 +586,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <tbody>
 <tr>
 <td>A standard JSON-RPC endpoint for each issuer's <code>chainid</code>, so the app's contract calls stay unchanged</td>
-<td>The party RPC, on the endpoints that watcher members run. The MetaLeX hub is not in the request path (R-21).</td>
+<td>The party RPC, on the endpoints that watcher members run. The MetaLeX hub is not in the request path.</td>
 </tr>
 <tr>
 <td>The watcher party's own index: logs, history and records, scoped by the contracts' authority</td>
@@ -901,17 +597,17 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <td>The browser, through the user's wallet</td>
 </tr>
 <tr>
-<td>Verification of each record against the issuer's root on L1 (§8.2), failing closed when a check or the authentication fails (I-40)</td>
+<td>Verification of each record against the issuer's root on L1 (§8.2), failing closed when a check or the authentication fails</td>
 <td>The browser, through the WASM verifier and Armada's browser light client</td>
 </tr>
 </tbody>
 </table></div>
 <p>The app's one new step is the payment commitment, which the user's Armada wallet signs (§9.2).</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 10</div><h2 id="system-design--9-value"><a class="section-link" href="#system-design--9-value">9. Value</a></h2>
-<h3 id="system-design--91-where-value-lives-r-5-r-14"><a class="section-link" href="#system-design--91-where-value-lives-r-5-r-14">9.1 Where value lives (R-5, R-14)</a></h3>
+<section class="report-section"><div class="section-index">System design · 09</div><h2 id="system-design--9-value"><a class="section-link" href="#system-design--9-value">9. Value</a></h2>
+<h3 id="system-design--91-where-value-lives"><a class="section-link" href="#system-design--91-where-value-lives">9.1 Where value lives</a></h3>
 <p>All value is armada-nitro assets on L1: shielded notes in the Armada pool, and channels funded from notes that pay out to notes.</p>
-<div class="table-hint"><span>Table 20</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 20" tabindex="0"><table>
+<div class="table-hint"><span>Table 13</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 13" tabindex="0"><table>
 <thead>
 <tr>
 <th>Property</th>
@@ -937,66 +633,20 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </tbody>
 </table></div>
-<p>Funding a channel needs a working hub: MetaLeX's or an issuer's (R-13).</p>
-<p><strong>Watchtowers (R-37).</strong> ForceMove protects a channel only if someone answers a stale-state challenge within the challenge window. The MetaLeX hub runs a watchtower for website users by default. The recovery operator may also run one. The mobile app runs its own.</p>
+<p>Funding a channel needs a working hub: MetaLeX's or an issuer's.</p>
+<p><strong>Watchtowers.</strong> ForceMove protects a channel only if someone answers a stale-state challenge within the challenge window. The MetaLeX hub runs a watchtower for website users by default. The recovery operator may also run one. The mobile app runs its own.</p>
 <h3 id="system-design--92-the-watcher-party-as-a-nitro-participant"><a class="section-link" href="#system-design--92-the-watcher-party-as-a-nitro-participant">9.2 The watcher party as a Nitro participant</a></h3>
-<p>The Cybercorps contracts pull, hold and pay an ERC20 in the same EVM (<code>cc</code> <code>src/storage/LexScrowStorage.sol:251, 308</code>). In the issuer state that ERC20 is the payment token. The watcher party connects it to armada-nitro through its own channels (R-24). No contract and no app reads an issuer root to move USDC: the signatures are binding (R-26, R-35).</p>
-<div class="table-hint"><span>Table 21</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 21" tabindex="0"><table>
-<thead>
-<tr>
-<th>Part</th>
-<th>Rule</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Buyer channels</td>
-<td>Each buyer has a channel with the watcher party, funded through the hub (§9.3). The party custodian is the watcher party's participant.</td>
-</tr>
-<tr>
-<td>Commit</td>
-<td>To pay in, the buyer signs a channel state that moves the amount to the watcher party, and gives it to the watcher party. The USDC stays in the buyer's channel. The watcher party writes a commit record and mints the same amount of payment token to the buyer.</td>
-</tr>
-<tr>
-<td>Settle</td>
-<td>In the batch whose root finalizes the step, the watcher party countersigns the committed state. A routed payment moves the amount into the settlement channel. Its signature on the root binds it to the shares; its signature on the state completes the payment.</td>
-</tr>
-<tr>
-<td>The buyer cannot withdraw a commitment</td>
-<td>If the buyer force-closes with an earlier state, the watcher party answers the challenge with the buyer-signed, higher-turn committed state. ForceMove's turn rule decides; no root is read.</td>
-</tr>
-<tr>
-<td>Release</td>
-<td>If the step is voided or refunded, the buyer and the watcher party co-sign a later state that leaves the amount with the buyer. The watcher party burns the payment token.</td>
-</tr>
-<tr>
-<td>Settlement channel</td>
-<td>The watcher party's channel with the MetaLeX hub. Settled amounts move into it, and pay-outs leave from it.</td>
-</tr>
-<tr>
-<td>Publication (R-41)</td>
-<td>Each day's blob data carries the settlement channel's latest co-signed state, bound by the party signature through <code>blobRefs</code> (§6.1). The channel itself works like any Nitro channel on the adjudicator: funding, challenge, checkpoint and conclusion as normal.</td>
-</tr>
-<tr>
-<td>Pay out</td>
-<td>A holder burns payment token. Against that burn in a hard-final root, a routed payment moves the amount from the settlement channel to the holder.</td>
-</tr>
-<tr>
-<td>Payout record</td>
-<td>With each pay-out, the issuer state records the <code>channelId</code> and the hash of the co-signed state that paid it. The holder's channel exit mints its note from that state, so the issuer's RootChain points to the note through the root (R-25).</td>
-</tr>
-<tr>
-<td>Supply</td>
-<td>Payment-token supply equals the open commit records plus the watcher party's allocation in the published settlement-channel state</td>
-</tr>
-<tr>
-<td>Exit</td>
-<td>ForceMove with the latest co-signed state, as in any channel</td>
-</tr>
-</tbody>
-</table></div>
+<p>The Cybercorps contracts pull, hold and pay an ERC20 in the same EVM (<code>cc</code> <code>src/storage/LexScrowStorage.sol:251, 308</code>). In the issuer state that ERC20 is the payment token. The watcher party connects it to armada-nitro through its own channels. No contract and no app reads an issuer root to move USDC: the signatures are binding.</p>
+<p><strong>Channels.</strong> Each buyer has a channel with the watcher party, funded through the hub (§9.3). The party custodian is the watcher party's participant in it.</p>
+<p><strong>Paying in.</strong> The buyer signs a channel state that moves the amount to the watcher party, and gives that state to the watcher party. The USDC stays in the buyer's channel. The watcher party writes a <em>commit record</em> and mints the same amount of payment token to the buyer.</p>
+<p><strong>The buyer cannot take a commitment back.</strong> The buyer could try to force-close the channel with an earlier state. The watcher party then answers the challenge with the committed state, which the buyer signed and which has a higher turn number. ForceMove's turn rule decides, and no root is read.</p>
+<p><strong>Settlement.</strong> In the batch whose root finalizes the step, the watcher party countersigns the committed state. A routed payment then moves the amount into the <em>settlement channel</em>, the watcher party's channel with the MetaLeX hub. The watcher party's signature on the root binds it to the shares, and its signature on the state completes the payment.</p>
+<p><strong>Release.</strong> If the step is voided or refunded, the buyer and the watcher party co-sign a later state that leaves the amount with the buyer. The watcher party burns the payment token.</p>
+<p><strong>Paying out.</strong> A holder burns payment token. Against that burn in a hard-final root, a routed payment moves the amount from the settlement channel to the holder. With each pay-out, the issuer state records a <em>payout record</em>: the <code>channelId</code> and the hash of the co-signed state that paid it. The holder's channel exit mints its note from that state. So the issuer's RootChain points to the note, through the root.</p>
+<p><strong>Publication and supply.</strong> Each day's blob data carries the settlement channel's latest co-signed state, and the party signature binds it through <code>blobRefs</code> (§6.1). The channel itself works like any Nitro channel on the adjudicator: funding, challenge, checkpoint and conclusion. Payment-token supply equals the open commit records plus the watcher party's allocation in the published settlement-channel state.</p>
+<p><strong>Exit.</strong> Any participant exits with ForceMove and the latest co-signed state, as in any channel.</p>
 <h3 id="system-design--93-routed-payments-through-the-metalex-hub"><a class="section-link" href="#system-design--93-routed-payments-through-the-metalex-hub">9.3 Routed payments through the MetaLeX hub</a></h3>
-<p>Value moves between channels as one Nitro payment routed through the MetaLeX hub's channels. Nitro's guarantees and reclaim make the move atomic across the hops, and ForceMove accepts or rejects whole states (<code>adr</code> ADR-0021 D21.1). armada-nitro settles a reclaim in <code>_settleReclaimExit</code> (<code>src/ArmadaNitroAdjudicator.sol:192</code>); that code is being rewritten (§13). The hub routes the payment and advances no value. No hash lock is used, and no party has value in flight (R-30).</p>
+<p>Value moves between channels as one Nitro payment routed through the MetaLeX hub's channels. Nitro's guarantees and reclaim make the move atomic across the hops, and ForceMove accepts or rejects whole states (<code>adr</code> ADR-0021 D21.1). armada-nitro settles a reclaim in <code>_settleReclaimExit</code> (<code>src/ArmadaNitroAdjudicator.sol:192</code>); that code is being rewritten (§13). The hub routes the payment and advances no value. No hash lock is used, and no party has value in flight.</p>
 <p>A user that does not want the MetaLeX hub uses an issuer's hub, or a channel with the watcher party directly.</p>
 <h3 id="system-design--94-a-primary-deal-step-by-step"><a class="section-link" href="#system-design--94-a-primary-deal-step-by-step">9.4 A primary deal, step by step</a></h3>
 <ol>
@@ -1009,23 +659,23 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <li><strong>Void.</strong> <code>refundVoidedDeal</code> (<code>DealManager.sol:310</code>) returns the payment token to the buyer. The buyer and the watcher party co-sign a release state, and the payment token is burned. The USDC never left the buyer's channel.</li>
 </ol>
 </section>
-<section class="report-section"><div class="section-index">System design · 11</div><h2 id="system-design--10-scrip-as-armada-nitro-notes-i-17-to-i-33"><a class="section-link" href="#system-design--10-scrip-as-armada-nitro-notes-i-17-to-i-33">10. Scrip as armada-nitro notes (I-17 to I-33)</a></h2>
+<section class="report-section"><div class="section-index">System design · 10</div><h2 id="system-design--10-scrip-as-armada-nitro-notes"><a class="section-link" href="#system-design--10-scrip-as-armada-nitro-notes">10. Scrip as armada-nitro notes</a></h2>
 <p>Scrip leaves the issuer state the way USDC enters it, in the opposite direction. Outside the issuer state it is a note of the issuer's wrapper, and it trades like any armada-nitro asset.</p>
 <p><strong>Out.</strong>
-1. The holder locks canonical scrip in the issuer state and names its note key. The scrip is locked, not burned, because its ratio cannot change while canonical supply is above zero (I-18). The entry guard applies (§5.4, I-19).
+1. The holder locks canonical scrip in the issuer state and names its note key. The scrip is locked, not burned, because its ratio cannot change while canonical supply is above zero. The entry guard applies (§5.4).
 2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapper and shields it as a note to the named key. The Armada pool accepts it, because its token policy is a blocklist: "any ERC-20 not blocklisted can be shielded" (Armada <code>engineering/T0-ethereum-anchor.md</code>).</p>
 <p><strong>In.</strong>
 1. The holder pays wrapper back to the party custodian, which burns it.
 2. The watcher party unlocks the scrip to the holder in the issuer state.</p>
 <p><strong>In channels.</strong> A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (<code>nitro</code> <code>src/ArmadaNitroAdjudicator.sol:44</code>). The list screens out tokens whose balances change other than by transfer (<code>p15</code> I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (<code>adr</code> ADR-0021 D21.2). A hub names the wrapper factory, so its channels accept every issuer's wrapper. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapper factory must therefore exist before the adjudicator that names it is deployed.</p>
-<p><strong>Accounting.</strong> <code>mlx</code>'s identities apply unchanged (I-24 to I-27): locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry <code>BridgeMessageV1</code>'s bindings (§5.4, I-28).</p>
-<p><strong>Transfer policy (I-20).</strong> A wrapper note can be unshielded like any note. The wrapper then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapper to scrip does not inherit recertification eligibility (I-21).</p>
+<p><strong>Accounting.</strong> <code>mlx</code>'s identities apply unchanged: locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry <code>BridgeMessageV1</code>'s bindings (§5.4).</p>
+<p><strong>Transfer policy.</strong> A wrapper note can be unshielded like any note. The wrapper then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapper to scrip does not inherit recertification eligibility.</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 12</div><h2 id="system-design--11-trust-without-the-zkevm"><a class="section-link" href="#system-design--11-trust-without-the-zkevm">11. Trust without the zkEVM</a></h2>
-<p><strong>Scope.</strong> The zkEVM matters for completeness, but proving every root is a daily operating cost, so it is out of scope for this release (R-23). The RootChain therefore accepts each root on the party signature alone (§6.1).</p>
-<p><strong>Every signed act is a binding commitment (R-26).</strong> The watcher party signs the roots, the channel states and the wrapper mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.</p>
+<section class="report-section"><div class="section-index">System design · 11</div><h2 id="system-design--11-trust-without-the-zkevm"><a class="section-link" href="#system-design--11-trust-without-the-zkevm">11. Trust without the zkEVM</a></h2>
+<p><strong>Scope.</strong> The zkEVM matters for completeness, but proving every root is a daily operating cost, so it is out of scope for this release. The RootChain therefore accepts each root on the party signature alone (§6.1).</p>
+<p><strong>Every signed act is a binding commitment.</strong> The watcher party signs the roots, the channel states and the wrapper mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.</p>
 <p><strong>What holds without the zkEVM:</strong></p>
-<div class="table-hint"><span>Table 22</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 22" tabindex="0"><table>
+<div class="table-hint"><span>Table 14</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 14" tabindex="0"><table>
 <thead>
 <tr>
 <th>Guarantee</th>
@@ -1059,8 +709,8 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </tbody>
 </table></div>
-<p><strong>Conservation proof (R-28).</strong> For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. Each identity has a public input on L1, and the proof reveals only totals:</p>
-<div class="table-hint"><span>Table 23</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 23" tabindex="0"><table>
+<p><strong>Conservation proof.</strong> For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. Each identity has a public input on L1, and the proof reveals only totals:</p>
+<div class="table-hint"><span>Table 15</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 15" tabindex="0"><table>
 <thead>
 <tr>
 <th>Asset</th>
@@ -1081,7 +731,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tr>
 </tbody>
 </table></div>
-<p><strong>Verifier tool (R-44).</strong> Any third party can check the inputs itself. The tool reads the party roots from the aggregator, the blobs, and the adjudicator. For each settlement channel, it makes three checks against the adjudicator:</p>
+<p><strong>Verifier tool.</strong> Any third party can check the inputs itself. The tool reads the party roots from the aggregator, the blobs, and the adjudicator. For each settlement channel, it makes three checks against the adjudicator:</p>
 <ul>
 <li>Both participants co-signed the published state.</li>
 <li>Its turn number is not below any state that the adjudicator holds for the channel.</li>
@@ -1090,7 +740,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p>It then checks the conservation proof against these inputs and the wrapper's supply.</p>
 <p>The proof shows the state at a root, not the transition that produced it. Its construction is an implementation question. Each open commit record is backed by a buyer-signed state that the watcher party holds, so it is binding (§9.2).</p>
 <p><strong>What t colluding watcher members can do,</strong> for example the issuer and MetaLeX: sign a root that misaccounts. L1 does not reject it. Each such root is signed evidence against them:</p>
-<div class="table-hint"><span>Table 24</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 24" tabindex="0"><table>
+<div class="table-hint"><span>Table 16</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 16" tabindex="0"><table>
 <thead>
 <tr>
 <th>Misaccounting</th>
@@ -1115,13 +765,13 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p>Misaccounting is limited to one issuer. It moves no value held in armada-nitro channels and notes.</p>
 <p><strong>What the zkEVM adds: conservation enforced on L1.</strong> With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation that depends on channel states and on the wrapper on L1 still rests on the conservation proof. <code>zos</code> shows the technique: a REVM state transition proven with ZisK.</p>
 <p><strong>If the zkEVM is added later:</strong>
-- <strong>Proof system.</strong> Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option (R-7).
+- <strong>Proof system.</strong> Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option.
 - <strong>Same EVM.</strong> The prover must prove the same EVM semantics that the harness runs. <code>zos</code> proves REVM, a different implementation from the nimbus EVM. Equivalence of the two is a condition of that migration.
-- <strong>Cost.</strong> Running provers is a daily operating cost, which is why this design leaves the zkEVM out (R-23).
+- <strong>Cost.</strong> Running provers is a daily operating cost, which is why this design leaves the zkEVM out.
 - <strong>Migration.</strong> A RootChain that requires proofs is a new deployment. An issuer moves to it through the departure of §5.5.</p>
 </section>
-<section class="report-section"><div class="section-index">System design · 13</div><h2 id="system-design--12-failures-as-state-transitions"><a class="section-link" href="#system-design--12-failures-as-state-transitions">12. Failures as state transitions</a></h2>
-<div class="table-hint"><span>Table 25</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 25" tabindex="0"><table>
+<section class="report-section"><div class="section-index">System design · 12</div><h2 id="system-design--12-failures-as-state-transitions"><a class="section-link" href="#system-design--12-failures-as-state-transitions">12. Failures as state transitions</a></h2>
+<div class="table-hint"><span>Table 17</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 17" tabindex="0"><table>
 <thead>
 <tr>
 <th>Event</th>
@@ -1173,8 +823,8 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 </section>
-<section class="report-section"><div class="section-index">System design · 14</div><h2 id="system-design--13-dependencies"><a class="section-link" href="#system-design--13-dependencies">13. Dependencies</a></h2>
-<div class="table-hint"><span>Table 26</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 26" tabindex="0"><table>
+<section class="report-section"><div class="section-index">System design · 13</div><h2 id="system-design--13-dependencies"><a class="section-link" href="#system-design--13-dependencies">13. Dependencies</a></h2>
+<div class="table-hint"><span>Table 18</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 18" tabindex="0"><table>
 <thead>
 <tr>
 <th>Need</th>
@@ -1233,8 +883,8 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 </section>
-<section class="report-section"><div class="section-index">System design · 15</div><h2 id="system-design--14-hash-function-choice-and-cost"><a class="section-link" href="#system-design--14-hash-function-choice-and-cost">14. Hash function choice and cost</a></h2>
-<h3 id="system-design--141-the-hash-is-a-deployment-parameter-r-8"><a class="section-link" href="#system-design--141-the-hash-is-a-deployment-parameter-r-8">14.1 The hash is a deployment parameter (R-8)</a></h3>
+<section class="report-section"><div class="section-index">System design · 14</div><h2 id="system-design--14-hash-function-choice-and-cost"><a class="section-link" href="#system-design--14-hash-function-choice-and-cost">14. Hash function choice and cost</a></h2>
+<h3 id="system-design--141-the-hash-is-a-deployment-parameter"><a class="section-link" href="#system-design--141-the-hash-is-a-deployment-parameter">14.1 The hash is a deployment parameter</a></h3>
 <ul>
 <li><code>lib/</code> builds the state tree and the events tree over a hash parameter. The harness and the WASM holder verifier use the same code. <code>lib/</code> is Armada's own Nim implementation of the JMT, so it takes the hash as a parameter.</li>
 <li>The choice is fixed per deployment. The hash identities are part of <code>chainConfigHash</code>, so each accepted root states its hashes.</li>
@@ -1249,7 +899,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <li>Native time: the Rust <code>sha2</code> and <code>sha3</code> crates.</li>
 </ul>
 <p>The harness is Nim, so its native hash times are not yet measured.</p>
-<div class="table-hint"><span>Table 27</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 27" tabindex="0"><table>
+<div class="table-hint"><span>Table 19</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 19" tabindex="0"><table>
 <thead>
 <tr>
 <th>Cost</th>
@@ -1279,7 +929,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p>The EVM computes keccak for the <code>KECCAK256</code> opcode and for every mapping slot key. That cost is the same for every tree hash.</p>
 <h3 id="system-design--143-operating-costs"><a class="section-link" href="#system-design--143-operating-costs">14.3 Operating costs</a></h3>
 <p><a href="#cost-comparison">Cost comparison</a> prices these lines against MetaLeX's Prividium plan.</p>
-<div class="table-hint"><span>Table 28</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 28" tabindex="0"><table>
+<div class="table-hint"><span>Table 20</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 20" tabindex="0"><table>
 <thead>
 <tr>
 <th>Cost line</th>
@@ -1308,9 +958,194 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <td>One conservation proof per root, off chain (§11). No zkEVM.</td>
 </tr>
 </tbody>
+</table></div>
+</section>
+<section class="report-section"><div class="section-index">System design · 15</div><h2 id="system-design--sources"><a class="section-link" href="#system-design--sources">Sources</a></h2>
+<div class="table-hint"><span>Table 21</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 21" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mlx</code></td>
+<td>MetaLeX Engineering, <em>Build MetaLeX's private chain with recovery</em>, standalone edition, evidence as of 8 November 2026. Cited by section and table.</td>
+</tr>
+<tr>
+<td><code>review</code></td>
+<td><a href="#invariant-review">Review of MetaLeX's plan</a>: Armada's review of <code>mlx</code>. No contradictions, three open points.</td>
+</tr>
+<tr>
+<td><code>cc</code></td>
+<td><a href="https://github.com/MetaLex-Tech/cybercorps-contracts"><code>MetaLex-Tech/cybercorps-contracts</code></a> at <code>8789081be696cc334f9b7b193b3c3eba17c8122b</code>, the commit that <code>mlx</code> analyses. Cited by file and line.</td>
+</tr>
+<tr>
+<td><code>nitro</code></td>
+<td>armada-nitro at <code>295b6c2e</code>. Cited by file and line.</td>
+</tr>
+<tr>
+<td><code>adr</code></td>
+<td>Armada <code>engineering/09-architecture-decisions.md</code>, including ADR-0021</td>
+</tr>
+<tr>
+<td><code>p15</code></td>
+<td>Armada <code>engineering/15-hub-yield-and-swaps.md</code>: invariants I1–I7 of hub channels</td>
+</tr>
+<tr>
+<td><code>t2</code></td>
+<td>Armada <code>engineering/T2-watcher-substrate.md</code> and <a href="#glossary">Glossary</a>: watcher parties</td>
+</tr>
+<tr>
+<td><code>nimbus</code></td>
+<td><a href="https://github.com/status-im/nimbus-eth1"><code>status-im/nimbus-eth1</code></a>: the nimbus EVM (<code>execution_chain/evm/</code>) and the verified proxy. Armada builds from its fork <code>AFDudley/nimbus-eth1</code>.</td>
+</tr>
+<tr>
+<td><code>zos</code></td>
+<td><a href="https://github.com/matter-labs/zksync-os-zisk"><code>matter-labs/zksync-os-zisk</code></a>: a REVM state transition proven with ZisK</td>
+</tr>
+</tbody>
 </table></div></section>
+</article><article class="doc" id="guarantees" data-title="Guarantees">
+<div class="prelude"><div class="section-index">Document 03</div><h1>Guarantees by party</h1>
+<p>Status: draft, 2026-11-09.</p>
+<p>For each party, this document states what it can check itself, what it must trust, and what happens to it when another party fails. Section numbers refer to <a href="#system-design">System design</a>. Terms follow <a href="#glossary">Glossary</a>.</p>
+<p>The zkEVM is out of scope (§11). So every statement below holds with roots that L1 accepts on the party signature alone, with no validity proof.</p>
+</div>
+<section class="report-section"><div class="section-index">Guarantees · 01</div><h2 id="guarantees--1-the-parties"><a class="section-link" href="#guarantees--1-the-parties">1. The parties</a></h2>
+<ul>
+<li><strong>Holder:</strong> a buyer or other counterparty that holds an issuer's MetaLeX assets or payment token.</li>
+<li><strong>Issuer:</strong> the company. It is a watcher member of its own watcher party, and it receives payments through <code>companyPayable()</code>.</li>
+<li><strong>Watcher party:</strong> the threshold signer for one issuer. Its party key needs a two-thirds majority of its n watcher members, so n = 3 and t = 2 at the start. Through its custodian, it is an armada-nitro participant and the wrapper's minter (§4.1).</li>
+<li><strong>MetaLeX hub:</strong> an armada-nitro hub that routes payments and runs watchtowers for website users (§9). It is an entity distinct from MetaLeX. As MetaLeX core, it is a watcher member of every party.</li>
+<li><strong>MetaLeX:</strong> the company. It receives the platform fee through <code>getPlatformPayable()</code>. It is a named plaintext audience, through the MetaLeX hub.</li>
+<li><strong>Recovery operator:</strong> the independent watcher member that <code>mlx</code> names (§4.1).</li>
+<li><strong>Wrapper holder:</strong> a holder of the issuer's wrapper, as notes or unshielded (§10).</li>
+</ul>
+</section>
+<section class="report-section"><div class="section-index">Guarantees · 02</div><h2 id="guarantees--2-what-each-party-can-check"><a class="section-link" href="#guarantees--2-what-each-party-can-check">2. What each party can check</a></h2>
+<div class="table-hint"><span>Table 22</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 22" tabindex="0"><table>
+<thead>
+<tr>
+<th>Party</th>
+<th>Can check itself</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Holder</td>
+<td>Each of its records at each root</td>
+<td>Inclusion and non-inclusion proofs against roots read through a light client (§8.2)</td>
+</tr>
+<tr>
+<td>Holder</td>
+<td>Any change to its records, even when the party RPC is silent</td>
+<td>Its verifier checks every new root, and reads the blobs when no update arrives (§8.2)</td>
+</tr>
+<tr>
+<td>Holder</td>
+<td>That no change to its records is unexplained</td>
+<td>Every change between consecutive roots matches a log in <code>eventsRoot</code> (§8.2)</td>
+</tr>
+<tr>
+<td>Holder</td>
+<td>The code that holds its records</td>
+<td>The root commits to each contract's code hash (§8.2)</td>
+</tr>
+<tr>
+<td>Holder</td>
+<td>That its channel value is safe</td>
+<td>It holds its latest co-signed channel state (§9.1)</td>
+</tr>
+<tr>
+<td>Issuer</td>
+<td>The full issuer state</td>
+<td>It is a watcher member and stores the state (§4.3)</td>
+</tr>
+<tr>
+<td>Issuer</td>
+<td>Its payout</td>
+<td>The payout record names the channel state that paid it, and its note is in the Armada pool (§9.2)</td>
+</tr>
+<tr>
+<td>Wrapper holder</td>
+<td>That its wrapper was minted against a lock</td>
+<td>The watcher party's signed mint record and the lock in a hard-final root (§10)</td>
+</tr>
+<tr>
+<td>Anyone</td>
+<td>That the payment token and the wrapper are conserved at each root</td>
+<td>The verifier tool checks the conservation proof against the published settlement-channel states, the adjudicator and the wrapper's supply on L1 (§11)</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="report-section"><div class="section-index">Guarantees · 03</div><h2 id="guarantees--3-what-each-party-must-trust"><a class="section-link" href="#guarantees--3-what-each-party-must-trust">3. What each party must trust</a></h2>
+<h3 id="guarantees--holder"><a class="section-link" href="#guarantees--holder">Holder</a></h3>
+<ul>
+<li><strong>The watcher party,</strong> for correct state transitions and for pay-out against a burn. If that trust fails, holders detect the change, and the signed root is evidence against the operators (§11). Value in the holder's channel exits by ForceMove. With the zkEVM, L1 would enforce correct transitions instead.</li>
+<li><strong>The sequencer,</strong> to include its writes. A payer whose write is refused gets no asset and has no remedy on L1. Its signed request and the refusal are its evidence to MetaLeX (§8.5).</li>
+<li><strong>A watchtower,</strong> while the holder is offline, to answer a stale-state challenge on its channel. The MetaLeX hub runs one for website users, the recovery operator may run one, and the mobile app runs its own (§9.1).</li>
+<li><strong>A hub,</strong> the MetaLeX hub or an issuer's, for routed payments to stay live. If one hub stops, the holder uses another hub, or a channel with the watcher party directly (§9.3).</li>
+</ul>
+<h3 id="guarantees--issuer"><a class="section-link" href="#guarantees--issuer">Issuer</a></h3>
+<ul>
+<li><strong>The other watcher members acting together,</strong> for correct state transitions and pay-outs without the issuer's share, because t = 2. If that trust fails, the issuer detects the change, and the signed root is evidence against the operators (§11). The issuer also holds the full state as evidence.</li>
+</ul>
+<h3 id="guarantees--wrapper-holder"><a class="section-link" href="#guarantees--wrapper-holder">Wrapper holder</a></h3>
+<ul>
+<li><strong>The watcher party,</strong> for three duties: each mint reflects locked scrip, each lock is wrapped, and each return is unlocked. A mint with no lock fails the conservation proof publicly. The signed lock, mint and return records are evidence against the operators (§11). With the zkEVM, L1 would enforce correct mints instead.</li>
+</ul>
+<h3 id="guarantees--where-the-money-is-at-each-step"><a class="section-link" href="#guarantees--where-the-money-is-at-each-step">Where the money is at each step</a></h3>
+<p>A buyer's USDC stays in its own channel until settlement, and the watcher party cannot take it before then. The watcher party holds only the buyer's signed commitment, which it countersigns at settlement (§9.2).</p>
+<p>After settlement, the USDC is in the settlement channel, and its latest co-signed state is in each day's blob data. The issuer and MetaLeX hold payment token for it, and the watcher party's signatures bind it to pay out.</p>
+<p>Value in any channel exits by ForceMove with the latest co-signed state (§9.1). A routed payment is atomic, so no party has value in flight (§9.3).</p>
+</section>
+<section class="report-section"><div class="section-index">Guarantees · 04</div><h2 id="guarantees--4-failures"><a class="section-link" href="#guarantees--4-failures">4. Failures</a></h2>
+<p>Each subsection is one failure. Parties that the failure does not affect are listed last.</p>
+<h3 id="guarantees--the-issuer-stops"><a class="section-link" href="#guarantees--the-issuer-stops">The issuer stops</a></h3>
+<p>MetaLeX core and the recovery operator continue the RootChain. Holders, the MetaLeX hub and wrapper holders are not affected.</p>
+<h3 id="guarantees--the-recovery-operator-stops"><a class="section-link" href="#guarantees--the-recovery-operator-stops">The recovery operator stops</a></h3>
+<p>MetaLeX core and the issuer continue the RootChain. No other party is affected.</p>
+<h3 id="guarantees--the-metalex-hub-stops"><a class="section-link" href="#guarantees--the-metalex-hub-stops">The MetaLeX hub stops</a></h3>
+<ul>
+<li><strong>The RootChain:</strong> the issuer and the recovery operator continue it. So it advances only while the issuer's watcher member is up.</li>
+<li><strong>Holders:</strong> they route through an issuer's hub, or use a channel with the watcher party directly. Website users lose the default watchtower. The recovery operator's watchtower continues, if it runs one.</li>
+<li><strong>The issuer:</strong> it is paid out through its own hub or a direct channel.</li>
+<li><strong>Not affected:</strong> wrapper holders.</li>
+</ul>
+<h3 id="guarantees--metalex-the-company-stops"><a class="section-link" href="#guarantees--metalex-the-company-stops">MetaLeX, the company, stops</a></h3>
+<p>No party is affected, because the MetaLeX hub is a separate entity.</p>
+<h3 id="guarantees--fewer-than-t-watcher-members-are-live"><a class="section-link" href="#guarantees--fewer-than-t-watcher-members-are-live">Fewer than t watcher members are live</a></h3>
+<ul>
+<li><strong>Holders:</strong> no new roots and no pay-outs. Each holder can prove what it held at the last root (§8.3). Value in channels exits by ForceMove. Open commitments stay open.</li>
+<li><strong>The issuer:</strong> no new roots and no pay-outs. The issuer holds the full state.</li>
+<li><strong>The MetaLeX hub:</strong> its routes to that watcher party stop.</li>
+<li><strong>Wrapper holders:</strong> no new mints or unlocks. Existing wrapper notes are not affected.</li>
+</ul>
+<h3 id="guarantees--the-issuer-the-metalex-hub-and-the-recovery-operator-all-stop"><a class="section-link" href="#guarantees--the-issuer-the-metalex-hub-and-the-recovery-operator-all-stop">The issuer, the MetaLeX hub and the recovery operator all stop</a></h3>
+<ul>
+<li><strong>Holders:</strong> they use self-help. Each holder proves its records from its own store and the archived blobs, against the last root (§8.3). Value in channels exits by ForceMove.</li>
+<li><strong>Wrapper holders:</strong> no new mints or unlocks. Existing wrapper notes are not affected.</li>
+</ul>
+<h3 id="guarantees--the-sequencer-refuses-a-write"><a class="section-link" href="#guarantees--the-sequencer-refuses-a-write">The sequencer refuses a write</a></h3>
+<p>The payer gets no asset and has no remedy on L1. Its signed request and the refusal are its evidence to MetaLeX (§8.5). No other party is affected.</p>
+<h3 id="guarantees--a-lock-is-never-wrapped-or-a-return-is-never-unlocked"><a class="section-link" href="#guarantees--a-lock-is-never-wrapped-or-a-return-is-never-unlocked">A lock is never wrapped, or a return is never unlocked</a></h3>
+<p>The wrapper holder has no remedy on L1. The signed lock and return records are its evidence (§5.4). No other party is affected.</p>
+<h3 id="guarantees--t-watcher-members-sign-a-root-that-misaccounts"><a class="section-link" href="#guarantees--t-watcher-members-sign-a-root-that-misaccounts">t watcher members sign a root that misaccounts</a></h3>
+<p>This is possible only because the zkEVM is out of scope (§11).</p>
+<ul>
+<li><strong>Holders:</strong> each holder detects it, and holds the signed root and its earlier proofs as evidence. Payment token with no commitment or settled USDC behind it fails the conservation proof.</li>
+<li><strong>The issuer:</strong> if it did not sign, it holds the full state as evidence.</li>
+<li><strong>Wrapper holders:</strong> a wrapper mint with no locked scrip fails the conservation proof.</li>
+<li><strong>Not affected:</strong> the MetaLeX hub, which only routes payments.</li>
+</ul>
+<h3 id="guarantees--the-party-key-signs-two-successors-of-one-root"><a class="section-link" href="#guarantees--the-party-key-signs-two-successors-of-one-root">The party key signs two successors of one root</a></h3>
+<p>The RootChain accepts only one successor per root, so no party is affected (§6.1). The party bond is slashed (§4.4).</p></section>
 </article><article class="doc" id="cost-comparison" data-title="Cost comparison">
-<div class="prelude"><div class="section-index">Document 03</div><h1>Cost comparison: MetaLeX's plan and this design</h1>
+<div class="prelude"><div class="section-index">Document 04</div><h1>Cost comparison: MetaLeX's plan and this design</h1>
 <p>Status: draft for review, 2026-11-09. Nothing in this design is built, so no figure for it is measured.</p>
 <p>This document compares the monthly cost of two ways to run MetaLeX's Cybercorps contracts privately:</p>
 <ul>
@@ -1321,7 +1156,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </div>
 <section class="report-section"><div class="section-index">Cost comparison · 01</div><h2 id="cost-comparison--1-basis"><a class="section-link" href="#cost-comparison--1-basis">1. Basis</a></h2>
 <p>The comparison prices both designs on the same basis, so that a line differs only where the architecture differs.</p>
-<div class="table-hint"><span>Table 29</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 29" tabindex="0"><table>
+<div class="table-hint"><span>Table 23</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 23" tabindex="0"><table>
 <thead>
 <tr>
 <th>Rule</th>
@@ -1354,7 +1189,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p><strong>Check of the method.</strong> The Prividium columns below reproduce <code>mlx</code> Table 15 (lines 318-321). The full-warm total differs by one cent, from rounding.</p>
 </section>
 <section class="report-section"><div class="section-index">Cost comparison · 02</div><h2 id="cost-comparison--2-monthly-cost"><a class="section-link" href="#cost-comparison--2-monthly-cost">2. Monthly cost</a></h2>
-<div class="table-hint"><span>Table 30</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 30" tabindex="0"><table>
+<div class="table-hint"><span>Table 24</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 24" tabindex="0"><table>
 <thead>
 <tr>
 <th>Monthly cost, USD</th>
@@ -1510,7 +1345,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 - Working capital that only this design needs: the MetaLeX hub's channel capacity, sized to peak payment value (§9.3), and the party bonds (§4.4).</p>
 </section>
 <section class="report-section"><div class="section-index">Cost comparison · 03</div><h2 id="cost-comparison--3-operational-complexity"><a class="section-link" href="#cost-comparison--3-operational-complexity">3. Operational complexity</a></h2>
-<div class="table-hint"><span>Table 31</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 31" tabindex="0"><table>
+<div class="table-hint"><span>Table 25</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 25" tabindex="0"><table>
 <thead>
 <tr>
 <th></th>
@@ -1548,7 +1383,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Cost comparison · 04</div><h2 id="cost-comparison--4-what-nothing-measured"><a class="section-link" href="#cost-comparison--4-what-nothing-measured">4. What nothing measured</a></h2>
-<div class="table-hint"><span>Table 32</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 32" tabindex="0"><table>
+<div class="table-hint"><span>Table 26</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 26" tabindex="0"><table>
 <thead>
 <tr>
 <th>Figure</th>
@@ -1583,7 +1418,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div></section>
 </article><article class="doc" id="invariants" data-title="Requirements">
-<div class="prelude"><div class="section-index">Document 04</div><h1>Requirements of the system</h1>
+<div class="prelude"><div class="section-index">Document 05</div><h1>Requirements of the system</h1>
 <p>Status: draft for review, 2026-11-09.</p>
 <p>This document lists every requirement that the system must keep, in two parts:
 - <strong>I-1 to I-65</strong> come from MetaLeX's plan, <em>Build MetaLeX's private chain with recovery</em> (<code>mlx</code>), evidence as of 8 November 2026. Each row quotes the plan.
@@ -1596,7 +1431,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 - <strong>Design:</strong> the design holds it by construction, through the mechanism named.
 - <strong>Build:</strong> it holds once ordinary engineering is done. <code>mlx</code>'s own design needs the same work.
 - <strong>Partial:</strong> the design holds part of it. The row states which part, and what would hold the rest.</p>
-<div class="table-hint"><span>Table 33</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 33" tabindex="0"><table>
+<div class="table-hint"><span>Table 27</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 27" tabindex="0"><table>
 <thead>
 <tr>
 <th>Status</th>
@@ -1619,7 +1454,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--protocol-and-portability"><a class="section-link" href="#invariants--protocol-and-portability">Protocol and portability</a></h3>
-<div class="table-hint"><span>Table 34</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 34" tabindex="0"><table>
+<div class="table-hint"><span>Table 28</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 28" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1706,7 +1541,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--authority"><a class="section-link" href="#invariants--authority">Authority</a></h3>
-<div class="table-hint"><span>Table 35</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 35" tabindex="0"><table>
+<div class="table-hint"><span>Table 29</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 29" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1753,7 +1588,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--let-and-scrip"><a class="section-link" href="#invariants--let-and-scrip">LET and scrip</a></h3>
-<div class="table-hint"><span>Table 36</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 36" tabindex="0"><table>
+<div class="table-hint"><span>Table 30</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 30" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1848,7 +1683,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--bridge-accounting"><a class="section-link" href="#invariants--bridge-accounting">Bridge accounting</a></h3>
-<div class="table-hint"><span>Table 37</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 37" tabindex="0"><table>
+<div class="table-hint"><span>Table 31</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 31" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1895,7 +1730,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--bridge-messages"><a class="section-link" href="#invariants--bridge-messages">Bridge messages</a></h3>
-<div class="table-hint"><span>Table 38</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 38" tabindex="0"><table>
+<div class="table-hint"><span>Table 32</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 32" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1958,7 +1793,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--privacy-and-access"><a class="section-link" href="#invariants--privacy-and-access">Privacy and access</a></h3>
-<div class="table-hint"><span>Table 39</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 39" tabindex="0"><table>
+<div class="table-hint"><span>Table 33</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 33" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2037,7 +1872,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--recovery"><a class="section-link" href="#invariants--recovery">Recovery</a></h3>
-<div class="table-hint"><span>Table 40</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 40" tabindex="0"><table>
+<div class="table-hint"><span>Table 34</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 34" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2132,7 +1967,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--issuer-records"><a class="section-link" href="#invariants--issuer-records">Issuer records</a></h3>
-<div class="table-hint"><span>Table 41</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 41" tabindex="0"><table>
+<div class="table-hint"><span>Table 35</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 35" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2203,7 +2038,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--departure-p3"><a class="section-link" href="#invariants--departure-p3">Departure (P3)</a></h3>
-<div class="table-hint"><span>Table 42</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 42" tabindex="0"><table>
+<div class="table-hint"><span>Table 36</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 36" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2266,7 +2101,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div>
 <h3 id="invariants--interface-parity"><a class="section-link" href="#invariants--interface-parity">Interface parity</a></h3>
-<div class="table-hint"><span>Table 43</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 43" tabindex="0"><table>
+<div class="table-hint"><span>Table 37</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 37" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2291,7 +2126,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </section>
 <section class="report-section"><div class="section-index">Requirements · 02</div><h2 id="invariants--2-from-armadas-design-r-1-to-r-45"><a class="section-link" href="#invariants--2-from-armadas-design-r-1-to-r-45">2. From Armada's design (R-1 to R-45)</a></h2>
 <p>These are the design requirements that Armada sets for the system. Each is written in the terms of <a href="#glossary">Glossary</a>.</p>
-<div class="table-hint"><span>Table 44</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 44" tabindex="0"><table>
+<div class="table-hint"><span>Table 38</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 38" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2528,7 +2363,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div></section>
 </article><article class="doc" id="invariant-review" data-title="Review of MetaLeX&#x27;s plan">
-<div class="prelude"><div class="section-index">Document 05</div><h1>MetaLeX private-chain plan: invariant review</h1>
+<div class="prelude"><div class="section-index">Document 06</div><h1>MetaLeX private-chain plan: invariant review</h1>
 <p class="lede">The requirements in MetaLeX's private-chain plan do not contradict each other. Three points are open: the plan states the requirement but leaves the rule that meets it undecided. This page quotes each requirement, shows the state transition it governs, and names the decision MetaLeX must make.</p>
 
 </div>
@@ -2539,7 +2374,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p><strong>Invariant IDs.</strong> The IDs (I-n) come from Armada's extraction, and match <a href="#invariants">Requirements</a>. The plan does not number its invariants.</p>
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 02</div><h2 id="invariant-review--summary"><a class="section-link" href="#invariant-review--summary">Summary</a></h2>
-<div class="table-hint"><span>Table 45</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 45" tabindex="0"><table>
+<div class="table-hint"><span>Table 39</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 39" tabindex="0"><table>
 <thead>
 <tr>
 <th>#</th>
@@ -2572,7 +2407,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 03</div><h2 id="invariant-review--open-point-1-the-rule-that-moves-submission-authority"><a class="section-link" href="#invariant-review--open-point-1-the-rule-that-moves-submission-authority">Open point 1: the rule that moves submission authority</a></h2>
 <h3 id="invariant-review--the-requirements"><a class="section-link" href="#invariant-review--the-requirements">The requirements</a></h3>
-<div class="table-hint"><span>Table 46</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 46" tabindex="0"><table>
+<div class="table-hint"><span>Table 40</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 40" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2629,7 +2464,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 04</div><h2 id="invariant-review--open-point-2-the-guard-on-entry-to-the-bridge"><a class="section-link" href="#invariant-review--open-point-2-the-guard-on-entry-to-the-bridge">Open point 2: the guard on entry to the bridge</a></h2>
 <h3 id="invariant-review--the-requirements_1"><a class="section-link" href="#invariant-review--the-requirements_1">The requirements</a></h3>
-<div class="table-hint"><span>Table 47</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 47" tabindex="0"><table>
+<div class="table-hint"><span>Table 41</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 41" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2686,7 +2521,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 05</div><h2 id="invariant-review--open-point-3-the-meaning-of-the-login-sentence"><a class="section-link" href="#invariant-review--open-point-3-the-meaning-of-the-login-sentence">Open point 3: the meaning of the login sentence</a></h2>
 <h3 id="invariant-review--the-requirements_2"><a class="section-link" href="#invariant-review--the-requirements_2">The requirements</a></h3>
-<div class="table-hint"><span>Table 48</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 48" tabindex="0"><table>
+<div class="table-hint"><span>Table 42</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 42" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2734,7 +2569,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 <p>Which reading MetaLeX intends. Table 07 lists "censorship" among the operator powers for legal review, which fits reading A.</p>
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 06</div><h2 id="invariant-review--pairs-that-look-like-conflicts"><a class="section-link" href="#invariant-review--pairs-that-look-like-conflicts">Pairs that look like conflicts</a></h2>
-<div class="table-hint"><span>Table 49</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 49" tabindex="0"><table>
+<div class="table-hint"><span>Table 43</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 43" tabindex="0"><table>
 <thead>
 <tr>
 <th>Pair</th>
@@ -2761,13 +2596,13 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </tbody>
 </table></div></section>
 </article><article class="doc" id="glossary" data-title="Glossary">
-<div class="prelude"><div class="section-index">Document 06</div><h1>Glossary</h1>
+<div class="prelude"><div class="section-index">Document 07</div><h1>Glossary</h1>
 <p>Terms used in these documents. Each entry has one meaning. §5 lists words that have another meaning in MetaLeX's plan or in Armada, with the rule this repo follows.</p>
 <p>Sources: <code>mlx</code> is MetaLeX's plan, <em>Build MetaLeX's private chain with recovery</em> (evidence as of 8 November 2026). <code>design</code> is <a href="#system-design">System design</a>. Armada's own glossary covers the wider Armada stack.</p>
 </div>
 <section class="report-section"><div class="section-index">Glossary · 01</div><h2 id="glossary--1-metalex-terms"><a class="section-link" href="#glossary--1-metalex-terms">1. MetaLeX terms</a></h2>
 <p>These are MetaLeX's terms. The definitions follow <code>mlx</code>.</p>
-<div class="table-hint"><span>Table 50</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 50" tabindex="0"><table>
+<div class="table-hint"><span>Table 44</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 44" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -2847,7 +2682,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 02</div><h2 id="glossary--2-terms-of-this-design"><a class="section-link" href="#glossary--2-terms-of-this-design">2. Terms of this design</a></h2>
-<div class="table-hint"><span>Table 51</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 51" tabindex="0"><table>
+<div class="table-hint"><span>Table 45</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 45" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -3027,7 +2862,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 03</div><h2 id="glossary--3-proof-and-data-terms"><a class="section-link" href="#glossary--3-proof-and-data-terms">3. Proof and data terms</a></h2>
-<div class="table-hint"><span>Table 52</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 52" tabindex="0"><table>
+<div class="table-hint"><span>Table 46</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 46" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -3083,7 +2918,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 04</div><h2 id="glossary--4-armada-terms-used-here"><a class="section-link" href="#glossary--4-armada-terms-used-here">4. Armada terms used here</a></h2>
-<div class="table-hint"><span>Table 53</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 53" tabindex="0"><table>
+<div class="table-hint"><span>Table 47</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 47" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -3127,7 +2962,7 @@ table{overflow-wrap:normal}th,td{overflow-wrap:break-word;word-break:normal}.wid
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 05</div><h2 id="glossary--5-word-collisions"><a class="section-link" href="#glossary--5-word-collisions">5. Word collisions</a></h2>
-<div class="table-hint"><span>Table 54</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 54" tabindex="0"><table>
+<div class="table-hint"><span>Table 48</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 48" tabindex="0"><table>
 <thead>
 <tr>
 <th>Word</th>

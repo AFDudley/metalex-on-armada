@@ -6,6 +6,7 @@ Armada's proposal to run MetaLeX's Cybercorps contracts on Armada. Status: draft
 
 | File | Content |
 |---|---|
+| [`summary.md`](summary.md) | The proposal on one page: what MetaLeX gets, how it differs from Prividium, what it costs, what MetaLeX must trust and decide. Read this first. |
 | [`guarantees.md`](guarantees.md) | For each party: what it can check, what it must trust, and what happens to it when another party fails |
 | [`system-design.md`](system-design.md) | How MetaLeX's unchanged Cybercorps contracts run on Armada. Watcher parties run the issuer states and anchor them to Ethereum L1. Payments are armada-nitro Nitro payments, and scrip is armada-nitro notes. It also covers holder proofs, self-help, and what holds without a zkEVM. |
 | [`cost-comparison.md`](cost-comparison.md) | The monthly cost of MetaLeX's Prividium plan and of this design, on the basis of MetaLeX's own cost tables. It also compares their operational complexity. |
