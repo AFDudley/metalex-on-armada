@@ -54,34 +54,34 @@ On the same basis as MetaLeX's own cost tables, this design costs about $4,400 p
 
 ## Notes
 
-[^protocol]: **Protocol and portability, I-1 to I-9.** The contracts run unchanged in an embedded EVM with a pinned version and hardfork. Each issuer state has its own `chainid`, so signatures stay bound to their domain. The deployment pins code hashes and the corporate graph. Also R-1, R-12 and R-45. System design §3.
+[^protocol]: **Protocol and portability, [I-1 to I-9](invariants.md#I-1).** The contracts run unchanged in an embedded EVM with a pinned version and hardfork. Each issuer state has its own `chainid`, so signatures stay bound to their domain. The deployment pins code hashes and the corporate graph. Also [R-1](invariants.md#R-1), [R-12](invariants.md#R-12) and [R-45](invariants.md#R-45). System design §3.
 
-[^parties]: **Operators and keys, R-2, R-3, R-6, R-14, R-27, R-34, R-38 and R-42.** One watcher party per issuer anchors one RootChain, with a two-thirds-majority FROST key. The MetaLeX hub is a watcher member of every party, but liveness never depends on it. A party key that signs two successors of one root loses its bond. System design §4.
+[^parties]: **Operators and keys, [R-2](invariants.md#R-2), [R-3](invariants.md#R-3), [R-6](invariants.md#R-6), [R-14](invariants.md#R-14), [R-27](invariants.md#R-27), [R-34](invariants.md#R-34), [R-38](invariants.md#R-38) and [R-42](invariants.md#R-42).** One watcher party per issuer anchors one RootChain, with a two-thirds-majority FROST key. The MetaLeX hub is a watcher member of every party, but liveness never depends on it. A party key that signs two successors of one root loses its bond. System design §4.
 
-[^authority]: **Authority, I-10 to I-13.** Infrastructure keys and data keys are separate from corporate authority. The recovery operator cannot invent balances, sign as a user or choose a beneficiary. Also R-11: only an asset's holder can start an action against it. System design §4.1, §8.1.
+[^authority]: **Authority, [I-10 to I-13](invariants.md#I-10).** Infrastructure keys and data keys are separate from corporate authority. The recovery operator cannot invent balances, sign as a user or choose a beneficiary. Also [R-11](invariants.md#R-11): only an asset's holder can start an action against it. System design §4.1, §8.1.
 
-[^value]: **Value and payments, R-5, R-13, R-24 to R-26, R-29, R-30, R-35 and R-41.** All value is armada-nitro notes and channels. The payment token is backed by buyer-signed commitments and the settlement channel. Routed payments are atomic, and every signed act binds the watcher party. System design §9.
+[^value]: **Value and payments, [R-5](invariants.md#R-5), [R-13](invariants.md#R-13), [R-24 to R-26](invariants.md#R-24), [R-29](invariants.md#R-29), [R-30](invariants.md#R-30), [R-35](invariants.md#R-35) and [R-41](invariants.md#R-41).** All value is armada-nitro notes and channels. The payment token is backed by buyer-signed commitments and the settlement channel. Routed payments are atomic, and every signed act binds the watcher party. System design §9.
 
-[^privacy]: **Privacy and access, I-34 to I-41.** One state per issuer, blinded blob data, and a party RPC scoped by the contracts' own authority. Nested calls are checked frame by frame. Also R-4, R-16, R-22 and R-36. System design §3, §7, §8.4, §8.5.
+[^privacy]: **Privacy and access, [I-34 to I-41](invariants.md#I-34).** One state per issuer, blinded blob data, and a party RPC scoped by the contracts' own authority. Nested calls are checked frame by frame. Also [R-4](invariants.md#R-4), [R-16](invariants.md#R-16), [R-22](invariants.md#R-22) and [R-36](invariants.md#R-36). System design §3, §7, §8.4, §8.5.
 
-[^recovery]: **Recovery, I-42 to I-51.** A root is final only after t watcher members store its batch. Ethereum accepts one successor per root, so two operators cannot continue in conflict. Any t watcher members continue with no promotion step. System design §4.2, §5.1, §6.
+[^recovery]: **Recovery, [I-42 to I-51](invariants.md#I-42).** A root is final only after t watcher members store its batch. Ethereum accepts one successor per root, so two operators cannot continue in conflict. Any t watcher members continue with no promotion step. System design §4.2, §5.1, §6.
 
-[^selfhelp]: **Holder access and self-help, R-9, R-10, R-15, R-19 to R-21, R-31, R-33 and R-37.** A holder reads roots through a light client and checks inclusion proofs. It checks its history against each root's events, and rebuilds its proofs from its own store and the blobs. System design §8.
+[^selfhelp]: **Holder access and self-help, [R-9](invariants.md#R-9), [R-10](invariants.md#R-10), [R-15](invariants.md#R-15), [R-19 to R-21](invariants.md#R-19), [R-31](invariants.md#R-31), [R-33](invariants.md#R-33) and [R-37](invariants.md#R-37).** A holder reads roots through a light client and checks inclusion proofs. It checks its history against each root's events, and rebuilds its proofs from its own store and the blobs. System design §8.
 
-[^scrip]: **LET and scrip, I-14 to I-23.** Scrip is locked, not burned, so the scrip ratio stays fixed. The lock requires the force features off and no transfer hooks. LET custody and legal ownership stay as the contracts define them. System design §5.4, §10.
+[^scrip]: **LET and scrip, [I-14 to I-23](invariants.md#I-14).** Scrip is locked, not burned, so the scrip ratio stays fixed. The lock requires the force features off and no transfer hooks. LET custody and legal ownership stay as the contracts define them. System design §5.4, §10.
 
-[^bridge]: **Bridge accounting and messages, I-24 to I-33.** K = Q + O + R holds, and the conservation proof shows it at each root. Each lock and return record binds `BridgeMessageV1`'s fields, waits for finality, and has one disposition. System design §5.4, §10, §11.
+[^bridge]: **Bridge accounting and messages, [I-24 to I-33](invariants.md#I-24).** K = Q + O + R holds, and the conservation proof shows it at each root. Each lock and return record binds `BridgeMessageV1`'s fields, waits for finality, and has one disposition. System design §5.4, §10, §11.
 
-[^records]: **Issuer records, I-52 to I-58.** The issuer holds its full state, logs and history. Completeness without the zkEVM is labeled attested, and no hash of guessable personal data is published. System design §3, §4.3, §7.
+[^records]: **Issuer records, [I-52 to I-58](invariants.md#I-52).** The issuer holds its full state, logs and history. Completeness without the zkEVM is labeled attested, and no hash of guessable personal data is published. System design §3, §4.3, §7.
 
-[^departure]: **Departure, I-59 to I-64.** An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapper note and open commitment gets one disposition in the new state. Also R-39. System design §5.5.
+[^departure]: **Departure, [I-59 to I-64](invariants.md#I-59).** An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapper note and open commitment gets one disposition in the new state. Also [R-39](invariants.md#R-39). System design §5.5.
 
-[^parity]: **Interface parity, I-65.** The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.
+[^parity]: **Interface parity, [I-65](invariants.md#I-65).** The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.
 
-[^trust]: **Trust without the zkEVM, R-7, R-23, R-28 and R-44.** The zkEVM is out of scope because of its operating cost. A conservation proof and a public verifier tool take its place for supply. System design §11.
+[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** The zkEVM is out of scope because of its operating cost. A conservation proof and a public verifier tool take its place for supply. System design §11.
 
-[^data]: **Publishing, R-8, R-17, R-18 and R-43.** Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §14.
+[^data]: **Publishing, [R-8](invariants.md#R-8), [R-17](invariants.md#R-17), [R-18](invariants.md#R-18) and [R-43](invariants.md#R-43).** Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §14.
 
-[^limits]: **Limits, R-40.** A refused write has no remedy on Ethereum. Watchtowers follow R-37. System design §8.5, §9.1.
+[^limits]: **Limits, [R-40](invariants.md#R-40).** A refused write has no remedy on Ethereum. Watchtowers follow [R-37](invariants.md#R-37). System design §8.5, §9.1.
 
-[^accept]: **Acceptance, R-32.** The requirements document shows which requirements come from MetaLeX's plan and which come from this design, and MetaLeX accepts both.
+[^accept]: **Acceptance, [R-32](invariants.md#R-32).** The requirements document shows which requirements come from MetaLeX's plan and which come from this design, and MetaLeX accepts both.
