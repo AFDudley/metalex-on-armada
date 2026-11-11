@@ -39,12 +39,10 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **Watcher member** | One participant in a watcher party: MetaLeX core, the recovery operator or the issuer. Each runs its own watcher. |
 | **MetaLeX core** | The MetaLeX hub in its role as a watcher member of every party (R-6). The default sequencer. |
 | **Party key** | One FROST threshold key per watcher party, with a two-thirds-majority threshold. Its threshold never needs MetaLeX's share. `HubCustodian` is its on-chain identity. |
-| **Sequencing key** | A watcher member's key for soft-final signatures, pinned in the RootChain |
 | **Batch** | An ordered group of transactions that one root covers |
-| **Batch commitment** | A hash over a batch. The sequencer signs it at soft finality. |
-| **Soft-final** | A batch the sequencer has signed. Only the issuer state's own next blocks build on it. |
+| **Batch commitment** | A hash over a batch. The party key signs it as one field of the root. |
 | **Hard-final** | A batch whose root the RootChain accepted. Only hard-final batches affect anything outside the issuer state. |
-| **Discarded** | A soft-final batch whose root lost to a different successor of the same root |
+| **Discarded** | An executed batch whose root lost to a different successor of the same root |
 | **Live, Retired** | The two states of a RootChain. It enters Retired when a departure is finalized, and then accepts no roots. |
 | **Events root** | A per-batch Merkle root over all logs. Holders prove logs against it. |
 | **Blinded tree data** | The blob content of each root: the salted position and salted leaf of each slot changed since the previous root. It binds the state and reveals nothing about it. Anyone with the archive rebuilds the tree from it. |
@@ -116,7 +114,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **encryption** | Earlier drafts of `design`: encrypted batch data in blobs | Not used for blob data. Blob data is blinded, not encrypted. |
 | **attestation** | Earlier drafts of `design`: storage signatures by watcher members | Not used. A watcher member's signature share on a root follows its storage of the batch. |
 | **fallback** | Any implicit second path on failure | Not used. Every path is a typed transition with a guard. |
-| **finality** | Ethereum's own finality | "Soft-final" and "hard-final" for batches. Hard finality includes L1 acceptance. |
+| **finality** | Ethereum's own finality | "Hard-final" for a batch whose root L1 accepted |
 | **recovery** | `mlx`: promotion of a warm standby operator | Any t watcher members continuing the RootChain. There is no promotion step. Holders' own recovery is "self-help". |
 | **operator** | `mlx`: MetaLeX as primary operator, plus the recovery operator | "MetaLeX core" and "recovery operator" by name |
 | **p2p, peer-to-peer** | A separate peer-to-peer messaging transport | Delivery to holders is through the party RPC |

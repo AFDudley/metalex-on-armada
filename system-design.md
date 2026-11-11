@@ -111,13 +111,13 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 
 ## 4. Watcher parties
 
-A watcher party is "a bonded federation of service providers serving one data need, and here also the execution venue" (`t2`, Armada's glossary). On the money side it provides "netting + non-custodial settlement … over Nitro channels" (`t2`, "Clearing (Nitro)"). No watcher party exists yet: "No bonding, no DKG ceremony, and no signer set exist" (`t2`, T2.4).
+A watcher party is a bonded group of operators, in the sense of Armada's glossary (`t2`). In this design, each watcher party serves one issuer. It runs the issuer's state and anchors it to Ethereum. It is also an armada-nitro participant: it holds channels, receives payments and pays withdrawals.
 
 ### 4.1 Composition
 
 Each issuer has one watcher party, and MetaLeX's whole platform is the set of these parties. A watcher party has three watcher members: MetaLeX core, the recovery operator and the issuer (n = 3). MetaLeX core is the MetaLeX hub in its role as a watcher member of every party. It sequences by default, and MetaLeX is a plaintext audience through it.
 
-**Keys.** Each party has one FROST threshold key, the *party key*. Its threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2. So any two watcher members can sign, and no signing set needs MetaLeX's share. Each watcher member also has a *sequencing key* for soft-final signatures, which the RootChain pins.
+**Keys.** Each party has one FROST threshold key, the *party key*. Its threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2. So any two watcher members can sign, and no signing set needs MetaLeX's share.
 
 **Custodian.** On L1, the party acts through its *party custodian*: a `HubCustodian` under the party key (`nitro` `src/HubCustodian.sol`; `adr` ADR-0016 D16.2). It is the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the party key, and it has no hot delegate. A hot delegate would only save signing time. Roots finalize daily, so a threshold signature on each state costs no time that matters.
 
@@ -142,7 +142,6 @@ Each party bonds through one armada-nitro channel. Its participants are the part
 
 | Fault | Slashable | Proof |
 |---|---|---|
-| A sequencing key signs two different batch commitments with the same parent batch | Yes | Two signatures from that key |
 | The party key signs two different successors of the same root | Yes | Two signatures from the party key, over two roots with the same `prevRoot` |
 | A watcher member leaks plaintext | No | A leak does not identify the leaker. It stays a legal obligation. |
 
@@ -156,18 +155,16 @@ Each component is a typed state machine. Each target state has exactly one entry
 stateDiagram-v2
  direction LR
  [*] --> Executed: sequencer executes
- Executed --> SoftFinal: sequencer signs batch commitment
- SoftFinal --> HardFinal: the RootChain accepts its root
- SoftFinal --> Discarded: the RootChain accepts another successor of the same root
+ Executed --> HardFinal: the RootChain accepts its root
+ Executed --> Discarded: the RootChain accepts another successor of the same root
  HardFinal --> [*]
  Discarded --> [*]
 ```
 
 | Transition | Guard |
 |---|---|
-| Executed → SoftFinal | The sequencer's pinned key signs the batch commitment |
-| SoftFinal → HardFinal | The RootChain accepts the batch's root (§6.1) |
-| SoftFinal → Discarded | The RootChain accepted a different successor of the same `prevRoot` |
+| Executed → HardFinal | The RootChain accepts the batch's root (§6.1) |
+| Executed → Discarded | The RootChain accepted a different successor of the same `prevRoot` |
 
 Only a hard-final batch affects anything outside the issuer state. Such effects are a payment out of a withdrawal, a wrapper mint, a departure, or a proof given to a holder as final.
 
@@ -373,7 +370,7 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 
 **Out.**
 1. The holder locks canonical scrip in the issuer state and names its note key. The scrip is locked, not burned, because its ratio cannot change while canonical supply is above zero. The entry guard applies (§5.4).
-2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapper and shields it as a note to the named key. The Armada pool accepts it, because its token policy is a blocklist: "any ERC-20 not blocklisted can be shielded" (Armada `engineering/T0-ethereum-anchor.md`).
+2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapper and shields it as a note to the named key. The Armada pool accepts it, because the pool shields any ERC20 that is not on its blocklist.
 
 **In.**
 1. The holder pays wrapper back to the party custodian, which burns it.
@@ -448,7 +445,7 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 | Need | Status |
 |---|---|
 | `HubCustodian` signing channel states with the party key, with no hot delegate | A change to armada-nitro. Not built. |
-| armada-nitro channels, `ConsensusApp`, guarantees and reclaim, checkpoints, `HubCustodian` | In code, but being rewritten from the Lean model on Armada's plan: the merged adjudicator code "has confirmed defects (… reclaim creates value …) and is replaced by the rewrite" (Armada's build plan) |
+| armada-nitro channels, `ConsensusApp`, guarantees and reclaim, checkpoints, `HubCustodian` | In code. The current adjudicator code has known defects, and Armada is rewriting it from its Lean model. |
 | A hub's asset list naming the wrapper factory (`adr` ADR-0021 D21.2) | A change to armada-nitro's asset list. Not built. The wrapper factory must be deployed first. |
 | Hub role, channels over Waku, watchtower | On Armada's plan. Next. |
 | Wrapper factory and issuer wrapper ERC20 | New. Not built. |
@@ -506,11 +503,10 @@ The EVM computes keccak for the `KECCAK256` opcode and for every mapping slot ke
 | Key | Source |
 |---|---|
 | `mlx` | MetaLeX Engineering, *Build MetaLeX's private chain with recovery*, standalone edition, evidence as of 8 November 2026. Cited by section and table. |
-| `review` | `invariant-review.md`: Armada's review of `mlx`. No contradictions, three open points. |
 | `cc` | [`MetaLex-Tech/cybercorps-contracts`](https://github.com/MetaLex-Tech/cybercorps-contracts) at `8789081be696cc334f9b7b193b3c3eba17c8122b`, the commit that `mlx` analyses. Cited by file and line. |
 | `nitro` | armada-nitro at `295b6c2e`. Cited by file and line. |
-| `adr` | Armada `engineering/09-architecture-decisions.md`, including ADR-0021 |
-| `p15` | Armada `engineering/15-hub-yield-and-swaps.md`: invariants I1–I7 of hub channels |
-| `t2` | Armada `engineering/T2-watcher-substrate.md` and `glossary.md`: watcher parties |
+| `adr` | Armada's architecture decision records, including ADR-0021 |
+| `p15` | Armada's design for hub channels: invariants I1–I7 |
+| `t2` | Armada's design for watcher parties, and Armada's glossary |
 | `nimbus` | [`status-im/nimbus-eth1`](https://github.com/status-im/nimbus-eth1): the nimbus EVM (`execution_chain/evm/`) and the verified proxy. Armada builds from its fork `AFDudley/nimbus-eth1`. |
 | `zos` | [`matter-labs/zksync-os-zisk`](https://github.com/matter-labs/zksync-os-zisk): a REVM state transition proven with ZisK |
