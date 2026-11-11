@@ -35,7 +35,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **MetaLeX assets** | Everything a holder can have in the Cybercorps contracts: LETs, CyberScrip balances, agreements, round allocations and MetaVesT grants. `mlx` has no single term. |
 | **Issuer RootChain** | The L1 contract of one issuer. It stores the hard-final roots of that issuer's state, one successor per root. |
 | **Issuer state** | One EVM state per issuer: its Cybercorps company graph, its channel-balance contract and its payout records. Watcher members execute it. Every asset in it is one that the issuer's watcher party issues. |
-| **Watcher party** | An entity: the threshold signer for one issuer. It runs the issuer state and anchors it to L1 through the issuer's RootChain. Through its custodian, it is an armada-nitro participant and the minter of the issuer's wrapper. One per issuer. |
+| **Watcher party** | An entity: the threshold signer for one issuer. It runs the issuer state and anchors it to L1 through the issuer's RootChain. Through its custodian, it is an armada-nitro participant and the minter of the issuer's wrapped scrip. One per issuer. |
 | **Watcher member** | One participant in a watcher party: MetaLeX core, the recovery operator or the issuer. Each runs its own watcher. |
 | **MetaLeX core** | The MetaLeX hub in its role as a watcher member of every party (R-6). The default sequencer. |
 | **Party key** | One FROST threshold key per watcher party, with a two-thirds-majority threshold. Its threshold never needs MetaLeX's share. `HubCustodian` is its on-chain identity. |
@@ -50,18 +50,19 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **Party RPC** | A watcher party's own private, authenticated RPC, in MetaLeX's sense. The only interface to an issuer state. Every method is scoped by the contracts' authority. It gives holders their records, salts and proofs. |
 | **MetaLeX hub** | An armada-nitro hub. An entity distinct from MetaLeX, the company (R-27), through which MetaLeX is a plaintext audience. It routes Nitro payments, runs watchtowers for website users, and supplies user IDs to each issuer state. It is not in the path of a user's request to the party RPC. |
 | **Self-help** | A holder proving its own records against any root from its salts, its values and the public blob data, with no watcher member |
-| **Party custodian** | The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key. |
+| **Party custodian** | The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapped-scrip mints with the FROST party key. |
 | **Channel-balance contract** | A system contract in an issuer state with an ERC20 interface, and the `paymentToken` of every deal. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not withdrawn. The watcher party updates it from co-signed states it receives over Nitro p2p. |
-| **Verifier tool** | A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them |
+| **Verifier tool** | A tool that reads a root and the issuer wrapper's supply from L1, and checks the conservation proof against them |
 | **Checkpoint** | Recording a channel's latest co-signed state on the adjudicator, as in any Nitro channel |
 | **Watchtower** | A service that answers a stale-state challenge on a user's channel within the challenge window, with the user's latest co-signed state |
 | **Payout record** | The issuer-state record of a paid withdrawal: the withdrawal, the `channelId` and the hash of the co-signed channel state that paid it |
 | **Pay in, withdraw** | A holder pays in with a co-signed armada-nitro state that moves USDC to the watcher party's allocation, and its channel balance is credited. It withdraws with its own transaction, and the watcher party pays it through armada-nitro once that batch is hard final. |
 | **Routed payment** | One Nitro payment across several channels, through a hub, made atomic by guarantees and reclaim. The hub advances no value (Armada ADR-0021). |
-| **Scrip lock** | Canonical scrip locked in the issuer state against wrapper notes outside it. States: Locked, Wrapped, Returned, Unlocked. |
-| **Issuer wrapper** | An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool. |
-| **Wrapper factory** | The L1 factory that deploys each issuer's wrapper. A hub may name it in its asset list. |
-| **Conservation proof** | An off-chain zero-knowledge proof for each hard-final root: locked scrip equals wrapper supply plus pending locks and returns. The USDC needs no such proof, because it never leaves armada-nitro. |
+| **Scrip lock** | Canonical scrip locked in the issuer state against wrapped-scrip notes outside it. States: Locked, Wrapped, Returned, Unlocked. |
+| **Wrapped scrip** | An issuer's scrip as an ERC20 on L1, backed one for one by scrip locked in the issuer state. It is held as notes in the Armada pool, or unshielded. MetaLeX's plan calls it the "public wrapper". Under MetaLeX-form bylaws, scrip is not stock and represents neither equity nor debt. |
+| **Issuer wrapper** | The ERC20 contract of an issuer's wrapped scrip, one per issuer. Its only minter is the party custodian. |
+| **Wrapper factory** | The L1 factory that deploys each issuer wrapper. A hub may name it in its asset list. |
+| **Conservation proof** | An off-chain zero-knowledge proof for each hard-final root: locked scrip equals wrapped-scrip supply plus pending locks and returns. The USDC needs no such proof, because it never leaves armada-nitro. |
 | **Entry guard** | The rule that a scrip lock reverts unless the asset's force features are off and its implementation hash is the pinned one |
 | **Daily aggregation** | MetaLeX core's default publishing run: one blob transaction per day, with all parties' data packed by size. It calls the aggregator with a Merkle root of the day's party roots. |
 | **Daily aggregator** | The L1 contract that records the day's root of party roots and the hashes of published blobs |
@@ -108,7 +109,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **watcher party** | Armada: "a bonded federation of service providers serving one data need … not a BFT chain" | The same kind of federation. Its one data need is one issuer's RootChain. |
 | **core** | Prividium Core, the open-source permissioning engine | "MetaLeX core" for the watcher member. "Prividium Core" for the product. |
 | **escrow** | LexScrow, MetaLeX's escrow contract. The scrip bridge escrow of `mlx` §2. | "Escrow" means LexScrow only. Locked scrip is a "scrip lock". |
-| **bridge** | The go-nitro mirrored L1↔L2 bridge. Armada's cross-chain swap design. A rollup's canonical bridge. `mlx` §2's scrip bridge to a public chain. | Not used. Value moves through the watcher party's channels, and scrip leaves as wrapper notes. |
+| **bridge** | The go-nitro mirrored L1↔L2 bridge. Armada's cross-chain swap design. A rollup's canonical bridge. `mlx` §2's scrip bridge to a public chain. | Not used. Value moves through the watcher party's channels, and scrip leaves as wrapped-scrip notes. |
 | **L2, rollup, chain, instance** | The ZKsync and OP Stack chains discussed in `mlx` and Armada | "Issuer state" and "issuer RootChain". There is no shared chain. |
 | **layer** | Armada bans it for its tiers (T0–T6) | Not used. "L1" means Ethereum only. |
 | **encryption** | Earlier drafts of `design`: encrypted batch data in blobs | Not used for blob data. Blob data is blinded, not encrypted. |

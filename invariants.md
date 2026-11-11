@@ -222,9 +222,9 @@ Scrip is locked, not burned, when it leaves the issuer state, and LET custody an
 
 <div class="req" markdown="1">
 
-<a id="I-19"></a>**I-19.** No force action destroys or moves collateral while public wrappers remain outstanding.
+<a id="I-19"></a>**I-19.** No force action destroys or moves locked collateral while wrapped scrip remains outstanding.
 
-*How the design holds it (by design):* Entry guard on the lock: force features off, no restriction hooks, pinned implementation (§5.4). A hook added later that blocks an unlock is a signed misaccounting (§5.4, §11). Beacon upgrades with outstanding wrapper notes belong to `mlx`'s powers review.
+*How the design holds it (by design):* Entry guard on the lock: force features off, no restriction hooks, pinned implementation (§5.4). A hook added later that blocks an unlock is a signed misaccounting (§5.4, §11). Beacon upgrades with outstanding wrapped-scrip notes belong to `mlx`'s powers review.
 
 *MetaLeX's plan, §2, "Why the first bridge locks canonical scrip":* "they must not destroy or move collateral while public wrappers remain outstanding"
 
@@ -232,7 +232,7 @@ Scrip is locked, not burned, when it leaves the issuer state, and LET custody an
 
 <div class="req" markdown="1">
 
-<a id="I-20"></a>**I-20.** A private holder limit does not constrain the public wrapper, and the wrapper states its own transfer policy.
+<a id="I-20"></a>**I-20.** A private holder limit does not constrain wrapped scrip, and wrapped scrip states its own transfer policy.
 
 *How the design holds it (by design):* The wrapper is a plain ERC20 held as notes. Unshielded, it moves as a plain ERC20, and no private holder limit applies to it (§10).
 
@@ -285,7 +285,7 @@ Locked scrip equals the supply of scrip tokens outside the issuer state plus pen
 
 <a id="I-24"></a>**I-24.** Canonical scrip supply equals the balances outside the bridge escrow plus the escrow balance, and the escrow balance equals locked backing plus surplus.
 
-*How the design holds it (once built):* The watcher party keeps MetaLeX's accounting over locks, wrapper supply and returns (§10).
+*How the design holds it (once built):* The watcher party keeps MetaLeX's accounting over locks, wrapped-scrip supply and returns (§10).
 
 *MetaLeX's plan, §2, "Execute and reconcile the full round trip":* "Enforce S = F + B = F + K + X and B = K + X."
 
@@ -293,7 +293,7 @@ Locked scrip equals the supply of scrip tokens outside the issuer state plus pen
 
 <div class="req" markdown="1">
 
-<a id="I-25"></a>**I-25.** At every reconciled checkpoint, locked backing equals wrapper supply plus locks awaiting a mint plus returns awaiting release.
+<a id="I-25"></a>**I-25.** At every reconciled checkpoint, locked backing equals wrapped-scrip supply plus locks awaiting a mint plus returns awaiting release.
 
 *How the design holds it (by design):* The conservation proof shows it at every hard-final root (§11).
 
@@ -303,9 +303,9 @@ Locked scrip equals the supply of scrip tokens outside the issuer state plus pen
 
 <div class="req" markdown="1">
 
-<a id="I-26"></a>**I-26.** An unsolicited donation to the escrow raises only its balance and surplus, never wrapper mint authority or bridge liabilities.
+<a id="I-26"></a>**I-26.** An unsolicited donation to the escrow raises only its balance and surplus, never wrapped-scrip mint authority or bridge liabilities.
 
-*How the design holds it (once built):* The watcher party keeps MetaLeX's accounting over locks, wrapper supply and returns (§10).
+*How the design holds it (once built):* The watcher party keeps MetaLeX's accounting over locks, wrapped-scrip supply and returns (§10).
 
 *MetaLeX's plan, §2, "Execute and reconcile the full round trip":* "An unsolicited donation increases B and X, never wrapper mint authority or bridge liabilities."
 
@@ -315,7 +315,7 @@ Locked scrip equals the supply of scrip tokens outside the issuer state plus pen
 
 <a id="I-27"></a>**I-27.** The system keeps explicit liabilities, and it never infers issuance from an escrow balance.
 
-*How the design holds it (once built):* The watcher party keeps MetaLeX's accounting over locks, wrapper supply and returns (§10).
+*How the design holds it (once built):* The watcher party keeps MetaLeX's accounting over locks, wrapped-scrip supply and returns (§10).
 
 *MetaLeX's plan, §2, "Execute and reconcile the full round trip":* "Maintain liabilities rather than inferring issuance from an escrow balance."
 
@@ -346,7 +346,7 @@ Each lock and return record binds every message field, waits for finality, and h
 
 <a id="I-29"></a>**I-29.** A wrong field, proof or finality check makes the message refuse without changing any balance.
 
-*How the design holds it (once built):* The party custodian refuses a mint or return whose record does not match a lock or a wrapper payment (§5.4, §10).
+*How the design holds it (once built):* The party custodian refuses a mint or return whose record does not match a lock or a wrapped-scrip payment (§5.4, §10).
 
 *MetaLeX's plan, §2, "Execute and reconcile the full round trip":* "refuses without balance change"
 
@@ -718,9 +718,9 @@ An issuer can move to a successor watcher party, and every outstanding item gets
 
 <div class="req" markdown="1">
 
-<a id="I-62"></a>**I-62.** Every outstanding wrapper and every pending message gets one disposition, including a late burn.
+<a id="I-62"></a>**I-62.** Every outstanding wrapped scrip and every pending message gets one disposition, including a late burn.
 
-*How the design holds it (once built):* Each wrapper note, pending lock or return, and channel balance gets one disposition in the successor's state (§5.5).
+*How the design holds it (once built):* Each wrapped-scrip note, pending lock or return, and channel balance gets one disposition in the successor's state (§5.5).
 
 *MetaLeX's plan, §3, "P2 recovery is operational; P3 adds enforceable departure":* "Outstanding wrappers and every pending message need one disposition, including late burns."
 
@@ -730,7 +730,7 @@ An issuer can move to a successor watcher party, and every outstanding item gets
 
 <a id="I-63"></a>**I-63.** The system does not release old collateral while it also creates successor backing.
 
-*How the design holds it (once built):* The successor backs the outstanding wrapper notes. The old RootChain is Retired and unlocks nothing (§5.5, §10).
+*How the design holds it (once built):* The successor backs the outstanding wrapped-scrip notes. The old RootChain is Retired and unlocks nothing (§5.5, §10).
 
 *MetaLeX's plan, §3, "P2 recovery is operational; P3 adds enforceable departure":* "Old collateral cannot be released while successor backing is also created."
 
@@ -1105,13 +1105,13 @@ A zkEVM is not required for a reasonable level of safety, and a public proof sho
 
 <div class="req" markdown="1">
 
-<a id="R-28"></a>**R-28.** A conservation proof, verified off chain, shows conservation of the wrapper without the zkEVM. (§11)
+<a id="R-28"></a>**R-28.** A conservation proof, verified off chain, shows conservation of wrapped scrip without the zkEVM. (§11)
 
 </div>
 
 <div class="req" markdown="1">
 
-<a id="R-44"></a>**R-44.** Third parties verify the conservation proof independently, with a tool that reads a root and the wrapper's supply from L1. (§11)
+<a id="R-44"></a>**R-44.** Third parties verify the conservation proof independently, with a tool that reads a root and the issuer wrapper's supply from L1. (§11)
 
 </div>
 

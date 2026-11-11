@@ -14,7 +14,7 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 - **MetaLeX hub:** an armada-nitro hub that routes payments and runs watchtowers for website users (§9). It is an entity distinct from MetaLeX. As MetaLeX core, it is a watcher member of every party.
 - **MetaLeX:** the company. It receives the platform fee through `getPlatformPayable()`. It is a named plaintext audience, through the MetaLeX hub.
 - **Recovery operator:** the independent watcher member that `mlx` names (§4.1).
-- **Wrapper holder:** a holder of the issuer's wrapper, as notes or unshielded (§10).
+- **Holder of wrapped scrip:** a holder of the issuer's wrapper, as notes or unshielded (§10).
 
 ## 2. What each party can check
 
@@ -27,8 +27,8 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 | Holder | That its channel value is safe | It holds its latest co-signed channel state (§9.1) |
 | Issuer | The full issuer state | It is a watcher member and stores the state (§4.3) |
 | Issuer | Its payout | The payout record names the channel state that paid it, and its note is in the Armada pool (§9.2) |
-| Wrapper holder | That its wrapper was minted against a lock | The watcher party's signed mint record and the lock in a hard-final root (§10) |
-| Anyone | That the wrapper is conserved at each root | The verifier tool checks the conservation proof against the root and the wrapper's supply on L1 (§11) |
+| Holder of wrapped scrip | That its wrapped scrip was minted against a lock | The watcher party's signed mint record and the lock in a hard-final root (§10) |
+| Anyone | That the wrapper is conserved at each root | The verifier tool checks the conservation proof against the root and the issuer wrapper's supply on L1 (§11) |
 
 ## 3. What each party must trust
 
@@ -43,7 +43,7 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 
 - **The other watcher members acting together,** for correct state transitions and payments without the issuer's share, because t = 2. If that trust fails, the issuer detects the change, and the signed root is evidence against the operators (§11). The issuer also holds the full state as evidence.
 
-### Wrapper holder
+### Holder of wrapped scrip
 
 - **The watcher party,** for three duties: each mint reflects locked scrip, each lock is wrapped, and each return is unlocked. A mint with no lock fails the conservation proof publicly. The signed lock, mint and return records are evidence against the operators (§11). With the zkEVM, L1 would enforce correct mints instead.
 
@@ -61,7 +61,7 @@ Each subsection is one failure. Parties that the failure does not affect are lis
 
 ### The issuer stops
 
-MetaLeX core and the recovery operator continue the RootChain. Holders, the MetaLeX hub and wrapper holders are not affected.
+MetaLeX core and the recovery operator continue the RootChain. Holders, the MetaLeX hub and holders of wrapped scrip are not affected.
 
 ### The recovery operator stops
 
@@ -72,7 +72,7 @@ MetaLeX core and the issuer continue the RootChain. No other party is affected.
 - **The RootChain:** the issuer and the recovery operator continue it. So it advances only while the issuer's watcher member is up.
 - **Holders:** they route through an issuer's hub, or use a channel with the watcher party directly. Website users lose the default watchtower. The recovery operator's watchtower continues, if it runs one.
 - **The issuer:** it is paid out through its own hub or a direct channel.
-- **Not affected:** wrapper holders.
+- **Not affected:** holders of wrapped scrip.
 
 ### MetaLeX, the company, stops
 
@@ -83,12 +83,12 @@ No party is affected, because the MetaLeX hub is a separate entity.
 - **Holders:** no new roots and no payments out. Each holder can prove what it held at the last root (§8.3). Value in channels exits by ForceMove. Balances stay in the issuer state.
 - **The issuer:** no new roots and no payments out. The issuer holds the full state.
 - **The MetaLeX hub:** its routes to that watcher party stop.
-- **Wrapper holders:** no new mints or unlocks. Existing wrapper notes are not affected.
+- **Holders of wrapped scrip:** no new mints or unlocks. Existing wrapped-scrip notes are not affected.
 
 ### The issuer, the MetaLeX hub and the recovery operator all stop
 
 - **Holders:** they use self-help. Each holder proves its records from its own store and the archived blobs, against the last root (§8.3). Value in channels exits by ForceMove.
-- **Wrapper holders:** no new mints or unlocks. Existing wrapper notes are not affected.
+- **Holders of wrapped scrip:** no new mints or unlocks. Existing wrapped-scrip notes are not affected.
 
 ### The sequencer refuses a write
 
@@ -96,7 +96,7 @@ The payer gets no asset and has no remedy on L1. Its signed request and the refu
 
 ### A lock is never wrapped, or a return is never unlocked
 
-The wrapper holder has no remedy on L1. The signed lock and return records are its evidence (§5.4). No other party is affected.
+The holder of wrapped scrip has no remedy on L1. The signed lock and return records are its evidence (§5.4). No other party is affected.
 
 ### t watcher members sign a root that misaccounts
 
@@ -104,7 +104,7 @@ This is possible only because the zkEVM is out of scope (§11).
 
 - **Holders:** each holder detects it, and holds the signed root and its earlier proofs as evidence. A channel balance with no co-signed state behind it is visible to every watcher member, because each batch records the states it applies.
 - **The issuer:** if it did not sign, it holds the full state as evidence.
-- **Wrapper holders:** a wrapper mint with no locked scrip fails the conservation proof.
+- **Holders of wrapped scrip:** a wrapped-scrip mint with no locked scrip fails the conservation proof.
 - **Not affected:** the MetaLeX hub, which only routes payments.
 
 ### The party key signs two successors of one root

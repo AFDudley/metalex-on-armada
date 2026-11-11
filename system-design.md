@@ -72,7 +72,7 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 
 - **Issuer state:** One EVM state per issuer: its Cybercorps companies, its channel-balance contract and its payout records (§3).
 - **Watcher party:** An entity: the threshold signer that runs one issuer state and anchors it to L1. Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).
-- **Party custodian:** The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key (§4.1).
+- **Party custodian:** The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapped-scrip mints with the FROST party key (§4.1).
 - **Party RPC:** The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).
 - **Channel-balance contract:** A system contract in the issuer state with an ERC20 interface. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not yet withdrawn (§9.2).
 - **Party bond:** One armada-nitro channel per watcher party (§4.4).
@@ -80,7 +80,7 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 **Run by MetaLeX, or by anyone**
 
 - **MetaLeX hub:** An armada-nitro hub, and an entity distinct from MetaLeX, the company. As MetaLeX core it is a watcher member of every party. MetaLeX is a plaintext audience through it. It routes payments, runs watchtowers for website users, and supplies user IDs to each issuer state (§8.1, §9).
-- **Verifier tool:** A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them (§11).
+- **Verifier tool:** A tool that reads a root and the issuer wrapper's supply from L1, and checks the conservation proof against them (§11).
 
 ## 3. Issuer state
 
@@ -166,7 +166,7 @@ stateDiagram-v2
 | Executed → HardFinal | The RootChain accepts the batch's root (§6.1) |
 | Executed → Discarded | The RootChain accepted a different successor of the same `prevRoot` |
 
-Only a hard-final batch affects anything outside the issuer state. Such effects are a payment out of a withdrawal, a wrapper mint, a departure, or a proof given to a holder as final.
+Only a hard-final batch affects anything outside the issuer state. Such effects are a payment out of a withdrawal, a wrapped-scrip mint, a departure, or a proof given to a holder as final.
 
 ### 5.2 RootChain
 
@@ -192,8 +192,8 @@ An issuer with no transactions posts nothing.
 | State | Entry transition | Guard |
 |---|---|---|
 | Locked | `lock` in the issuer state, naming the holder's note key | The entry guard: `canForceTransfer()`, `canForceBurn()` and `canFreeze()` all return false, `transferRestrictionHooksLength()` is zero, and the asset's implementation hash equals the pinned hash. CyberScrip's `disable…` functions are one-way: "Cannot be re-enabled post-initialization" (`cc` `src/CyberScrip.sol`). |
-| Wrapped | The party custodian mints the same amount of wrapper and shields it as a note to the named key | The lock's batch is hard-final, and the lock is not yet wrapped |
-| Returned | The holder pays wrapper back to the party custodian, which burns it | The token is the issuer's wrapper |
+| Wrapped | The party custodian mints the same amount of wrapped scrip and shields it as a note to the named key | The lock's batch is hard-final, and the lock is not yet wrapped |
+| Returned | The holder pays wrapped scrip back to the party custodian, which burns it | The token is the issuer's wrapper |
 | Unlocked | The watcher party unlocks the scrip to the holder in the issuer state | A Returned amount not yet unlocked |
 
 `setRestrictionHook` stays callable after a lock (`cc` `src/CyberScrip.sol:146-149`). A hook added later that blocks an unlock is a misaccounting, and the signed lock and return records are the holder's evidence (§11).
@@ -217,7 +217,7 @@ Each lock and return record binds the bindings of `mlx`'s `BridgeMessageV1`: iss
 | Retiring | `scheduleDeparture` on `IssuerEpochRegistry` | Signed by the party key. The successor's watcher party checks `mlx` §3's scope rules (settled deals, drained escrows, no reserved units, resolved allocations) before it accepts the state. |
 | Retired | `finalizeDeparture` | Signed by the party key. It records the old RootChain's final root and the successor's identity, and the old RootChain accepts no further roots. |
 
-No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapper note, pending lock or return, and channel balance gets one disposition in the successor's state.
+No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapped-scrip note, pending lock or return, and channel balance gets one disposition in the successor's state.
 
 ## 6. RootChain rules
 
@@ -366,27 +366,27 @@ A user that does not want the MetaLeX hub uses an issuer's hub, or a channel wit
 
 ## 10. Scrip as armada-nitro notes
 
-Scrip leaves the issuer state the way USDC enters it, in the opposite direction. Outside the issuer state it is a note of the issuer's wrapper, and it trades like any armada-nitro asset.
+Scrip leaves the issuer state the way USDC enters it, in the opposite direction. Outside the issuer state it is wrapped scrip, held as notes, and it trades like any armada-nitro asset.
 
 **Out.**
 1. The holder locks canonical scrip in the issuer state and names its note key. The scrip is locked, not burned, because its ratio cannot change while canonical supply is above zero. The entry guard applies (§5.4).
-2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapper and shields it as a note to the named key. The Armada pool accepts it, because the pool shields any ERC20 that is not on its blocklist.
+2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapped scrip. It shields it as a note to the named key. The Armada pool accepts it, because the pool shields any ERC20 that is not on its blocklist.
 
 **In.**
-1. The holder pays wrapper back to the party custodian, which burns it.
+1. The holder pays wrapped scrip back to the party custodian, which burns it.
 2. The watcher party unlocks the scrip to the holder in the issuer state.
 
 **In channels.** A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (`nitro` `src/ArmadaNitroAdjudicator.sol:44`). The list screens out tokens whose balances change other than by transfer (`p15` I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (`adr` ADR-0021 D21.2). A hub names the wrapper factory, so its channels accept every issuer's wrapper. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapper factory must therefore exist before the adjudicator that names it is deployed.
 
-**Accounting.** `mlx`'s identities apply unchanged: locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry `BridgeMessageV1`'s bindings (§5.4).
+**Accounting.** `mlx`'s identities apply unchanged: locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry `BridgeMessageV1`'s bindings (§5.4).
 
-**Transfer policy.** A wrapper note can be unshielded like any note. The wrapper then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapper to scrip does not inherit recertification eligibility.
+**Transfer policy.** A wrapped-scrip note can be unshielded like any note. The wrapped scrip then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapped scrip to scrip does not inherit recertification eligibility.
 
 ## 11. Trust without the zkEVM
 
 **Scope.** A zkEVM is not required for a reasonable level of safety, so it is out of scope. The RootChain therefore accepts each root on the party signature alone (§6.1).
 
-**Every signed act is a binding commitment.** The watcher party signs the roots, the channel states and the wrapper mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.
+**Every signed act is a binding commitment.** The watcher party signs the roots, the channel states and the wrapped-scrip mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.
 
 **What holds without the zkEVM:**
 
@@ -399,13 +399,13 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 | A counterparty keeps its claim | Its claim is the operators' own signature on the agreement and the roots |
 | Anyone can check conservation | The conservation proof, below |
 
-**Conservation proof.** For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. It covers the wrapper only. The USDC needs no such proof, because it never leaves armada-nitro, and armada-nitro conserves it (§9.2). The proof's public input is on L1, and it reveals only totals:
+**Conservation proof.** For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. It covers wrapped scrip only. The USDC needs no such proof, because it never leaves armada-nitro, and armada-nitro conserves it (§9.2). The proof's public input is on L1, and it reveals only totals:
 
 | Asset | Identity | Public input on L1 |
 |---|---|---|
-| Scrip | Locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R | The wrapper's `totalSupply()` |
+| Scrip | Locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R | The wrapper's `totalSupply()` |
 
-**Verifier tool.** Any third party can check the proof itself. The tool reads the root from the aggregator and the wrapper's `totalSupply()` from L1, then verifies the proof against them.
+**Verifier tool.** Any third party can check the proof itself. The tool reads the root from the aggregator and the issuer wrapper's `totalSupply()` from L1, then verifies the proof against them.
 
 The proof shows the state at a root, not the transition that produced it. Its construction is an implementation question.
 
@@ -415,11 +415,11 @@ The proof shows the state at a root, not the transition that produced it. Its co
 |---|---|
 | A holder's LET or scrip is moved or voided without the holder's signature, or shares are issued that the contracts forbid | Its earlier proofs of what it held, and the signed roots that contradict them |
 | A channel balance is credited with no co-signed state behind it, or a holder's balance is moved or not paid | The holder's co-signed states, its inclusion proofs and the signed roots. The batch records the hash of every state it applies, so a credit with no state behind it is visible to every watcher member. |
-| Wrapper is minted with no locked scrip, or a hook added after a lock blocks the unlock | The signed lock, mint and return records. A mint with no lock also fails the conservation proof. |
+| Wrapped scrip is minted with no locked scrip, or a hook added after a lock blocks the unlock | The signed lock, mint and return records. A mint with no lock also fails the conservation proof. |
 
 Misaccounting is limited to one issuer. It moves no value held in armada-nitro channels and notes.
 
-**What the zkEVM adds: conservation enforced on L1.** With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation of the wrapper on L1 still rests on the conservation proof. `zos` shows the technique: a REVM state transition proven with ZisK.
+**What the zkEVM adds: conservation enforced on L1.** With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation of wrapped scrip on L1 still rests on the conservation proof. `zos` shows the technique: a REVM state transition proven with ZisK.
 
 **If the zkEVM is added later:**
 - **Proof system.** Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option.
@@ -437,7 +437,7 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 | Fewer than t watcher members are live | No hard finality, no payments out | Holders keep their proofs against the last root and can prove what they own (§8.3). Value in channels exits by ForceMove. Balances stay in the issuer state. |
 | The sequencer refuses a write | None | The payer gets no asset and has no L1 remedy. Its signed request and the refusal are its evidence to MetaLeX (§8.5). |
 | A lock is never wrapped, or a return is never unlocked | None on L1 | A watcher-party duty. The signed lock and return records are the holder's evidence (§5.4). |
-| t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if the wrapper's supply is broken, and the signed root is evidence against the operators (§11) |
+| t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if the issuer wrapper's supply is broken, and the signed root is evidence against the operators (§11) |
 | The party key signs two successors of one root | None in RootChain | The RootChain accepts one successor per root. The party bond is slashed (§4.4). |
 
 ## 13. Hash function choice and cost
@@ -477,7 +477,7 @@ The EVM computes keccak for the `KECCAK256` opcode and for every mapping slot ke
 |---|---|
 | Hub channel capacity | Peak payment value being routed |
 | People operating the watcher members' watchers | The number of parties and incidents. `mlx` assumed 40–80 hours per month for MetaLeX's own maintenance. |
-| L1 settlement | One blob transaction per day, which also calls the aggregator. More blob transactions only on a day whose data exceeds one transaction's blob limit. Channel and wrapper transactions as users make them. |
+| L1 settlement | One blob transaction per day, which also calls the aggregator. More blob transactions only on a day whose data exceeds one transaction's blob limit. Channel and wrapped-scrip transactions as users make them. |
 | Blob data | Slots changed since the previous root × 64 bytes. One blob costs 131,072 blob gas. |
 | Proving | One conservation proof per root, off chain (§11). No zkEVM. |
 

@@ -133,7 +133,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <li><strong>Recovery without MetaLeX.</strong> The recovery operator and the issuer hold the full state, and either can continue with the other. No promotion step and no MetaLeX signature is needed.<sup id="summary--fnref:recovery"><a class="footnote-ref" href="#summary--fn:recovery">6</a></sup></li>
 <li><strong>Verified self-help for holders.</strong> Each holder can recover its own records and check them cryptographically against the roots on Ethereum, with no operator involved. It needs only its own stored records and the public blob data.<sup id="summary--fnref:selfhelp"><a class="footnote-ref" href="#summary--fn:selfhelp">7</a></sup></li>
 <li><strong>Safe money.</strong> No operator can take a user's funds. A user can always exit a channel on Ethereum with its latest signed state.<sup id="summary--fnref2:value"><a class="footnote-ref" href="#summary--fn:value">4</a></sup></li>
-<li><strong>Scrip on Ethereum.</strong> A holder can lock scrip and receive notes of the issuer's wrapper token on Ethereum, one for one. MetaLeX's bridge accounting holds unchanged, and every lock, mint and return is a signed record.<sup id="summary--fnref:scrip"><a class="footnote-ref" href="#summary--fn:scrip">8</a></sup><sup id="summary--fnref:bridge"><a class="footnote-ref" href="#summary--fn:bridge">9</a></sup></li>
+<li><strong>Wrapped scrip on Ethereum.</strong> A holder can lock scrip in the issuer state and receive the same amount of wrapped scrip on Ethereum, as notes. MetaLeX's bridge accounting holds unchanged, and every lock, mint and return is a signed record.<sup id="summary--fnref:scrip"><a class="footnote-ref" href="#summary--fn:scrip">8</a></sup><sup id="summary--fnref:bridge"><a class="footnote-ref" href="#summary--fn:bridge">9</a></sup></li>
 <li><strong>The issuer's own records.</strong> The issuer is one of the operators. So it holds its full state and history, and it can export them without anyone's permission.<sup id="summary--fnref:records"><a class="footnote-ref" href="#summary--fn:records">10</a></sup></li>
 <li><strong>Departure.</strong> An issuer can leave for a new set of operators. Its holders prove their records to the new operators.<sup id="summary--fnref:departure"><a class="footnote-ref" href="#summary--fn:departure">11</a></sup></li>
 <li><strong>Any interface.</strong> MetaLeX's web app needs no new transport. Any other interface gets the same standard endpoint, with the same scope and checks.<sup id="summary--fnref:parity"><a class="footnote-ref" href="#summary--fn:parity">12</a></sup></li>
@@ -144,7 +144,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <ul>
 <li>every root is a signed commitment that the operators cannot deny;</li>
 <li>each holder checks its own records against every root;</li>
-<li>a published conservation proof shows that no wrapper token exists without locked scrip behind it. Anyone can check it.</li>
+<li>a published conservation proof shows that no wrapped scrip exists without locked scrip behind it. Anyone can check it.</li>
 </ul>
 <p>So a dishonest majority of operators could sign a wrong root, and Ethereum would accept it. But every holder would detect the change, and the signed root is evidence against those operators. Prividium's zkEVM would reject such a root. A zkEVM can be added later if MetaLeX wants that protection.<sup id="summary--fnref:trust"><a class="footnote-ref" href="#summary--fn:trust">13</a></sup></p>
 <p>Prividium keeps transaction data and state off chain, in the operators' databases. So a Prividium holder needs an operator to read or prove its records. In this proposal, a holder does not.<sup id="summary--fnref:data"><a class="footnote-ref" href="#summary--fn:data">14</a></sup></p>
@@ -200,13 +200,13 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Issuer records, <a href="#invariants--I-52">I-52 to I-58</a>.</strong> The issuer holds its full state, logs and history. Completeness without the zkEVM is labeled attested, and no hash of guessable personal data is published. System design §3, §4.3, §7.&#160;<a class="footnote-backref" href="#summary--fnref:records" title="Jump back to footnote 10 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:departure">
-<p><strong>Departure, <a href="#invariants--I-59">I-59 to I-64</a>.</strong> An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapper note and channel balance gets one disposition in the new state. Also <a href="#invariants--R-39">R-39</a>. System design §5.5.&#160;<a class="footnote-backref" href="#summary--fnref:departure" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+<p><strong>Departure, <a href="#invariants--I-59">I-59 to I-64</a>.</strong> An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapped-scrip note and channel balance gets one disposition in the new state. Also <a href="#invariants--R-39">R-39</a>. System design §5.5.&#160;<a class="footnote-backref" href="#summary--fnref:departure" title="Jump back to footnote 11 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:parity">
 <p><strong>Interface parity, <a href="#invariants--I-65">I-65</a>.</strong> The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.&#160;<a class="footnote-backref" href="#summary--fnref:parity" title="Jump back to footnote 12 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:trust">
-<p><strong>Trust without the zkEVM, <a href="#invariants--R-7">R-7</a>, <a href="#invariants--R-23">R-23</a>, <a href="#invariants--R-28">R-28</a> and <a href="#invariants--R-44">R-44</a>.</strong> A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the wrapper's supply. System design §11.&#160;<a class="footnote-backref" href="#summary--fnref:trust" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+<p><strong>Trust without the zkEVM, <a href="#invariants--R-7">R-7</a>, <a href="#invariants--R-23">R-23</a>, <a href="#invariants--R-28">R-28</a> and <a href="#invariants--R-44">R-44</a>.</strong> A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the issuer wrapper's supply. System design §11.&#160;<a class="footnote-backref" href="#summary--fnref:trust" title="Jump back to footnote 13 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:data">
 <p><strong>Publishing, <a href="#invariants--R-8">R-8</a>, <a href="#invariants--R-17">R-17</a>, <a href="#invariants--R-18">R-18</a> and <a href="#invariants--R-43">R-43</a>.</strong> Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §13.&#160;<a class="footnote-backref" href="#summary--fnref:data" title="Jump back to footnote 14 in the text">&#8617;</a></p>
@@ -332,12 +332,12 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><em>MetaLeX's plan, §2, "Why the first bridge locks canonical scrip":</em> "the scrip ratio cannot change while canonical totalSupply() is nonzero"</p>
 </div>
 <div class="req">
-<p><a id="invariants--I-19"></a><strong>I-19.</strong> No force action destroys or moves collateral while public wrappers remain outstanding.</p>
-<p><em>How the design holds it (by design):</em> Entry guard on the lock: force features off, no restriction hooks, pinned implementation (§5.4). A hook added later that blocks an unlock is a signed misaccounting (§5.4, §11). Beacon upgrades with outstanding wrapper notes belong to <code>mlx</code>'s powers review.</p>
+<p><a id="invariants--I-19"></a><strong>I-19.</strong> No force action destroys or moves locked collateral while wrapped scrip remains outstanding.</p>
+<p><em>How the design holds it (by design):</em> Entry guard on the lock: force features off, no restriction hooks, pinned implementation (§5.4). A hook added later that blocks an unlock is a signed misaccounting (§5.4, §11). Beacon upgrades with outstanding wrapped-scrip notes belong to <code>mlx</code>'s powers review.</p>
 <p><em>MetaLeX's plan, §2, "Why the first bridge locks canonical scrip":</em> "they must not destroy or move collateral while public wrappers remain outstanding"</p>
 </div>
 <div class="req">
-<p><a id="invariants--I-20"></a><strong>I-20.</strong> A private holder limit does not constrain the public wrapper, and the wrapper states its own transfer policy.</p>
+<p><a id="invariants--I-20"></a><strong>I-20.</strong> A private holder limit does not constrain wrapped scrip, and wrapped scrip states its own transfer policy.</p>
 <p><em>How the design holds it (by design):</em> The wrapper is a plain ERC20 held as notes. Unshielded, it moves as a plain ERC20, and no private holder limit applies to it (§10).</p>
 <p><em>MetaLeX's plan, §2, "Why the first bridge locks canonical scrip":</em> "Define freeze handling and the wrapper's public transfer policy explicitly."</p>
 </div>
@@ -363,22 +363,22 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <summary>I-24 to I-27 (4 requirements)</summary>
 <div class="req">
 <p><a id="invariants--I-24"></a><strong>I-24.</strong> Canonical scrip supply equals the balances outside the bridge escrow plus the escrow balance, and the escrow balance equals locked backing plus surplus.</p>
-<p><em>How the design holds it (once built):</em> The watcher party keeps MetaLeX's accounting over locks, wrapper supply and returns (§10).</p>
+<p><em>How the design holds it (once built):</em> The watcher party keeps MetaLeX's accounting over locks, wrapped-scrip supply and returns (§10).</p>
 <p><em>MetaLeX's plan, §2, "Execute and reconcile the full round trip":</em> "Enforce S = F + B = F + K + X and B = K + X."</p>
 </div>
 <div class="req">
-<p><a id="invariants--I-25"></a><strong>I-25.</strong> At every reconciled checkpoint, locked backing equals wrapper supply plus locks awaiting a mint plus returns awaiting release.</p>
+<p><a id="invariants--I-25"></a><strong>I-25.</strong> At every reconciled checkpoint, locked backing equals wrapped-scrip supply plus locks awaiting a mint plus returns awaiting release.</p>
 <p><em>How the design holds it (by design):</em> The conservation proof shows it at every hard-final root (§11).</p>
 <p><em>MetaLeX's plan, §2, "Execute and reconcile the full round trip":</em> "K = public wrapper supply Q + outbound locks awaiting mint O + public burns awaiting release R"</p>
 </div>
 <div class="req">
-<p><a id="invariants--I-26"></a><strong>I-26.</strong> An unsolicited donation to the escrow raises only its balance and surplus, never wrapper mint authority or bridge liabilities.</p>
-<p><em>How the design holds it (once built):</em> The watcher party keeps MetaLeX's accounting over locks, wrapper supply and returns (§10).</p>
+<p><a id="invariants--I-26"></a><strong>I-26.</strong> An unsolicited donation to the escrow raises only its balance and surplus, never wrapped-scrip mint authority or bridge liabilities.</p>
+<p><em>How the design holds it (once built):</em> The watcher party keeps MetaLeX's accounting over locks, wrapped-scrip supply and returns (§10).</p>
 <p><em>MetaLeX's plan, §2, "Execute and reconcile the full round trip":</em> "An unsolicited donation increases B and X, never wrapper mint authority or bridge liabilities."</p>
 </div>
 <div class="req">
 <p><a id="invariants--I-27"></a><strong>I-27.</strong> The system keeps explicit liabilities, and it never infers issuance from an escrow balance.</p>
-<p><em>How the design holds it (once built):</em> The watcher party keeps MetaLeX's accounting over locks, wrapper supply and returns (§10).</p>
+<p><em>How the design holds it (once built):</em> The watcher party keeps MetaLeX's accounting over locks, wrapped-scrip supply and returns (§10).</p>
 <p><em>MetaLeX's plan, §2, "Execute and reconcile the full round trip":</em> "Maintain liabilities rather than inferring issuance from an escrow balance."</p>
 </div>
 </details>
@@ -393,7 +393,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </div>
 <div class="req">
 <p><a id="invariants--I-29"></a><strong>I-29.</strong> A wrong field, proof or finality check makes the message refuse without changing any balance.</p>
-<p><em>How the design holds it (once built):</em> The party custodian refuses a mint or return whose record does not match a lock or a wrapper payment (§5.4, §10).</p>
+<p><em>How the design holds it (once built):</em> The party custodian refuses a mint or return whose record does not match a lock or a wrapped-scrip payment (§5.4, §10).</p>
 <p><em>MetaLeX's plan, §2, "Execute and reconcile the full round trip":</em> "refuses without balance change"</p>
 </div>
 <div class="req">
@@ -577,13 +577,13 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><em>MetaLeX's plan, §3, "P2 recovery is operational; P3 adds enforceable departure":</em> "importer completeness and economic checks must precede activation"</p>
 </div>
 <div class="req">
-<p><a id="invariants--I-62"></a><strong>I-62.</strong> Every outstanding wrapper and every pending message gets one disposition, including a late burn.</p>
-<p><em>How the design holds it (once built):</em> Each wrapper note, pending lock or return, and channel balance gets one disposition in the successor's state (§5.5).</p>
+<p><a id="invariants--I-62"></a><strong>I-62.</strong> Every outstanding wrapped scrip and every pending message gets one disposition, including a late burn.</p>
+<p><em>How the design holds it (once built):</em> Each wrapped-scrip note, pending lock or return, and channel balance gets one disposition in the successor's state (§5.5).</p>
 <p><em>MetaLeX's plan, §3, "P2 recovery is operational; P3 adds enforceable departure":</em> "Outstanding wrappers and every pending message need one disposition, including late burns."</p>
 </div>
 <div class="req">
 <p><a id="invariants--I-63"></a><strong>I-63.</strong> The system does not release old collateral while it also creates successor backing.</p>
-<p><em>How the design holds it (once built):</em> The successor backs the outstanding wrapper notes. The old RootChain is Retired and unlocks nothing (§5.5, §10).</p>
+<p><em>How the design holds it (once built):</em> The successor backs the outstanding wrapped-scrip notes. The old RootChain is Retired and unlocks nothing (§5.5, §10).</p>
 <p><em>MetaLeX's plan, §3, "P2 recovery is operational; P3 adds enforceable departure":</em> "Old collateral cannot be released while successor backing is also created."</p>
 </div>
 <div class="req">
@@ -767,10 +767,10 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><a id="invariants--R-23"></a><strong>R-23.</strong> A zkEVM is not required for a reasonable level of safety, so it is out of scope. (§11)</p>
 </div>
 <div class="req">
-<p><a id="invariants--R-28"></a><strong>R-28.</strong> A conservation proof, verified off chain, shows conservation of the wrapper without the zkEVM. (§11)</p>
+<p><a id="invariants--R-28"></a><strong>R-28.</strong> A conservation proof, verified off chain, shows conservation of wrapped scrip without the zkEVM. (§11)</p>
 </div>
 <div class="req">
-<p><a id="invariants--R-44"></a><strong>R-44.</strong> Third parties verify the conservation proof independently, with a tool that reads a root and the wrapper's supply from L1. (§11)</p>
+<p><a id="invariants--R-44"></a><strong>R-44.</strong> Third parties verify the conservation proof independently, with a tool that reads a root and the issuer wrapper's supply from L1. (§11)</p>
 </div>
 </details>
 <h3 id="invariants--departure"><a class="section-link" href="#invariants--departure">Departure</a></h3>
@@ -811,7 +811,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <li><strong>MetaLeX hub:</strong> an armada-nitro hub that routes payments and runs watchtowers for website users (§9). It is an entity distinct from MetaLeX. As MetaLeX core, it is a watcher member of every party.</li>
 <li><strong>MetaLeX:</strong> the company. It receives the platform fee through <code>getPlatformPayable()</code>. It is a named plaintext audience, through the MetaLeX hub.</li>
 <li><strong>Recovery operator:</strong> the independent watcher member that <code>mlx</code> names (§4.1).</li>
-<li><strong>Wrapper holder:</strong> a holder of the issuer's wrapper, as notes or unshielded (§10).</li>
+<li><strong>Holder of wrapped scrip:</strong> a holder of the issuer's wrapper, as notes or unshielded (§10).</li>
 </ul>
 </section>
 <section class="report-section"><div class="section-index">Guarantees · 02</div><h2 id="guarantees--2-what-each-party-can-check"><a class="section-link" href="#guarantees--2-what-each-party-can-check">2. What each party can check</a></h2>
@@ -860,14 +860,14 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <td>The payout record names the channel state that paid it, and its note is in the Armada pool (§9.2)</td>
 </tr>
 <tr>
-<td>Wrapper holder</td>
-<td>That its wrapper was minted against a lock</td>
+<td>Holder of wrapped scrip</td>
+<td>That its wrapped scrip was minted against a lock</td>
 <td>The watcher party's signed mint record and the lock in a hard-final root (§10)</td>
 </tr>
 <tr>
 <td>Anyone</td>
 <td>That the wrapper is conserved at each root</td>
-<td>The verifier tool checks the conservation proof against the root and the wrapper's supply on L1 (§11)</td>
+<td>The verifier tool checks the conservation proof against the root and the issuer wrapper's supply on L1 (§11)</td>
 </tr>
 </tbody>
 </table></div>
@@ -884,7 +884,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <ul>
 <li><strong>The other watcher members acting together,</strong> for correct state transitions and payments without the issuer's share, because t = 2. If that trust fails, the issuer detects the change, and the signed root is evidence against the operators (§11). The issuer also holds the full state as evidence.</li>
 </ul>
-<h3 id="guarantees--wrapper-holder"><a class="section-link" href="#guarantees--wrapper-holder">Wrapper holder</a></h3>
+<h3 id="guarantees--holder-of-wrapped-scrip"><a class="section-link" href="#guarantees--holder-of-wrapped-scrip">Holder of wrapped scrip</a></h3>
 <ul>
 <li><strong>The watcher party,</strong> for three duties: each mint reflects locked scrip, each lock is wrapped, and each return is unlocked. A mint with no lock fails the conservation proof publicly. The signed lock, mint and return records are evidence against the operators (§11). With the zkEVM, L1 would enforce correct mints instead.</li>
 </ul>
@@ -896,7 +896,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <section class="report-section"><div class="section-index">Guarantees · 04</div><h2 id="guarantees--4-failures"><a class="section-link" href="#guarantees--4-failures">4. Failures</a></h2>
 <p>Each subsection is one failure. Parties that the failure does not affect are listed last.</p>
 <h3 id="guarantees--the-issuer-stops"><a class="section-link" href="#guarantees--the-issuer-stops">The issuer stops</a></h3>
-<p>MetaLeX core and the recovery operator continue the RootChain. Holders, the MetaLeX hub and wrapper holders are not affected.</p>
+<p>MetaLeX core and the recovery operator continue the RootChain. Holders, the MetaLeX hub and holders of wrapped scrip are not affected.</p>
 <h3 id="guarantees--the-recovery-operator-stops"><a class="section-link" href="#guarantees--the-recovery-operator-stops">The recovery operator stops</a></h3>
 <p>MetaLeX core and the issuer continue the RootChain. No other party is affected.</p>
 <h3 id="guarantees--the-metalex-hub-stops"><a class="section-link" href="#guarantees--the-metalex-hub-stops">The MetaLeX hub stops</a></h3>
@@ -904,7 +904,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <li><strong>The RootChain:</strong> the issuer and the recovery operator continue it. So it advances only while the issuer's watcher member is up.</li>
 <li><strong>Holders:</strong> they route through an issuer's hub, or use a channel with the watcher party directly. Website users lose the default watchtower. The recovery operator's watchtower continues, if it runs one.</li>
 <li><strong>The issuer:</strong> it is paid out through its own hub or a direct channel.</li>
-<li><strong>Not affected:</strong> wrapper holders.</li>
+<li><strong>Not affected:</strong> holders of wrapped scrip.</li>
 </ul>
 <h3 id="guarantees--metalex-the-company-stops"><a class="section-link" href="#guarantees--metalex-the-company-stops">MetaLeX, the company, stops</a></h3>
 <p>No party is affected, because the MetaLeX hub is a separate entity.</p>
@@ -913,23 +913,23 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <li><strong>Holders:</strong> no new roots and no payments out. Each holder can prove what it held at the last root (§8.3). Value in channels exits by ForceMove. Balances stay in the issuer state.</li>
 <li><strong>The issuer:</strong> no new roots and no payments out. The issuer holds the full state.</li>
 <li><strong>The MetaLeX hub:</strong> its routes to that watcher party stop.</li>
-<li><strong>Wrapper holders:</strong> no new mints or unlocks. Existing wrapper notes are not affected.</li>
+<li><strong>Holders of wrapped scrip:</strong> no new mints or unlocks. Existing wrapped-scrip notes are not affected.</li>
 </ul>
 <h3 id="guarantees--the-issuer-the-metalex-hub-and-the-recovery-operator-all-stop"><a class="section-link" href="#guarantees--the-issuer-the-metalex-hub-and-the-recovery-operator-all-stop">The issuer, the MetaLeX hub and the recovery operator all stop</a></h3>
 <ul>
 <li><strong>Holders:</strong> they use self-help. Each holder proves its records from its own store and the archived blobs, against the last root (§8.3). Value in channels exits by ForceMove.</li>
-<li><strong>Wrapper holders:</strong> no new mints or unlocks. Existing wrapper notes are not affected.</li>
+<li><strong>Holders of wrapped scrip:</strong> no new mints or unlocks. Existing wrapped-scrip notes are not affected.</li>
 </ul>
 <h3 id="guarantees--the-sequencer-refuses-a-write"><a class="section-link" href="#guarantees--the-sequencer-refuses-a-write">The sequencer refuses a write</a></h3>
 <p>The payer gets no asset and has no remedy on L1. Its signed request and the refusal are its evidence to MetaLeX (§8.5). No other party is affected.</p>
 <h3 id="guarantees--a-lock-is-never-wrapped-or-a-return-is-never-unlocked"><a class="section-link" href="#guarantees--a-lock-is-never-wrapped-or-a-return-is-never-unlocked">A lock is never wrapped, or a return is never unlocked</a></h3>
-<p>The wrapper holder has no remedy on L1. The signed lock and return records are its evidence (§5.4). No other party is affected.</p>
+<p>The holder of wrapped scrip has no remedy on L1. The signed lock and return records are its evidence (§5.4). No other party is affected.</p>
 <h3 id="guarantees--t-watcher-members-sign-a-root-that-misaccounts"><a class="section-link" href="#guarantees--t-watcher-members-sign-a-root-that-misaccounts">t watcher members sign a root that misaccounts</a></h3>
 <p>This is possible only because the zkEVM is out of scope (§11).</p>
 <ul>
 <li><strong>Holders:</strong> each holder detects it, and holds the signed root and its earlier proofs as evidence. A channel balance with no co-signed state behind it is visible to every watcher member, because each batch records the states it applies.</li>
 <li><strong>The issuer:</strong> if it did not sign, it holds the full state as evidence.</li>
-<li><strong>Wrapper holders:</strong> a wrapper mint with no locked scrip fails the conservation proof.</li>
+<li><strong>Holders of wrapped scrip:</strong> a wrapped-scrip mint with no locked scrip fails the conservation proof.</li>
 <li><strong>Not affected:</strong> the MetaLeX hub, which only routes payments.</li>
 </ul>
 <h3 id="guarantees--the-party-key-signs-two-successors-of-one-root"><a class="section-link" href="#guarantees--the-party-key-signs-two-successors-of-one-root">The party key signs two successors of one root</a></h3>
@@ -974,7 +974,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <ul>
 <li><strong>Issuer state:</strong> One EVM state per issuer: its Cybercorps companies, its channel-balance contract and its payout records (§3).</li>
 <li><strong>Watcher party:</strong> An entity: the threshold signer that runs one issuer state and anchors it to L1. Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).</li>
-<li><strong>Party custodian:</strong> The watcher party's <code>HubCustodian</code>, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key (§4.1).</li>
+<li><strong>Party custodian:</strong> The watcher party's <code>HubCustodian</code>, a smart wallet. It signs the watcher party's channel states and wrapped-scrip mints with the FROST party key (§4.1).</li>
 <li><strong>Party RPC:</strong> The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).</li>
 <li><strong>Channel-balance contract:</strong> A system contract in the issuer state with an ERC20 interface. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not yet withdrawn (§9.2).</li>
 <li><strong>Party bond:</strong> One armada-nitro channel per watcher party (§4.4).</li>
@@ -982,7 +982,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Run by MetaLeX, or by anyone</strong></p>
 <ul>
 <li><strong>MetaLeX hub:</strong> An armada-nitro hub, and an entity distinct from MetaLeX, the company. As MetaLeX core it is a watcher member of every party. MetaLeX is a plaintext audience through it. It routes payments, runs watchtowers for website users, and supplies user IDs to each issuer state (§8.1, §9).</li>
-<li><strong>Verifier tool:</strong> A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them (§11).</li>
+<li><strong>Verifier tool:</strong> A tool that reads a root and the issuer wrapper's supply from L1, and checks the conservation proof against them (§11).</li>
 </ul>
 </section>
 <section class="report-section"><div class="section-index">System design · 03</div><h2 id="system-design--3-issuer-state"><a class="section-link" href="#system-design--3-issuer-state">3. Issuer state</a></h2>
@@ -1105,7 +1105,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 </tbody>
 </table></div>
-<p>Only a hard-final batch affects anything outside the issuer state. Such effects are a payment out of a withdrawal, a wrapper mint, a departure, or a proof given to a holder as final.</p>
+<p>Only a hard-final batch affects anything outside the issuer state. Such effects are a payment out of a withdrawal, a wrapped-scrip mint, a departure, or a proof given to a holder as final.</p>
 <h3 id="system-design--52-rootchain"><a class="section-link" href="#system-design--52-rootchain">5.2 RootChain</a></h3>
 <div class="table-hint"><span>Table 07</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 07" tabindex="0"><table>
 <thead>
@@ -1178,12 +1178,12 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td>Wrapped</td>
-<td>The party custodian mints the same amount of wrapper and shields it as a note to the named key</td>
+<td>The party custodian mints the same amount of wrapped scrip and shields it as a note to the named key</td>
 <td>The lock's batch is hard-final, and the lock is not yet wrapped</td>
 </tr>
 <tr>
 <td>Returned</td>
-<td>The holder pays wrapper back to the party custodian, which burns it</td>
+<td>The holder pays wrapped scrip back to the party custodian, which burns it</td>
 <td>The token is the issuer's wrapper</td>
 </tr>
 <tr>
@@ -1256,7 +1256,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 </tbody>
 </table></div>
-<p>No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapper note, pending lock or return, and channel balance gets one disposition in the successor's state.</p>
+<p>No import happens on L1. The successor's watcher party receives the full state from the old watcher members, the MetaLeX hub included. Each holder proves its own records to the successor from its own store, against the final root. Every wrapped-scrip note, pending lock or return, and channel balance gets one disposition in the successor's state.</p>
 </section>
 <section class="report-section"><div class="section-index">System design · 06</div><h2 id="system-design--6-rootchain-rules"><a class="section-link" href="#system-design--6-rootchain-rules">6. RootChain rules</a></h2>
 <h3 id="system-design--61-root-acceptance"><a class="section-link" href="#system-design--61-root-acceptance">6.1 Root acceptance</a></h3>
@@ -1424,20 +1424,20 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </ol>
 </section>
 <section class="report-section"><div class="section-index">System design · 10</div><h2 id="system-design--10-scrip-as-armada-nitro-notes"><a class="section-link" href="#system-design--10-scrip-as-armada-nitro-notes">10. Scrip as armada-nitro notes</a></h2>
-<p>Scrip leaves the issuer state the way USDC enters it, in the opposite direction. Outside the issuer state it is a note of the issuer's wrapper, and it trades like any armada-nitro asset.</p>
+<p>Scrip leaves the issuer state the way USDC enters it, in the opposite direction. Outside the issuer state it is wrapped scrip, held as notes, and it trades like any armada-nitro asset.</p>
 <p><strong>Out.</strong>
 1. The holder locks canonical scrip in the issuer state and names its note key. The scrip is locked, not burned, because its ratio cannot change while canonical supply is above zero. The entry guard applies (§5.4).
-2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapper and shields it as a note to the named key. The Armada pool accepts it, because the pool shields any ERC20 that is not on its blocklist.</p>
+2. Once the lock's batch is hard-final, the party custodian mints the same amount of wrapped scrip. It shields it as a note to the named key. The Armada pool accepts it, because the pool shields any ERC20 that is not on its blocklist.</p>
 <p><strong>In.</strong>
-1. The holder pays wrapper back to the party custodian, which burns it.
+1. The holder pays wrapped scrip back to the party custodian, which burns it.
 2. The watcher party unlocks the scrip to the holder in the issuer state.</p>
 <p><strong>In channels.</strong> A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (<code>nitro</code> <code>src/ArmadaNitroAdjudicator.sol:44</code>). The list screens out tokens whose balances change other than by transfer (<code>p15</code> I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (<code>adr</code> ADR-0021 D21.2). A hub names the wrapper factory, so its channels accept every issuer's wrapper. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapper factory must therefore exist before the adjudicator that names it is deployed.</p>
-<p><strong>Accounting.</strong> <code>mlx</code>'s identities apply unchanged: locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry <code>BridgeMessageV1</code>'s bindings (§5.4).</p>
-<p><strong>Transfer policy.</strong> A wrapper note can be unshielded like any note. The wrapper then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapper to scrip does not inherit recertification eligibility.</p>
+<p><strong>Accounting.</strong> <code>mlx</code>'s identities apply unchanged: locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry <code>BridgeMessageV1</code>'s bindings (§5.4).</p>
+<p><strong>Transfer policy.</strong> A wrapped-scrip note can be unshielded like any note. The wrapped scrip then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapped scrip to scrip does not inherit recertification eligibility.</p>
 </section>
 <section class="report-section"><div class="section-index">System design · 11</div><h2 id="system-design--11-trust-without-the-zkevm"><a class="section-link" href="#system-design--11-trust-without-the-zkevm">11. Trust without the zkEVM</a></h2>
 <p><strong>Scope.</strong> A zkEVM is not required for a reasonable level of safety, so it is out of scope. The RootChain therefore accepts each root on the party signature alone (§6.1).</p>
-<p><strong>Every signed act is a binding commitment.</strong> The watcher party signs the roots, the channel states and the wrapper mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.</p>
+<p><strong>Every signed act is a binding commitment.</strong> The watcher party signs the roots, the channel states and the wrapped-scrip mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.</p>
 <p><strong>What holds without the zkEVM:</strong></p>
 <div class="table-hint"><span>Table 15</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 15" tabindex="0"><table>
 <thead>
@@ -1473,7 +1473,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 </tbody>
 </table></div>
-<p><strong>Conservation proof.</strong> For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. It covers the wrapper only. The USDC needs no such proof, because it never leaves armada-nitro, and armada-nitro conserves it (§9.2). The proof's public input is on L1, and it reveals only totals:</p>
+<p><strong>Conservation proof.</strong> For each hard-final root, the watcher party publishes a zero-knowledge proof that anyone can verify off chain. It covers wrapped scrip only. The USDC needs no such proof, because it never leaves armada-nitro, and armada-nitro conserves it (§9.2). The proof's public input is on L1, and it reveals only totals:</p>
 <div class="table-hint"><span>Table 16</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 16" tabindex="0"><table>
 <thead>
 <tr>
@@ -1485,12 +1485,12 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <tbody>
 <tr>
 <td>Scrip</td>
-<td>Locked scrip K equals wrapper supply Q plus locks awaiting mint O plus returns awaiting unlock R</td>
+<td>Locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R</td>
 <td>The wrapper's <code>totalSupply()</code></td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Verifier tool.</strong> Any third party can check the proof itself. The tool reads the root from the aggregator and the wrapper's <code>totalSupply()</code> from L1, then verifies the proof against them.</p>
+<p><strong>Verifier tool.</strong> Any third party can check the proof itself. The tool reads the root from the aggregator and the issuer wrapper's <code>totalSupply()</code> from L1, then verifies the proof against them.</p>
 <p>The proof shows the state at a root, not the transition that produced it. Its construction is an implementation question.</p>
 <p><strong>What t colluding watcher members can do,</strong> for example the issuer and MetaLeX: sign a root that misaccounts. L1 does not reject it. Each such root is signed evidence against them:</p>
 <div class="table-hint"><span>Table 17</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 17" tabindex="0"><table>
@@ -1510,13 +1510,13 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <td>The holder's co-signed states, its inclusion proofs and the signed roots. The batch records the hash of every state it applies, so a credit with no state behind it is visible to every watcher member.</td>
 </tr>
 <tr>
-<td>Wrapper is minted with no locked scrip, or a hook added after a lock blocks the unlock</td>
+<td>Wrapped scrip is minted with no locked scrip, or a hook added after a lock blocks the unlock</td>
 <td>The signed lock, mint and return records. A mint with no lock also fails the conservation proof.</td>
 </tr>
 </tbody>
 </table></div>
 <p>Misaccounting is limited to one issuer. It moves no value held in armada-nitro channels and notes.</p>
-<p><strong>What the zkEVM adds: conservation enforced on L1.</strong> With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation of the wrapper on L1 still rests on the conservation proof. <code>zos</code> shows the technique: a REVM state transition proven with ZisK.</p>
+<p><strong>What the zkEVM adds: conservation enforced on L1.</strong> With the zkEVM, each root carries a validity proof. The proof shows that the root follows from the previous root under the Cybercorps contracts. L1 then rejects a root that moves a holder's assets without the holder's transaction. Conservation of wrapped scrip on L1 still rests on the conservation proof. <code>zos</code> shows the technique: a REVM state transition proven with ZisK.</p>
 <p><strong>If the zkEVM is added later:</strong>
 - <strong>Proof system.</strong> Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option.
 - <strong>Same EVM.</strong> The prover must prove the same EVM semantics that the harness runs. <code>zos</code> proves REVM, a different implementation from the nimbus EVM. Equivalence of the two is a condition of that migration.
@@ -1566,7 +1566,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <tr>
 <td>t watcher members sign a misaccounting root</td>
 <td>None on L1</td>
-<td>Holders detect it (§8.2), the conservation proof fails if the wrapper's supply is broken, and the signed root is evidence against the operators (§11)</td>
+<td>Holders detect it (§8.2), the conservation proof fails if the issuer wrapper's supply is broken, and the signed root is evidence against the operators (§11)</td>
 </tr>
 <tr>
 <td>The party key signs two successors of one root</td>
@@ -1640,7 +1640,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td>L1 settlement</td>
-<td>One blob transaction per day, which also calls the aggregator. More blob transactions only on a day whose data exceeds one transaction's blob limit. Channel and wrapper transactions as users make them.</td>
+<td>One blob transaction per day, which also calls the aggregator. More blob transactions only on a day whose data exceeds one transaction's blob limit. Channel and wrapped-scrip transactions as users make them.</td>
 </tr>
 <tr>
 <td>Blob data</td>
@@ -2311,7 +2311,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><strong>Watcher party</strong></td>
-<td>An entity: the threshold signer for one issuer. It runs the issuer state and anchors it to L1 through the issuer's RootChain. Through its custodian, it is an armada-nitro participant and the minter of the issuer's wrapper. One per issuer.</td>
+<td>An entity: the threshold signer for one issuer. It runs the issuer state and anchors it to L1 through the issuer's RootChain. Through its custodian, it is an armada-nitro participant and the minter of the issuer's wrapped scrip. One per issuer.</td>
 </tr>
 <tr>
 <td><strong>Watcher member</strong></td>
@@ -2371,7 +2371,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><strong>Party custodian</strong></td>
-<td>The watcher party's <code>HubCustodian</code>, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key.</td>
+<td>The watcher party's <code>HubCustodian</code>, a smart wallet. It signs the watcher party's channel states and wrapped-scrip mints with the FROST party key.</td>
 </tr>
 <tr>
 <td><strong>Channel-balance contract</strong></td>
@@ -2379,7 +2379,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><strong>Verifier tool</strong></td>
-<td>A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them</td>
+<td>A tool that reads a root and the issuer wrapper's supply from L1, and checks the conservation proof against them</td>
 </tr>
 <tr>
 <td><strong>Checkpoint</strong></td>
@@ -2403,19 +2403,23 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><strong>Scrip lock</strong></td>
-<td>Canonical scrip locked in the issuer state against wrapper notes outside it. States: Locked, Wrapped, Returned, Unlocked.</td>
+<td>Canonical scrip locked in the issuer state against wrapped-scrip notes outside it. States: Locked, Wrapped, Returned, Unlocked.</td>
+</tr>
+<tr>
+<td><strong>Wrapped scrip</strong></td>
+<td>An issuer's scrip as an ERC20 on L1, backed one for one by scrip locked in the issuer state. It is held as notes in the Armada pool, or unshielded. MetaLeX's plan calls it the "public wrapper". Under MetaLeX-form bylaws, scrip is not stock and represents neither equity nor debt.</td>
 </tr>
 <tr>
 <td><strong>Issuer wrapper</strong></td>
-<td>An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool.</td>
+<td>The ERC20 contract of an issuer's wrapped scrip, one per issuer. Its only minter is the party custodian.</td>
 </tr>
 <tr>
 <td><strong>Wrapper factory</strong></td>
-<td>The L1 factory that deploys each issuer's wrapper. A hub may name it in its asset list.</td>
+<td>The L1 factory that deploys each issuer wrapper. A hub may name it in its asset list.</td>
 </tr>
 <tr>
 <td><strong>Conservation proof</strong></td>
-<td>An off-chain zero-knowledge proof for each hard-final root: locked scrip equals wrapper supply plus pending locks and returns. The USDC needs no such proof, because it never leaves armada-nitro.</td>
+<td>An off-chain zero-knowledge proof for each hard-final root: locked scrip equals wrapped-scrip supply plus pending locks and returns. The USDC needs no such proof, because it never leaves armada-nitro.</td>
 </tr>
 <tr>
 <td><strong>Entry guard</strong></td>
@@ -2585,7 +2589,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <tr>
 <td><strong>bridge</strong></td>
 <td>The go-nitro mirrored L1↔L2 bridge. Armada's cross-chain swap design. A rollup's canonical bridge. <code>mlx</code> §2's scrip bridge to a public chain.</td>
-<td>Not used. Value moves through the watcher party's channels, and scrip leaves as wrapper notes.</td>
+<td>Not used. Value moves through the watcher party's channels, and scrip leaves as wrapped-scrip notes.</td>
 </tr>
 <tr>
 <td><strong>L2, rollup, chain, instance</strong></td>

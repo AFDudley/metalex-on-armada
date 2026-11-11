@@ -20,7 +20,7 @@ Money does not live in the private state. It stays on Ethereum in armada-nitro, 
 - **Recovery without MetaLeX.** The recovery operator and the issuer hold the full state, and either can continue with the other. No promotion step and no MetaLeX signature is needed.[^recovery]
 - **Verified self-help for holders.** Each holder can recover its own records and check them cryptographically against the roots on Ethereum, with no operator involved. It needs only its own stored records and the public blob data.[^selfhelp]
 - **Safe money.** No operator can take a user's funds. A user can always exit a channel on Ethereum with its latest signed state.[^value]
-- **Scrip on Ethereum.** A holder can lock scrip and receive notes of the issuer's wrapper token on Ethereum, one for one. MetaLeX's bridge accounting holds unchanged, and every lock, mint and return is a signed record.[^scrip][^bridge]
+- **Wrapped scrip on Ethereum.** A holder can lock scrip in the issuer state and receive the same amount of wrapped scrip on Ethereum, as notes. MetaLeX's bridge accounting holds unchanged, and every lock, mint and return is a signed record.[^scrip][^bridge]
 - **The issuer's own records.** The issuer is one of the operators. So it holds its full state and history, and it can export them without anyone's permission.[^records]
 - **Departure.** An issuer can leave for a new set of operators. Its holders prove their records to the new operators.[^departure]
 - **Any interface.** MetaLeX's web app needs no new transport. Any other interface gets the same standard endpoint, with the same scope and checks.[^parity]
@@ -31,7 +31,7 @@ Prividium proves every batch with a zkEVM on GPU hardware. This proposal does no
 
 - every root is a signed commitment that the operators cannot deny;
 - each holder checks its own records against every root;
-- a published conservation proof shows that no wrapper token exists without locked scrip behind it. Anyone can check it.
+- a published conservation proof shows that no wrapped scrip exists without locked scrip behind it. Anyone can check it.
 
 So a dishonest majority of operators could sign a wrong root, and Ethereum would accept it. But every holder would detect the change, and the signed root is evidence against those operators. Prividium's zkEVM would reject such a root. A zkEVM can be added later if MetaLeX wants that protection.[^trust]
 
@@ -74,11 +74,11 @@ On the same basis as MetaLeX's own cost tables, this design costs about $4,400 p
 
 [^records]: **Issuer records, [I-52 to I-58](invariants.md#I-52).** The issuer holds its full state, logs and history. Completeness without the zkEVM is labeled attested, and no hash of guessable personal data is published. System design §3, §4.3, §7.
 
-[^departure]: **Departure, [I-59 to I-64](invariants.md#I-59).** An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapper note and channel balance gets one disposition in the new state. Also [R-39](invariants.md#R-39). System design §5.5.
+[^departure]: **Departure, [I-59 to I-64](invariants.md#I-59).** An on-chain registry records the old state's final root and its successor, and the old RootChain then accepts no roots. Each wrapped-scrip note and channel balance gets one disposition in the new state. Also [R-39](invariants.md#R-39). System design §5.5.
 
 [^parity]: **Interface parity, [I-65](invariants.md#I-65).** The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.
 
-[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the wrapper's supply. System design §11.
+[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the issuer wrapper's supply. System design §11.
 
 [^data]: **Publishing, [R-8](invariants.md#R-8), [R-17](invariants.md#R-17), [R-18](invariants.md#R-18) and [R-43](invariants.md#R-43).** Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §13.
 
