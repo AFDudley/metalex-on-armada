@@ -105,7 +105,7 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 |---|---|
 | Position | `H(positionSalt ‖ address ‖ slot)`. The position salt is fixed per slot. |
 | Leaf | `H(value ‖ salt)`, with a fresh random salt each time the value changes |
-| Hash | Pluggable per deployment. Default SHA-256 (§14). |
+| Hash | Pluggable per deployment. Default SHA-256 (§13). |
 
 **Events.** Besides the state root, each batch commits to `eventsRoot`: every log of the batch, in order. It is the same commitment as Ethereum's `receiptsRoot` and Starknet's `event_commitment`. Holders read their history from it (§8).
 
@@ -350,7 +350,7 @@ The Cybercorps contracts pull, hold and pay an ERC20 in the same EVM (`cc` `src/
 
 ### 9.3 Routed payments through the MetaLeX hub
 
-Value moves between channels as one Nitro payment routed through the MetaLeX hub's channels. Nitro's guarantees and reclaim make the move atomic across the hops, and ForceMove accepts or rejects whole states (`adr` ADR-0021 D21.1). armada-nitro settles a reclaim in `_settleReclaimExit` (`src/ArmadaNitroAdjudicator.sol:192`); that code is being rewritten (§13). The hub routes the payment and advances no value. No hash lock is used, and no party has value in flight.
+Value moves between channels as one Nitro payment routed through the MetaLeX hub's channels. Nitro's guarantees and reclaim make the move atomic across the hops, and ForceMove accepts or rejects whole states (`adr` ADR-0021 D21.1). The hub routes the payment and advances no value. No hash lock is used, and no party has value in flight.
 
 A user that does not want the MetaLeX hub uses an issuer's hub, or a channel with the watcher party directly.
 
@@ -440,33 +440,16 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 | t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if the wrapper's supply is broken, and the signed root is evidence against the operators (§11) |
 | The party key signs two successors of one root | None in RootChain | The RootChain accepts one successor per root. The party bond is slashed (§4.4). |
 
-## 13. Dependencies
+## 13. Hash function choice and cost
 
-| Need | Status |
-|---|---|
-| `HubCustodian` signing channel states with the party key, with no hot delegate | A change to armada-nitro. Not built. |
-| armada-nitro channels, `ConsensusApp`, guarantees and reclaim, checkpoints, `HubCustodian` | In code. The current adjudicator code has known defects, and Armada is rewriting it from its Lean model. |
-| A hub's asset list naming the wrapper factory (`adr` ADR-0021 D21.2) | A change to armada-nitro's asset list. Not built. The wrapper factory must be deployed first. |
-| Hub role, channels over Waku, watchtower | On Armada's plan. Next. |
-| Wrapper factory and issuer wrapper ERC20 | New. Not built. |
-| Issuer RootChain, daily aggregator and IssuerEpochRegistry | New. Not built. |
-| Watcher-party harness: nimbus EVM, JMT, packed blobs, party RPC, channel-balance contract, Nitro p2p client, payout records | New. Not built. |
-| nimbus in a browser | The WASM build of the verified proxy compiles, but stalls at its first `sync()` call; the cause is not known (`adr` ADR-0009 D9.2). The browser verifier depends on the fix. On Armada's plan. |
-| Conservation proof | New. Construction not chosen. |
-| Verifier tool | New. Not built. |
-| Federation and party DKG: one FROST key per watcher party | On Armada's plan. Later. |
-| Registry and bond, fault verifier | On Armada's plan. Later. |
-
-## 14. Hash function choice and cost
-
-### 14.1 The hash is a deployment parameter
+### 13.1 The hash is a deployment parameter
 
 - `lib/` builds the state tree and the events tree over a hash parameter. The harness and the WASM holder verifier use the same code. `lib/` is Armada's own Nim implementation of the JMT, so it takes the hash as a parameter.
 - The choice is fixed per deployment. The hash identities are part of `chainConfigHash`, so each accepted root states its hashes.
 - Changing the hash of a live RootChain means a new RootChain, through the departure of §5.5.
 - L1 verifies no tree proof. A departure imports off L1 (§5.5).
 
-### 14.2 Measured cost
+### 13.2 Measured cost
 
 Measured on 2026-11-09:
 
@@ -486,7 +469,7 @@ SHA-256 is 2.7 to 3.9 times faster off chain. Through WebCrypto, SHA-256 measure
 
 The EVM computes keccak for the `KECCAK256` opcode and for every mapping slot key. That cost is the same for every tree hash.
 
-### 14.3 Operating costs
+### 13.3 Operating costs
 
 `cost-comparison.md` prices these lines against MetaLeX's Prividium plan.
 

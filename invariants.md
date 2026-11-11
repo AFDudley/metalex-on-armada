@@ -151,7 +151,7 @@ These are the design requirements that Armada sets for the system. Each is writt
 | <a id="R-5"></a>R-5 | Value moves into and out of an issuer state only through armada-nitro. | §9 |
 | <a id="R-6"></a>R-6 | The MetaLeX hub is a watcher member of every party, and the system's liveness never depends on it. Any t watcher members continue the RootChain and the pay-outs without it. | §4.1 |
 | <a id="R-7"></a>R-7 | ZisK stays a candidate zkVM. | §11 |
-| <a id="R-8"></a>R-8 | The tree hash is pluggable, and the documents state why each hash is better or worse. | §14 |
+| <a id="R-8"></a>R-8 | The tree hash is pluggable, and the documents state why each hash is better or worse. | §13 |
 | <a id="R-9"></a>R-9 | Blinded blob data on L1 lets holders use self-help without any watcher member. Plaintext availability rests on t watcher members. | §4.2, §7 |
 | <a id="R-10"></a>R-10 | Each batch commits to an events root. | §3, §8 |
 | <a id="R-11"></a>R-11 | No party other than an asset holder can start an action against that holder's assets. | §1 |

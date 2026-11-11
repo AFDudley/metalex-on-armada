@@ -69,8 +69,8 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </style></head>
 <body id="top">
 <header class="topbar"><a class="brand" href="#index" aria-label="Overview"><span class="wordmark">Armada × MetaLeX</span></a><span class="top-caption">Overview</span><div class="top-actions"><button class="button print-button" type="button">Print ↗</button><button class="button menu-button" type="button" aria-expanded="false" aria-controls="report-navigation">Contents ☰</button></div><div class="progress" aria-hidden="true"></div></header>
-<header class="cover"><div class="eyebrow">MetaLeX on Armada · Draft for review · November 2026</div><h1>MetaLeX on Armada</h1><p class="cover-subtitle">Summary · System design · Guarantees · Cost · Requirements</p><div class="cover-meta"><div><b>Status</b>Draft for review. Not built.</div><div><b>Reading map</b>7 documents / 48 tables / 4 figures</div><a class="cover-jump" href="#summary">Read the summary ↓</a></div></header>
-<div class="layout"><aside class="sidebar" id="report-navigation" aria-label="Contents"><div class="toc-title">Documents</div><nav class="toc"><a href="#index" data-doc="index"><span>00</span>Overview</a><a href="#summary" data-doc="summary"><span>01</span>Summary</a><a class="sub" href="#summary--the-proposal" data-doc="summary"><span>↳</span>The proposal</a><a class="sub" href="#summary--what-metalex-and-its-users-get" data-doc="summary"><span>↳</span>What MetaLeX and its users get</a><a class="sub" href="#summary--how-it-differs-from-prividium" data-doc="summary"><span>↳</span>How it differs from Prividium</a><a class="sub" href="#summary--what-it-costs" data-doc="summary"><span>↳</span>What it costs</a><a class="sub" href="#summary--what-metalex-must-trust" data-doc="summary"><span>↳</span>What MetaLeX must trust</a><a class="sub" href="#summary--what-metalex-must-decide" data-doc="summary"><span>↳</span>What MetaLeX must decide</a><a class="sub" href="#summary--notes" data-doc="summary"><span>↳</span>Notes</a><a href="#system-design" data-doc="system-design"><span>02</span>System design</a><a class="sub" href="#system-design--1-requirements" data-doc="system-design"><span>↳</span>1. Requirements</a><a class="sub" href="#system-design--2-architecture" data-doc="system-design"><span>↳</span>2. Architecture</a><a class="sub" href="#system-design--3-issuer-state" data-doc="system-design"><span>↳</span>3. Issuer state</a><a class="sub" href="#system-design--4-watcher-parties" data-doc="system-design"><span>↳</span>4. Watcher parties</a><a class="sub" href="#system-design--5-state-machines" data-doc="system-design"><span>↳</span>5. State machines</a><a class="sub" href="#system-design--6-rootchain-rules" data-doc="system-design"><span>↳</span>6. RootChain rules</a><a class="sub" href="#system-design--7-blob-data-blinded-not-encrypted" data-doc="system-design"><span>↳</span>7. Blob data: blinded, not encrypted</a><a class="sub" href="#system-design--8-holders" data-doc="system-design"><span>↳</span>8. Holders</a><a class="sub" href="#system-design--9-value" data-doc="system-design"><span>↳</span>9. Value</a><a class="sub" href="#system-design--10-scrip-as-armada-nitro-notes" data-doc="system-design"><span>↳</span>10. Scrip as armada-nitro notes</a><a class="sub" href="#system-design--11-trust-without-the-zkevm" data-doc="system-design"><span>↳</span>11. Trust without the zkEVM</a><a class="sub" href="#system-design--12-failures-as-state-transitions" data-doc="system-design"><span>↳</span>12. Failures as state transitions</a><a class="sub" href="#system-design--13-dependencies" data-doc="system-design"><span>↳</span>13. Dependencies</a><a class="sub" href="#system-design--14-hash-function-choice-and-cost" data-doc="system-design"><span>↳</span>14. Hash function choice and cost</a><a class="sub" href="#system-design--sources" data-doc="system-design"><span>↳</span>Sources</a><a href="#guarantees" data-doc="guarantees"><span>03</span>Guarantees</a><a class="sub" href="#guarantees--1-the-parties" data-doc="guarantees"><span>↳</span>1. The parties</a><a class="sub" href="#guarantees--2-what-each-party-can-check" data-doc="guarantees"><span>↳</span>2. What each party can check</a><a class="sub" href="#guarantees--3-what-each-party-must-trust" data-doc="guarantees"><span>↳</span>3. What each party must trust</a><a class="sub" href="#guarantees--4-failures" data-doc="guarantees"><span>↳</span>4. Failures</a><a href="#cost-comparison" data-doc="cost-comparison"><span>04</span>Cost comparison</a><a class="sub" href="#cost-comparison--1-basis" data-doc="cost-comparison"><span>↳</span>1. Basis</a><a class="sub" href="#cost-comparison--2-monthly-cost" data-doc="cost-comparison"><span>↳</span>2. Monthly cost</a><a class="sub" href="#cost-comparison--3-operational-complexity" data-doc="cost-comparison"><span>↳</span>3. Operational complexity</a><a class="sub" href="#cost-comparison--4-what-nothing-measured" data-doc="cost-comparison"><span>↳</span>4. What nothing measured</a><a href="#invariants" data-doc="invariants"><span>05</span>Requirements</a><a class="sub" href="#invariants--1-from-metalexs-plan-i-1-to-i-65" data-doc="invariants"><span>↳</span>1. From MetaLeX&#x27;s plan (I-1 to I-65)</a><a class="sub" href="#invariants--2-from-armadas-design-r-1-to-r-46" data-doc="invariants"><span>↳</span>2. From Armada&#x27;s design (R-1 to R-46)</a><a href="#invariant-review" data-doc="invariant-review"><span>06</span>Review of MetaLeX&#x27;s plan</a><a class="sub" href="#invariant-review--source-and-method" data-doc="invariant-review"><span>↳</span>Source and method</a><a class="sub" href="#invariant-review--summary" data-doc="invariant-review"><span>↳</span>Summary</a><a class="sub" href="#invariant-review--open-point-1-the-rule-that-moves-submission-authority" data-doc="invariant-review"><span>↳</span>Open point 1: the rule that moves submission authority</a><a class="sub" href="#invariant-review--open-point-2-the-guard-on-entry-to-the-bridge" data-doc="invariant-review"><span>↳</span>Open point 2: the guard on entry to the bridge</a><a class="sub" href="#invariant-review--open-point-3-the-meaning-of-the-login-sentence" data-doc="invariant-review"><span>↳</span>Open point 3: the meaning of the login sentence</a><a class="sub" href="#invariant-review--pairs-that-look-like-conflicts" data-doc="invariant-review"><span>↳</span>Pairs that look like conflicts</a><a href="#glossary" data-doc="glossary"><span>07</span>Glossary</a><a class="sub" href="#glossary--1-metalex-terms" data-doc="glossary"><span>↳</span>1. MetaLeX terms</a><a class="sub" href="#glossary--2-terms-of-this-design" data-doc="glossary"><span>↳</span>2. Terms of this design</a><a class="sub" href="#glossary--3-proof-and-data-terms" data-doc="glossary"><span>↳</span>3. Proof and data terms</a><a class="sub" href="#glossary--4-armada-terms-used-here" data-doc="glossary"><span>↳</span>4. Armada terms used here</a><a class="sub" href="#glossary--5-word-collisions" data-doc="glossary"><span>↳</span>5. Word collisions</a></nav><p class="sidebar-foot">Armada<br>9 November 2026<br>Draft for review</p></aside>
+<header class="cover"><div class="eyebrow">MetaLeX on Armada · Draft for review · November 2026</div><h1>MetaLeX on Armada</h1><p class="cover-subtitle">Summary · System design · Guarantees · Cost · Requirements</p><div class="cover-meta"><div><b>Status</b>Draft for review. Not built.</div><div><b>Reading map</b>7 documents / 47 tables / 4 figures</div><a class="cover-jump" href="#summary">Read the summary ↓</a></div></header>
+<div class="layout"><aside class="sidebar" id="report-navigation" aria-label="Contents"><div class="toc-title">Documents</div><nav class="toc"><a href="#index" data-doc="index"><span>00</span>Overview</a><a href="#summary" data-doc="summary"><span>01</span>Summary</a><a class="sub" href="#summary--the-proposal" data-doc="summary"><span>↳</span>The proposal</a><a class="sub" href="#summary--what-metalex-and-its-users-get" data-doc="summary"><span>↳</span>What MetaLeX and its users get</a><a class="sub" href="#summary--how-it-differs-from-prividium" data-doc="summary"><span>↳</span>How it differs from Prividium</a><a class="sub" href="#summary--what-it-costs" data-doc="summary"><span>↳</span>What it costs</a><a class="sub" href="#summary--what-metalex-must-trust" data-doc="summary"><span>↳</span>What MetaLeX must trust</a><a class="sub" href="#summary--what-metalex-must-decide" data-doc="summary"><span>↳</span>What MetaLeX must decide</a><a class="sub" href="#summary--notes" data-doc="summary"><span>↳</span>Notes</a><a href="#system-design" data-doc="system-design"><span>02</span>System design</a><a class="sub" href="#system-design--1-requirements" data-doc="system-design"><span>↳</span>1. Requirements</a><a class="sub" href="#system-design--2-architecture" data-doc="system-design"><span>↳</span>2. Architecture</a><a class="sub" href="#system-design--3-issuer-state" data-doc="system-design"><span>↳</span>3. Issuer state</a><a class="sub" href="#system-design--4-watcher-parties" data-doc="system-design"><span>↳</span>4. Watcher parties</a><a class="sub" href="#system-design--5-state-machines" data-doc="system-design"><span>↳</span>5. State machines</a><a class="sub" href="#system-design--6-rootchain-rules" data-doc="system-design"><span>↳</span>6. RootChain rules</a><a class="sub" href="#system-design--7-blob-data-blinded-not-encrypted" data-doc="system-design"><span>↳</span>7. Blob data: blinded, not encrypted</a><a class="sub" href="#system-design--8-holders" data-doc="system-design"><span>↳</span>8. Holders</a><a class="sub" href="#system-design--9-value" data-doc="system-design"><span>↳</span>9. Value</a><a class="sub" href="#system-design--10-scrip-as-armada-nitro-notes" data-doc="system-design"><span>↳</span>10. Scrip as armada-nitro notes</a><a class="sub" href="#system-design--11-trust-without-the-zkevm" data-doc="system-design"><span>↳</span>11. Trust without the zkEVM</a><a class="sub" href="#system-design--12-failures-as-state-transitions" data-doc="system-design"><span>↳</span>12. Failures as state transitions</a><a class="sub" href="#system-design--13-hash-function-choice-and-cost" data-doc="system-design"><span>↳</span>13. Hash function choice and cost</a><a class="sub" href="#system-design--sources" data-doc="system-design"><span>↳</span>Sources</a><a href="#guarantees" data-doc="guarantees"><span>03</span>Guarantees</a><a class="sub" href="#guarantees--1-the-parties" data-doc="guarantees"><span>↳</span>1. The parties</a><a class="sub" href="#guarantees--2-what-each-party-can-check" data-doc="guarantees"><span>↳</span>2. What each party can check</a><a class="sub" href="#guarantees--3-what-each-party-must-trust" data-doc="guarantees"><span>↳</span>3. What each party must trust</a><a class="sub" href="#guarantees--4-failures" data-doc="guarantees"><span>↳</span>4. Failures</a><a href="#cost-comparison" data-doc="cost-comparison"><span>04</span>Cost comparison</a><a class="sub" href="#cost-comparison--1-basis" data-doc="cost-comparison"><span>↳</span>1. Basis</a><a class="sub" href="#cost-comparison--2-monthly-cost" data-doc="cost-comparison"><span>↳</span>2. Monthly cost</a><a class="sub" href="#cost-comparison--3-operational-complexity" data-doc="cost-comparison"><span>↳</span>3. Operational complexity</a><a class="sub" href="#cost-comparison--4-what-nothing-measured" data-doc="cost-comparison"><span>↳</span>4. What nothing measured</a><a href="#invariants" data-doc="invariants"><span>05</span>Requirements</a><a class="sub" href="#invariants--1-from-metalexs-plan-i-1-to-i-65" data-doc="invariants"><span>↳</span>1. From MetaLeX&#x27;s plan (I-1 to I-65)</a><a class="sub" href="#invariants--2-from-armadas-design-r-1-to-r-46" data-doc="invariants"><span>↳</span>2. From Armada&#x27;s design (R-1 to R-46)</a><a href="#invariant-review" data-doc="invariant-review"><span>06</span>Review of MetaLeX&#x27;s plan</a><a class="sub" href="#invariant-review--source-and-method" data-doc="invariant-review"><span>↳</span>Source and method</a><a class="sub" href="#invariant-review--summary" data-doc="invariant-review"><span>↳</span>Summary</a><a class="sub" href="#invariant-review--open-point-1-the-rule-that-moves-submission-authority" data-doc="invariant-review"><span>↳</span>Open point 1: the rule that moves submission authority</a><a class="sub" href="#invariant-review--open-point-2-the-guard-on-entry-to-the-bridge" data-doc="invariant-review"><span>↳</span>Open point 2: the guard on entry to the bridge</a><a class="sub" href="#invariant-review--open-point-3-the-meaning-of-the-login-sentence" data-doc="invariant-review"><span>↳</span>Open point 3: the meaning of the login sentence</a><a class="sub" href="#invariant-review--pairs-that-look-like-conflicts" data-doc="invariant-review"><span>↳</span>Pairs that look like conflicts</a><a href="#glossary" data-doc="glossary"><span>07</span>Glossary</a><a class="sub" href="#glossary--1-metalex-terms" data-doc="glossary"><span>↳</span>1. MetaLeX terms</a><a class="sub" href="#glossary--2-terms-of-this-design" data-doc="glossary"><span>↳</span>2. Terms of this design</a><a class="sub" href="#glossary--3-proof-and-data-terms" data-doc="glossary"><span>↳</span>3. Proof and data terms</a><a class="sub" href="#glossary--4-armada-terms-used-here" data-doc="glossary"><span>↳</span>4. Armada terms used here</a><a class="sub" href="#glossary--5-word-collisions" data-doc="glossary"><span>↳</span>5. Word collisions</a></nav><p class="sidebar-foot">Armada<br>9 November 2026<br>Draft for review</p></aside>
 <main class="main" id="report">
 <article class="doc" id="index" data-title="Overview">
 <div class="prelude"><div class="section-index">Document 00</div><h1>MetaLeX on Armada</h1>
@@ -206,7 +206,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Trust without the zkEVM, <a href="#invariants--R-7">R-7</a>, <a href="#invariants--R-23">R-23</a>, <a href="#invariants--R-28">R-28</a> and <a href="#invariants--R-44">R-44</a>.</strong> The zkEVM is out of scope because of its operating cost. A conservation proof and a public verifier tool take its place for the wrapper's supply. System design §11.&#160;<a class="footnote-backref" href="#summary--fnref:trust" title="Jump back to footnote 13 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:data">
-<p><strong>Publishing, <a href="#invariants--R-8">R-8</a>, <a href="#invariants--R-17">R-17</a>, <a href="#invariants--R-18">R-18</a> and <a href="#invariants--R-43">R-43</a>.</strong> Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §14.&#160;<a class="footnote-backref" href="#summary--fnref:data" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+<p><strong>Publishing, <a href="#invariants--R-8">R-8</a>, <a href="#invariants--R-17">R-17</a>, <a href="#invariants--R-18">R-18</a> and <a href="#invariants--R-43">R-43</a>.</strong> Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §13.&#160;<a class="footnote-backref" href="#summary--fnref:data" title="Jump back to footnote 14 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:limits">
 <p><strong>Limits, <a href="#invariants--R-40">R-40</a>.</strong> A refused write has no remedy on Ethereum. Watchtowers follow <a href="#invariants--R-37">R-37</a>. System design §8.5, §9.1.&#160;<a class="footnote-backref" href="#summary--fnref:limits" title="Jump back to footnote 15 in the text">&#8617;</a></p>
@@ -317,7 +317,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td>Hash</td>
-<td>Pluggable per deployment. Default SHA-256 (§14).</td>
+<td>Pluggable per deployment. Default SHA-256 (§13).</td>
 </tr>
 </tbody>
 </table></div>
@@ -692,7 +692,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Supply.</strong> The sum of all balances, plus withdrawals not yet paid, equals what the watcher party received through applied states, less what it paid out. The watcher party holds that USDC as its own allocations in armada-nitro channels. Every credit, withdrawal and payment is a co-signed state or a transaction in a signed root, so each holder can prove its own part (§11).</p>
 <p><strong>A buyer's challenge.</strong> A buyer could force-close its channel with an earlier state, from before its payment. The watcher party, or a watchtower, answers the challenge with the later co-signed state. ForceMove's turn rule decides, and no root is read (§9.1).</p>
 <h3 id="system-design--93-routed-payments-through-the-metalex-hub"><a class="section-link" href="#system-design--93-routed-payments-through-the-metalex-hub">9.3 Routed payments through the MetaLeX hub</a></h3>
-<p>Value moves between channels as one Nitro payment routed through the MetaLeX hub's channels. Nitro's guarantees and reclaim make the move atomic across the hops, and ForceMove accepts or rejects whole states (<code>adr</code> ADR-0021 D21.1). armada-nitro settles a reclaim in <code>_settleReclaimExit</code> (<code>src/ArmadaNitroAdjudicator.sol:192</code>); that code is being rewritten (§13). The hub routes the payment and advances no value. No hash lock is used, and no party has value in flight.</p>
+<p>Value moves between channels as one Nitro payment routed through the MetaLeX hub's channels. Nitro's guarantees and reclaim make the move atomic across the hops, and ForceMove accepts or rejects whole states (<code>adr</code> ADR-0021 D21.1). The hub routes the payment and advances no value. No hash lock is used, and no party has value in flight.</p>
 <p>A user that does not want the MetaLeX hub uses an issuer's hub, or a channel with the watcher party directly.</p>
 <h3 id="system-design--94-a-primary-deal-step-by-step"><a class="section-link" href="#system-design--94-a-primary-deal-step-by-step">9.4 A primary deal, step by step</a></h3>
 <ol>
@@ -858,75 +858,15 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 </section>
-<section class="report-section"><div class="section-index">System design · 13</div><h2 id="system-design--13-dependencies"><a class="section-link" href="#system-design--13-dependencies">13. Dependencies</a></h2>
-<div class="table-hint"><span>Table 18</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 18" tabindex="0"><table>
-<thead>
-<tr>
-<th>Need</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>HubCustodian</code> signing channel states with the party key, with no hot delegate</td>
-<td>A change to armada-nitro. Not built.</td>
-</tr>
-<tr>
-<td>armada-nitro channels, <code>ConsensusApp</code>, guarantees and reclaim, checkpoints, <code>HubCustodian</code></td>
-<td>In code. The current adjudicator code has known defects, and Armada is rewriting it from its Lean model.</td>
-</tr>
-<tr>
-<td>A hub's asset list naming the wrapper factory (<code>adr</code> ADR-0021 D21.2)</td>
-<td>A change to armada-nitro's asset list. Not built. The wrapper factory must be deployed first.</td>
-</tr>
-<tr>
-<td>Hub role, channels over Waku, watchtower</td>
-<td>On Armada's plan. Next.</td>
-</tr>
-<tr>
-<td>Wrapper factory and issuer wrapper ERC20</td>
-<td>New. Not built.</td>
-</tr>
-<tr>
-<td>Issuer RootChain, daily aggregator and IssuerEpochRegistry</td>
-<td>New. Not built.</td>
-</tr>
-<tr>
-<td>Watcher-party harness: nimbus EVM, JMT, packed blobs, party RPC, channel-balance contract, Nitro p2p client, payout records</td>
-<td>New. Not built.</td>
-</tr>
-<tr>
-<td>nimbus in a browser</td>
-<td>The WASM build of the verified proxy compiles, but stalls at its first <code>sync()</code> call; the cause is not known (<code>adr</code> ADR-0009 D9.2). The browser verifier depends on the fix. On Armada's plan.</td>
-</tr>
-<tr>
-<td>Conservation proof</td>
-<td>New. Construction not chosen.</td>
-</tr>
-<tr>
-<td>Verifier tool</td>
-<td>New. Not built.</td>
-</tr>
-<tr>
-<td>Federation and party DKG: one FROST key per watcher party</td>
-<td>On Armada's plan. Later.</td>
-</tr>
-<tr>
-<td>Registry and bond, fault verifier</td>
-<td>On Armada's plan. Later.</td>
-</tr>
-</tbody>
-</table></div>
-</section>
-<section class="report-section"><div class="section-index">System design · 14</div><h2 id="system-design--14-hash-function-choice-and-cost"><a class="section-link" href="#system-design--14-hash-function-choice-and-cost">14. Hash function choice and cost</a></h2>
-<h3 id="system-design--141-the-hash-is-a-deployment-parameter"><a class="section-link" href="#system-design--141-the-hash-is-a-deployment-parameter">14.1 The hash is a deployment parameter</a></h3>
+<section class="report-section"><div class="section-index">System design · 13</div><h2 id="system-design--13-hash-function-choice-and-cost"><a class="section-link" href="#system-design--13-hash-function-choice-and-cost">13. Hash function choice and cost</a></h2>
+<h3 id="system-design--131-the-hash-is-a-deployment-parameter"><a class="section-link" href="#system-design--131-the-hash-is-a-deployment-parameter">13.1 The hash is a deployment parameter</a></h3>
 <ul>
 <li><code>lib/</code> builds the state tree and the events tree over a hash parameter. The harness and the WASM holder verifier use the same code. <code>lib/</code> is Armada's own Nim implementation of the JMT, so it takes the hash as a parameter.</li>
 <li>The choice is fixed per deployment. The hash identities are part of <code>chainConfigHash</code>, so each accepted root states its hashes.</li>
 <li>Changing the hash of a live RootChain means a new RootChain, through the departure of §5.5.</li>
 <li>L1 verifies no tree proof. A departure imports off L1 (§5.5).</li>
 </ul>
-<h3 id="system-design--142-measured-cost"><a class="section-link" href="#system-design--142-measured-cost">14.2 Measured cost</a></h3>
+<h3 id="system-design--132-measured-cost"><a class="section-link" href="#system-design--132-measured-cost">13.2 Measured cost</a></h3>
 <p>Measured on 2026-11-09:</p>
 <ul>
 <li>L1 gas: a Foundry test of one binary Merkle inclusion proof per hash.</li>
@@ -934,7 +874,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <li>Native time: the Rust <code>sha2</code> and <code>sha3</code> crates.</li>
 </ul>
 <p>The harness is Nim, so its native hash times are not yet measured.</p>
-<div class="table-hint"><span>Table 19</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 19" tabindex="0"><table>
+<div class="table-hint"><span>Table 18</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 18" tabindex="0"><table>
 <thead>
 <tr>
 <th>Cost</th>
@@ -962,9 +902,9 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </table></div>
 <p>SHA-256 is 2.7 to 3.9 times faster off chain. Through WebCrypto, SHA-256 measured 0.375 ms per depth-32 proof, because each call is asynchronous, so the verifier uses the WASM implementation. L1 checks no tree proof, so Keccak-256's lower gas does not matter. SHA-256 is therefore the default. The blinding salts (§3) use the state-tree hash.</p>
 <p>The EVM computes keccak for the <code>KECCAK256</code> opcode and for every mapping slot key. That cost is the same for every tree hash.</p>
-<h3 id="system-design--143-operating-costs"><a class="section-link" href="#system-design--143-operating-costs">14.3 Operating costs</a></h3>
+<h3 id="system-design--133-operating-costs"><a class="section-link" href="#system-design--133-operating-costs">13.3 Operating costs</a></h3>
 <p><a href="#cost-comparison">Cost comparison</a> prices these lines against MetaLeX's Prividium plan.</p>
-<div class="table-hint"><span>Table 20</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 20" tabindex="0"><table>
+<div class="table-hint"><span>Table 19</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 19" tabindex="0"><table>
 <thead>
 <tr>
 <th>Cost line</th>
@@ -995,8 +935,8 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 </section>
-<section class="report-section"><div class="section-index">System design · 15</div><h2 id="system-design--sources"><a class="section-link" href="#system-design--sources">Sources</a></h2>
-<div class="table-hint"><span>Table 21</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 21" tabindex="0"><table>
+<section class="report-section"><div class="section-index">System design · 14</div><h2 id="system-design--sources"><a class="section-link" href="#system-design--sources">Sources</a></h2>
+<div class="table-hint"><span>Table 20</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 20" tabindex="0"><table>
 <thead>
 <tr>
 <th>Key</th>
@@ -1056,7 +996,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </ul>
 </section>
 <section class="report-section"><div class="section-index">Guarantees · 02</div><h2 id="guarantees--2-what-each-party-can-check"><a class="section-link" href="#guarantees--2-what-each-party-can-check">2. What each party can check</a></h2>
-<div class="table-hint"><span>Table 22</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 22" tabindex="0"><table>
+<div class="table-hint"><span>Table 21</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 21" tabindex="0"><table>
 <thead>
 <tr>
 <th>Party</th>
@@ -1187,7 +1127,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </div>
 <section class="report-section"><div class="section-index">Cost comparison · 01</div><h2 id="cost-comparison--1-basis"><a class="section-link" href="#cost-comparison--1-basis">1. Basis</a></h2>
 <p>The comparison prices both designs on the same basis, so that a line differs only where the architecture differs.</p>
-<div class="table-hint"><span>Table 23</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 23" tabindex="0"><table>
+<div class="table-hint"><span>Table 22</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 22" tabindex="0"><table>
 <thead>
 <tr>
 <th>Rule</th>
@@ -1220,7 +1160,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Check of the method.</strong> The Prividium columns below reproduce <code>mlx</code> Table 15 (lines 318-321). The full-warm total differs by one cent, from rounding.</p>
 </section>
 <section class="report-section"><div class="section-index">Cost comparison · 02</div><h2 id="cost-comparison--2-monthly-cost"><a class="section-link" href="#cost-comparison--2-monthly-cost">2. Monthly cost</a></h2>
-<div class="table-hint"><span>Table 24</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 24" tabindex="0"><table>
+<div class="table-hint"><span>Table 23</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 23" tabindex="0"><table>
 <thead>
 <tr>
 <th>Monthly cost, USD</th>
@@ -1376,7 +1316,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 - Working capital that only this design needs: the MetaLeX hub's channel capacity, sized to peak payment value (§9.3), and the party bonds (§4.4).</p>
 </section>
 <section class="report-section"><div class="section-index">Cost comparison · 03</div><h2 id="cost-comparison--3-operational-complexity"><a class="section-link" href="#cost-comparison--3-operational-complexity">3. Operational complexity</a></h2>
-<div class="table-hint"><span>Table 25</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 25" tabindex="0"><table>
+<div class="table-hint"><span>Table 24</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 24" tabindex="0"><table>
 <thead>
 <tr>
 <th></th>
@@ -1414,7 +1354,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Cost comparison · 04</div><h2 id="cost-comparison--4-what-nothing-measured"><a class="section-link" href="#cost-comparison--4-what-nothing-measured">4. What nothing measured</a></h2>
-<div class="table-hint"><span>Table 26</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 26" tabindex="0"><table>
+<div class="table-hint"><span>Table 25</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 25" tabindex="0"><table>
 <thead>
 <tr>
 <th>Figure</th>
@@ -1462,7 +1402,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 - <strong>Design:</strong> the design holds it by construction, through the mechanism named.
 - <strong>Build:</strong> it holds once ordinary engineering is done. <code>mlx</code>'s own design needs the same work.
 - <strong>Partial:</strong> the design holds part of it. The row states which part, and what would hold the rest.</p>
-<div class="table-hint"><span>Table 27</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 27" tabindex="0"><table>
+<div class="table-hint"><span>Table 26</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 26" tabindex="0"><table>
 <thead>
 <tr>
 <th>Status</th>
@@ -1485,7 +1425,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--protocol-and-portability"><a class="section-link" href="#invariants--protocol-and-portability">Protocol and portability</a></h3>
-<div class="table-hint"><span>Table 28</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 28" tabindex="0"><table>
+<div class="table-hint"><span>Table 27</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 27" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1572,7 +1512,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--authority"><a class="section-link" href="#invariants--authority">Authority</a></h3>
-<div class="table-hint"><span>Table 29</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 29" tabindex="0"><table>
+<div class="table-hint"><span>Table 28</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 28" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1619,7 +1559,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--let-and-scrip"><a class="section-link" href="#invariants--let-and-scrip">LET and scrip</a></h3>
-<div class="table-hint"><span>Table 30</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 30" tabindex="0"><table>
+<div class="table-hint"><span>Table 29</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 29" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1714,7 +1654,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--bridge-accounting"><a class="section-link" href="#invariants--bridge-accounting">Bridge accounting</a></h3>
-<div class="table-hint"><span>Table 31</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 31" tabindex="0"><table>
+<div class="table-hint"><span>Table 30</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 30" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1761,7 +1701,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--bridge-messages"><a class="section-link" href="#invariants--bridge-messages">Bridge messages</a></h3>
-<div class="table-hint"><span>Table 32</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 32" tabindex="0"><table>
+<div class="table-hint"><span>Table 31</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 31" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1824,7 +1764,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--privacy-and-access"><a class="section-link" href="#invariants--privacy-and-access">Privacy and access</a></h3>
-<div class="table-hint"><span>Table 33</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 33" tabindex="0"><table>
+<div class="table-hint"><span>Table 32</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 32" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1903,7 +1843,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--recovery"><a class="section-link" href="#invariants--recovery">Recovery</a></h3>
-<div class="table-hint"><span>Table 34</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 34" tabindex="0"><table>
+<div class="table-hint"><span>Table 33</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 33" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -1998,7 +1938,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--issuer-records"><a class="section-link" href="#invariants--issuer-records">Issuer records</a></h3>
-<div class="table-hint"><span>Table 35</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 35" tabindex="0"><table>
+<div class="table-hint"><span>Table 34</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 34" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2069,7 +2009,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--departure-p3"><a class="section-link" href="#invariants--departure-p3">Departure (P3)</a></h3>
-<div class="table-hint"><span>Table 36</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 36" tabindex="0"><table>
+<div class="table-hint"><span>Table 35</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 35" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2132,7 +2072,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tbody>
 </table></div>
 <h3 id="invariants--interface-parity"><a class="section-link" href="#invariants--interface-parity">Interface parity</a></h3>
-<div class="table-hint"><span>Table 37</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 37" tabindex="0"><table>
+<div class="table-hint"><span>Table 36</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 36" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2157,7 +2097,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </section>
 <section class="report-section"><div class="section-index">Requirements · 02</div><h2 id="invariants--2-from-armadas-design-r-1-to-r-46"><a class="section-link" href="#invariants--2-from-armadas-design-r-1-to-r-46">2. From Armada's design (R-1 to R-46)</a></h2>
 <p>These are the design requirements that Armada sets for the system. Each is written in the terms of <a href="#glossary">Glossary</a>.</p>
-<div class="table-hint"><span>Table 38</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 38" tabindex="0"><table>
+<div class="table-hint"><span>Table 37</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 37" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2204,7 +2144,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <tr>
 <td><a id="invariants--R-8"></a>R-8</td>
 <td>The tree hash is pluggable, and the documents state why each hash is better or worse.</td>
-<td>§14</td>
+<td>§13</td>
 </tr>
 <tr>
 <td><a id="invariants--R-9"></a>R-9</td>
@@ -2410,7 +2350,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Invariant IDs.</strong> The IDs (I-n) come from Armada's extraction, and match <a href="#invariants">Requirements</a>. The plan does not number its invariants.</p>
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 02</div><h2 id="invariant-review--summary"><a class="section-link" href="#invariant-review--summary">Summary</a></h2>
-<div class="table-hint"><span>Table 39</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 39" tabindex="0"><table>
+<div class="table-hint"><span>Table 38</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 38" tabindex="0"><table>
 <thead>
 <tr>
 <th>#</th>
@@ -2443,7 +2383,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 03</div><h2 id="invariant-review--open-point-1-the-rule-that-moves-submission-authority"><a class="section-link" href="#invariant-review--open-point-1-the-rule-that-moves-submission-authority">Open point 1: the rule that moves submission authority</a></h2>
 <h3 id="invariant-review--the-requirements"><a class="section-link" href="#invariant-review--the-requirements">The requirements</a></h3>
-<div class="table-hint"><span>Table 40</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 40" tabindex="0"><table>
+<div class="table-hint"><span>Table 39</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 39" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2500,7 +2440,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 04</div><h2 id="invariant-review--open-point-2-the-guard-on-entry-to-the-bridge"><a class="section-link" href="#invariant-review--open-point-2-the-guard-on-entry-to-the-bridge">Open point 2: the guard on entry to the bridge</a></h2>
 <h3 id="invariant-review--the-requirements_1"><a class="section-link" href="#invariant-review--the-requirements_1">The requirements</a></h3>
-<div class="table-hint"><span>Table 41</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 41" tabindex="0"><table>
+<div class="table-hint"><span>Table 40</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 40" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2557,7 +2497,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 05</div><h2 id="invariant-review--open-point-3-the-meaning-of-the-login-sentence"><a class="section-link" href="#invariant-review--open-point-3-the-meaning-of-the-login-sentence">Open point 3: the meaning of the login sentence</a></h2>
 <h3 id="invariant-review--the-requirements_2"><a class="section-link" href="#invariant-review--the-requirements_2">The requirements</a></h3>
-<div class="table-hint"><span>Table 42</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 42" tabindex="0"><table>
+<div class="table-hint"><span>Table 41</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 41" tabindex="0"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2605,7 +2545,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p>Which reading MetaLeX intends. Table 07 lists "censorship" among the operator powers for legal review, which fits reading A.</p>
 </section>
 <section class="report-section"><div class="section-index">Review of MetaLeX&#x27;s plan · 06</div><h2 id="invariant-review--pairs-that-look-like-conflicts"><a class="section-link" href="#invariant-review--pairs-that-look-like-conflicts">Pairs that look like conflicts</a></h2>
-<div class="table-hint"><span>Table 43</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 43" tabindex="0"><table>
+<div class="table-hint"><span>Table 42</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 42" tabindex="0"><table>
 <thead>
 <tr>
 <th>Pair</th>
@@ -2638,7 +2578,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </div>
 <section class="report-section"><div class="section-index">Glossary · 01</div><h2 id="glossary--1-metalex-terms"><a class="section-link" href="#glossary--1-metalex-terms">1. MetaLeX terms</a></h2>
 <p>These are MetaLeX's terms. The definitions follow <code>mlx</code>.</p>
-<div class="table-hint"><span>Table 44</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 44" tabindex="0"><table>
+<div class="table-hint"><span>Table 43</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 43" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -2718,7 +2658,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 02</div><h2 id="glossary--2-terms-of-this-design"><a class="section-link" href="#glossary--2-terms-of-this-design">2. Terms of this design</a></h2>
-<div class="table-hint"><span>Table 45</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 45" tabindex="0"><table>
+<div class="table-hint"><span>Table 44</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 44" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -2882,7 +2822,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 03</div><h2 id="glossary--3-proof-and-data-terms"><a class="section-link" href="#glossary--3-proof-and-data-terms">3. Proof and data terms</a></h2>
-<div class="table-hint"><span>Table 46</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 46" tabindex="0"><table>
+<div class="table-hint"><span>Table 45</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 45" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -2938,7 +2878,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 04</div><h2 id="glossary--4-armada-terms-used-here"><a class="section-link" href="#glossary--4-armada-terms-used-here">4. Armada terms used here</a></h2>
-<div class="table-hint"><span>Table 47</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 47" tabindex="0"><table>
+<div class="table-hint"><span>Table 46</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 46" tabindex="0"><table>
 <thead>
 <tr>
 <th>Term</th>
@@ -2982,7 +2922,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </table></div>
 </section>
 <section class="report-section"><div class="section-index">Glossary · 05</div><h2 id="glossary--5-word-collisions"><a class="section-link" href="#glossary--5-word-collisions">5. Word collisions</a></h2>
-<div class="table-hint"><span>Table 48</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 48" tabindex="0"><table>
+<div class="table-hint"><span>Table 47</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 47" tabindex="0"><table>
 <thead>
 <tr>
 <th>Word</th>
