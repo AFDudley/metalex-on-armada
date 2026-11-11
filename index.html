@@ -140,7 +140,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </ul>
 </section>
 <section class="report-section"><div class="section-index">Summary · 03</div><h2 id="summary--how-it-differs-from-prividium"><a class="section-link" href="#summary--how-it-differs-from-prividium">How it differs from Prividium</a></h2>
-<p>Prividium proves every batch with a zkEVM on GPU hardware. This proposal does not, because those provers cost the most to operate. It relies on three things instead:</p>
+<p>Prividium proves every batch with a zkEVM on GPU hardware. This proposal does not need one for a reasonable level of safety. It relies on three things instead:</p>
 <ul>
 <li>every root is a signed commitment that the operators cannot deny;</li>
 <li>each holder checks its own records against every root;</li>
@@ -206,7 +206,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Interface parity, <a href="#invariants--I-65">I-65</a>.</strong> The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.&#160;<a class="footnote-backref" href="#summary--fnref:parity" title="Jump back to footnote 12 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:trust">
-<p><strong>Trust without the zkEVM, <a href="#invariants--R-7">R-7</a>, <a href="#invariants--R-23">R-23</a>, <a href="#invariants--R-28">R-28</a> and <a href="#invariants--R-44">R-44</a>.</strong> The zkEVM is out of scope because of its operating cost. A conservation proof and a public verifier tool take its place for the wrapper's supply. System design §11.&#160;<a class="footnote-backref" href="#summary--fnref:trust" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+<p><strong>Trust without the zkEVM, <a href="#invariants--R-7">R-7</a>, <a href="#invariants--R-23">R-23</a>, <a href="#invariants--R-28">R-28</a> and <a href="#invariants--R-44">R-44</a>.</strong> A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the wrapper's supply. System design §11.&#160;<a class="footnote-backref" href="#summary--fnref:trust" title="Jump back to footnote 13 in the text">&#8617;</a></p>
 </li>
 <li id="summary--fn:data">
 <p><strong>Publishing, <a href="#invariants--R-8">R-8</a>, <a href="#invariants--R-17">R-17</a>, <a href="#invariants--R-18">R-18</a> and <a href="#invariants--R-43">R-43</a>.</strong> Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §13.&#160;<a class="footnote-backref" href="#summary--fnref:data" title="Jump back to footnote 14 in the text">&#8617;</a></p>
@@ -358,7 +358,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </div>
 </details>
 <h3 id="invariants--bridge-accounting"><a class="section-link" href="#invariants--bridge-accounting">Bridge accounting</a></h3>
-<p>Locked scrip equals wrapper supply plus pending locks and returns, and the conservation proof shows this at each root.</p>
+<p>Locked scrip equals the supply of scrip tokens outside the issuer state plus pending locks and returns, and the conservation proof shows this at each root.</p>
 <details>
 <summary>I-24 to I-27 (4 requirements)</summary>
 <div class="req">
@@ -757,14 +757,14 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </div>
 </details>
 <h3 id="invariants--trust-without-the-zkevm"><a class="section-link" href="#invariants--trust-without-the-zkevm">Trust without the zkEVM</a></h3>
-<p>The zkEVM is out of scope because of its operating cost, and a public conservation proof covers the wrapper.</p>
+<p>A zkEVM is not required for a reasonable level of safety, and a public proof shows that every scrip token outside the issuer state has locked scrip behind it.</p>
 <details>
 <summary>R-7, R-23, R-28, R-44 (4 requirements)</summary>
 <div class="req">
 <p><a id="invariants--R-7"></a><strong>R-7.</strong> ZisK stays a candidate zkVM. (§11)</p>
 </div>
 <div class="req">
-<p><a id="invariants--R-23"></a><strong>R-23.</strong> The zkEVM matters for completeness, but it is out of scope because of its operating cost. (§11)</p>
+<p><a id="invariants--R-23"></a><strong>R-23.</strong> A zkEVM is not required for a reasonable level of safety, so it is out of scope. (§11)</p>
 </div>
 <div class="req">
 <p><a id="invariants--R-28"></a><strong>R-28.</strong> A conservation proof, verified off chain, shows conservation of the wrapper without the zkEVM. (§11)</p>
@@ -940,7 +940,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p>MetaLeX's Cybercorps contracts run unchanged, but not on one shared chain. Each issuer gets its own EVM state, the <em>issuer state</em>. A small group of operators, the issuer's <em>watcher party</em>, runs that state. The group has three <em>watcher members</em>: MetaLeX, an independent recovery operator, and the issuer.</p>
 <p>Once a day, the watcher party posts a fingerprint of the state, its <em>root</em>, to an Ethereum contract: the issuer's <em>RootChain</em>. Each holder keeps proofs of its own records against those roots. So a holder can show what it owns, even if every operator fails.</p>
 <p>Money does not live in the issuer state. It stays in <em>armada-nitro</em>, Armada's payment system on Ethereum. There, value is either a shielded <em>note</em> in the Armada pool, or a balance in a payment <em>channel</em> that a note funds. A buyer's USDC stays in the buyer's own channel until the deal settles. Scrip that leaves the issuer state becomes notes of an issuer-specific token, the issuer's <em>wrapper</em>.</p>
-<p>The design has no zkEVM and no GPU prover, because proving every root costs too much to operate (§11). It relies on three other things instead:</p>
+<p>The design has no zkEVM and no GPU prover. It does not need one for a reasonable level of safety (§11). It relies on three other things instead:</p>
 <ul>
 <li>signed commitments that the operators cannot deny;</li>
 <li>proofs that each holder checks itself;</li>
@@ -1436,7 +1436,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>Transfer policy.</strong> A wrapper note can be unshielded like any note. The wrapper then moves as a plain ERC20, and no private holder limit applies to it. A holder that returns wrapper to scrip does not inherit recertification eligibility.</p>
 </section>
 <section class="report-section"><div class="section-index">System design · 11</div><h2 id="system-design--11-trust-without-the-zkevm"><a class="section-link" href="#system-design--11-trust-without-the-zkevm">11. Trust without the zkEVM</a></h2>
-<p><strong>Scope.</strong> The zkEVM matters for completeness, but proving every root is a daily operating cost, so it is out of scope for this release. The RootChain therefore accepts each root on the party signature alone (§6.1).</p>
+<p><strong>Scope.</strong> A zkEVM is not required for a reasonable level of safety, so it is out of scope. The RootChain therefore accepts each root on the party signature alone (§6.1).</p>
 <p><strong>Every signed act is a binding commitment.</strong> The watcher party signs the roots, the channel states and the wrapper mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.</p>
 <p><strong>What holds without the zkEVM:</strong></p>
 <div class="table-hint"><span>Table 15</span><span>Scroll horizontally ↔</span></div><div class="table-wrap" role="region" aria-label="Table 15" tabindex="0"><table>
@@ -1520,7 +1520,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <p><strong>If the zkEVM is added later:</strong>
 - <strong>Proof system.</strong> Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option.
 - <strong>Same EVM.</strong> The prover must prove the same EVM semantics that the harness runs. <code>zos</code> proves REVM, a different implementation from the nimbus EVM. Equivalence of the two is a condition of that migration.
-- <strong>Cost.</strong> Running provers is a daily operating cost, which is why this design leaves the zkEVM out.
+- <strong>Cost.</strong> Running provers adds a daily operating cost.
 - <strong>Migration.</strong> A RootChain that requires proofs is a new deployment. An issuer moves to it through the departure of §5.5.</p>
 </section>
 <section class="report-section"><div class="section-index">System design · 12</div><h2 id="system-design--12-failures-as-state-transitions"><a class="section-link" href="#system-design--12-failures-as-state-transitions">12. Failures as state transitions</a></h2>
@@ -2467,7 +2467,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><strong>zkEVM</strong></td>
-<td>An EVM state transition proven in a zkVM. Out of scope in this design, because of its operating cost (<code>design</code> §11).</td>
+<td>An EVM state transition proven in a zkVM. Out of scope in this design: it is not required for a reasonable level of safety (<code>design</code> §11).</td>
 </tr>
 <tr>
 <td><strong>ZisK</strong></td>

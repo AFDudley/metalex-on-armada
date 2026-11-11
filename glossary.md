@@ -76,7 +76,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | Term | Meaning |
 |---|---|
 | **zkVM** | A virtual machine whose execution can be proven |
-| **zkEVM** | An EVM state transition proven in a zkVM. Out of scope in this design, because of its operating cost (`design` §11). |
+| **zkEVM** | An EVM state transition proven in a zkVM. Out of scope in this design: it is not required for a reasonable level of safety (`design` §11). |
 | **ZisK** | An RV64IMA zkVM. Release `v1.4.0-alpha` at the time of writing, with audits ongoing. |
 | **RISC Zero** | An RV32IM zkVM. Release 3.0. |
 | **nimbus EVM** | The EVM of `status-im/nimbus-eth1`, written in Nim. It builds natively, for iOS and Android, and as WASM. The harness runs it against an in-memory ledger. |

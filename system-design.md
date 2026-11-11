@@ -8,7 +8,7 @@ Once a day, the watcher party posts a fingerprint of the state, its *root*, to a
 
 Money does not live in the issuer state. It stays in *armada-nitro*, Armada's payment system on Ethereum. There, value is either a shielded *note* in the Armada pool, or a balance in a payment *channel* that a note funds. A buyer's USDC stays in the buyer's own channel until the deal settles. Scrip that leaves the issuer state becomes notes of an issuer-specific token, the issuer's *wrapper*.
 
-The design has no zkEVM and no GPU prover, because proving every root costs too much to operate (§11). It relies on three other things instead:
+The design has no zkEVM and no GPU prover. It does not need one for a reasonable level of safety (§11). It relies on three other things instead:
 
 - signed commitments that the operators cannot deny;
 - proofs that each holder checks itself;
@@ -384,7 +384,7 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 
 ## 11. Trust without the zkEVM
 
-**Scope.** The zkEVM matters for completeness, but proving every root is a daily operating cost, so it is out of scope for this release. The RootChain therefore accepts each root on the party signature alone (§6.1).
+**Scope.** A zkEVM is not required for a reasonable level of safety, so it is out of scope. The RootChain therefore accepts each root on the party signature alone (§6.1).
 
 **Every signed act is a binding commitment.** The watcher party signs the roots, the channel states and the wrapper mints. Each signature binds it to what it records. A root that pays the issuer y USDC also records the n shares that the buyer receives for it. The commitment stays binding even if the operators fail to account for it in a later root.
 
@@ -424,7 +424,7 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 **If the zkEVM is added later:**
 - **Proof system.** Armada has chosen RISC Zero for zkVM proofs. ZisK stays an option.
 - **Same EVM.** The prover must prove the same EVM semantics that the harness runs. `zos` proves REVM, a different implementation from the nimbus EVM. Equivalence of the two is a condition of that migration.
-- **Cost.** Running provers is a daily operating cost, which is why this design leaves the zkEVM out.
+- **Cost.** Running provers adds a daily operating cost.
 - **Migration.** A RootChain that requires proofs is a new deployment. An issuer moves to it through the departure of §5.5.
 
 ## 12. Failures as state transitions

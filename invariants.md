@@ -276,7 +276,7 @@ Scrip is locked, not burned, when it leaves the issuer state, and LET custody an
 
 ### Bridge accounting
 
-Locked scrip equals wrapper supply plus pending locks and returns, and the conservation proof shows this at each root.
+Locked scrip equals the supply of scrip tokens outside the issuer state plus pending locks and returns, and the conservation proof shows this at each root.
 
 <details markdown="1">
 <summary>I-24 to I-27 (4 requirements)</summary>
@@ -1086,7 +1086,7 @@ Once a day, one transaction posts all roots and the blinded data, and an issuer 
 
 ### Trust without the zkEVM
 
-The zkEVM is out of scope because of its operating cost, and a public conservation proof covers the wrapper.
+A zkEVM is not required for a reasonable level of safety, and a public proof shows that every scrip token outside the issuer state has locked scrip behind it.
 
 <details markdown="1">
 <summary>R-7, R-23, R-28, R-44 (4 requirements)</summary>
@@ -1099,7 +1099,7 @@ The zkEVM is out of scope because of its operating cost, and a public conservati
 
 <div class="req" markdown="1">
 
-<a id="R-23"></a>**R-23.** The zkEVM matters for completeness, but it is out of scope because of its operating cost. (§11)
+<a id="R-23"></a>**R-23.** A zkEVM is not required for a reasonable level of safety, so it is out of scope. (§11)
 
 </div>
 
