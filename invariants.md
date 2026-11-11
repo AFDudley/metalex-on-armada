@@ -6,23 +6,9 @@ The system must keep 65 requirements from MetaLeX's plan (I-1 to I-65) and 46 fr
 
 ## 1. From MetaLeX's plan (I-1 to I-65)
 
-<details markdown="1">
-<summary>How Armada extracted these, and the status counts</summary>
+Armada read MetaLeX's plan once and took out every statement of something the system must keep. Each requirement below quotes the sentence in the plan that states it. A script checked that each quotation appears word for word in the plan. One reading can miss a requirement, so a second, independent reading is the check for that.
 
-**Method.** Armada extracted these from `mlx` in one reading. Each row quotes the `mlx` sentence that states the invariant. A script checked that every quotation occurs verbatim in the plan's text. The extraction can still have missed an invariant. A second, independent reading is the check for that.
-
-**Status.**
-- **Design:** the design holds it by construction, through the mechanism named.
-- **Build:** it holds once ordinary engineering is done. `mlx`'s own design needs the same work.
-- **Partial:** the design holds part of it. The row states which part, and what would hold the rest.
-
-| Status | Count |
-|---|---:|
-| Design | 44 |
-| Build | 20 |
-| Partial | 1 |
-
-</details>
+Each requirement also says how this design holds it. 44 hold by design: a mechanism in the design makes them true. 20 hold once built: they need ordinary engineering, the same work that MetaLeX's own design needs. One holds in part, and its explanation says which part is still open.
 
 
 ### Protocol and portability
