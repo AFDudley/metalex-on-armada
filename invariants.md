@@ -917,7 +917,7 @@ All value stays in armada-nitro, and the issuer state sees USDC only as channel 
 
 <div class="req" markdown="1">
 
-<a id="R-29"></a>**R-29.** A hub names the wrapper factory in its asset list, so issuer wrappers need no per-token listing. (§10)
+<a id="R-29"></a>**R-29.** A hub names the wrapped-scrip factory in its asset list, so wrapped-scrip contracts need no per-token listing. (§10)
 
 </div>
 
@@ -1111,7 +1111,7 @@ A zkEVM is not required for a reasonable level of safety, and a public proof sho
 
 <div class="req" markdown="1">
 
-<a id="R-44"></a>**R-44.** Third parties verify the conservation proof independently, with a tool that reads a root and the issuer wrapper's supply from L1. (§11)
+<a id="R-44"></a>**R-44.** Third parties verify the conservation proof independently, with a tool that reads a root and the supply of wrapped scrip from L1. (§11)
 
 </div>
 

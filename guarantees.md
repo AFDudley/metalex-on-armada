@@ -28,7 +28,7 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 | Issuer | The full issuer state | It is a watcher member and stores the state (§4.3) |
 | Issuer | Its payout | The payout record names the channel state that paid it, and its note is in the Armada pool (§9.2) |
 | Holder of wrapped scrip | That its wrapped scrip was minted against a lock | The watcher party's signed mint record and the lock in a hard-final root (§10) |
-| Anyone | That the wrapper is conserved at each root | The verifier tool checks the conservation proof against the root and the issuer wrapper's supply on L1 (§11) |
+| Anyone | That the wrapper is conserved at each root | The verifier tool checks the conservation proof against the root and the supply of wrapped scrip on L1 (§11) |
 
 ## 3. What each party must trust
 

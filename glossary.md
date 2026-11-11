@@ -52,7 +52,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **Self-help** | A holder proving its own records against any root from its salts, its values and the public blob data, with no watcher member |
 | **Party custodian** | The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapped-scrip mints with the FROST party key. |
 | **Channel-balance contract** | A system contract in an issuer state with an ERC20 interface, and the `paymentToken` of every deal. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not withdrawn. The watcher party updates it from co-signed states it receives over Nitro p2p. |
-| **Verifier tool** | A tool that reads a root and the issuer wrapper's supply from L1, and checks the conservation proof against them |
+| **Verifier tool** | A tool that reads a root and the supply of wrapped scrip from L1, and checks the conservation proof against them |
 | **Checkpoint** | Recording a channel's latest co-signed state on the adjudicator, as in any Nitro channel |
 | **Watchtower** | A service that answers a stale-state challenge on a user's channel within the challenge window, with the user's latest co-signed state |
 | **Payout record** | The issuer-state record of a paid withdrawal: the withdrawal, the `channelId` and the hash of the co-signed channel state that paid it |
@@ -60,8 +60,8 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **Routed payment** | One Nitro payment across several channels, through a hub, made atomic by guarantees and reclaim. The hub advances no value (Armada ADR-0021). |
 | **Scrip lock** | Canonical scrip locked in the issuer state against wrapped-scrip notes outside it. States: Locked, Wrapped, Returned, Unlocked. |
 | **Wrapped scrip** | An issuer's scrip as an ERC20 on L1, backed one for one by scrip locked in the issuer state. It is held as notes in the Armada pool, or unshielded. MetaLeX's plan calls it the "public wrapper". Under MetaLeX-form bylaws, scrip is not stock and represents neither equity nor debt. |
-| **Issuer wrapper** | The ERC20 contract of an issuer's wrapped scrip, one per issuer. Its only minter is the party custodian. |
-| **Wrapper factory** | The L1 factory that deploys each issuer wrapper. A hub may name it in its asset list. |
+| **Wrapped-scrip contract** | The ERC20 contract of an issuer's wrapped scrip, one per issuer. Its only minter is the party custodian. |
+| **Wrapped-scrip factory** | The L1 factory that deploys each wrapped-scrip contract. A hub may name it in its asset list. |
 | **Conservation proof** | An off-chain zero-knowledge proof for each hard-final root: locked scrip equals wrapped-scrip supply plus pending locks and returns. The USDC needs no such proof, because it never leaves armada-nitro. |
 | **Entry guard** | The rule that a scrip lock reverts unless the asset's force features are off and its implementation hash is the pinned one |
 | **Daily aggregation** | MetaLeX core's default publishing run: one blob transaction per day, with all parties' data packed by size. It calls the aggregator with a Merkle root of the day's party roots. |

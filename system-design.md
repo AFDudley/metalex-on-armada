@@ -33,8 +33,8 @@ flowchart LR
  subgraph L1["Ethereum L1"]
   AG["Daily aggregator: one root of party roots, blob hashes"]
   RC["Issuer RootChain: party-signed roots"]
-  WF["Wrapper factory"]
-  WR["Issuer wrapper (ERC20)"]
+  WF["Wrapped-scrip factory"]
+  WR["Wrapped-scrip contract (ERC20)"]
   ER["IssuerEpochRegistry: departure records"]
   AN["ArmadaNitroAdjudicator: channels, routed payments, checkpoints, party bonds"]
   PP["Armada pool"]
@@ -49,7 +49,7 @@ flowchart LR
  CORE -->|"daily: aggregated roots, packed blobs"| AG
  AG -->|"inclusion proof"| RC
  WF -->|"deploys"| WR
- WP -->|"mints wrapper as notes"| WR
+ WP -->|"mints wrapped scrip as notes"| WR
  WR --> PP
  RC --> ER
  PP <-->|"notes fund channels, payouts are notes"| AN
@@ -65,8 +65,8 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 - **Issuer RootChain:** An L1 contract, one per issuer. It stores the hard-final roots of the issuer state, one successor per root, each accepted on the party signature (§6).
 - **Daily aggregator:** An L1 contract. Once per day it records one Merkle root over every party's signed root, and the hashes of the blobs that carry their data (§6.2).
 - **IssuerEpochRegistry:** An L1 contract that records each departure: the old RootChain's final root and the successor's identity (§5.5).
-- **Issuer wrapper:** An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool (§10).
-- **Wrapper factory:** The L1 factory that deploys each issuer's wrapper. A hub names it in its asset list (§10).
+- **Wrapped-scrip contract:** An ERC20 on L1, one per issuer, whose only minter is the party custodian. It is held as notes in the Armada pool (§10).
+- **Wrapped-scrip factory:** The L1 factory that deploys each issuer's wrapped-scrip contract. A hub names it in its asset list (§10).
 
 **Run by each watcher party**
 
@@ -80,7 +80,7 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 **Run by MetaLeX, or by anyone**
 
 - **MetaLeX hub:** An armada-nitro hub, and an entity distinct from MetaLeX, the company. As MetaLeX core it is a watcher member of every party. MetaLeX is a plaintext audience through it. It routes payments, runs watchtowers for website users, and supplies user IDs to each issuer state (§8.1, §9).
-- **Verifier tool:** A tool that reads a root and the issuer wrapper's supply from L1, and checks the conservation proof against them (§11).
+- **Verifier tool:** A tool that reads a root and the supply of wrapped scrip from L1, and checks the conservation proof against them (§11).
 
 ## 3. Issuer state
 
@@ -376,7 +376,7 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 1. The holder pays wrapped scrip back to the party custodian, which burns it.
 2. The watcher party unlocks the scrip to the holder in the issuer state.
 
-**In channels.** A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (`nitro` `src/ArmadaNitroAdjudicator.sol:44`). The list screens out tokens whose balances change other than by transfer (`p15` I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (`adr` ADR-0021 D21.2). A hub names the wrapper factory, so its channels accept every issuer's wrapped scrip. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapper factory must therefore exist before the adjudicator that names it is deployed.
+**In channels.** A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (`nitro` `src/ArmadaNitroAdjudicator.sol:44`). The list screens out tokens whose balances change other than by transfer (`p15` I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (`adr` ADR-0021 D21.2). A hub names the wrapped-scrip factory, so its channels accept every issuer's wrapped scrip. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapped-scrip factory must therefore exist before the adjudicator that names it is deployed.
 
 **Accounting.** `mlx`'s identities apply unchanged: locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry `BridgeMessageV1`'s bindings (§5.4).
 
@@ -405,7 +405,7 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 |---|---|---|
 | Scrip | Locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R | The wrapper's `totalSupply()` |
 
-**Verifier tool.** Any third party can check the proof itself. The tool reads the root from the aggregator and the issuer wrapper's `totalSupply()` from L1, then verifies the proof against them.
+**Verifier tool.** Any third party can check the proof itself. The tool reads the root from the aggregator and the wrapped-scrip contract's `totalSupply()` from L1, then verifies the proof against them.
 
 The proof shows the state at a root, not the transition that produced it. Its construction is an implementation question.
 
@@ -437,7 +437,7 @@ Misaccounting is limited to one issuer. It moves no value held in armada-nitro c
 | Fewer than t watcher members are live | No hard finality, no payments out | Holders keep their proofs against the last root and can prove what they own (§8.3). Value in channels exits by ForceMove. Balances stay in the issuer state. |
 | The sequencer refuses a write | None | The payer gets no asset and has no L1 remedy. Its signed request and the refusal are its evidence to MetaLeX (§8.5). |
 | A lock is never wrapped, or a return is never unlocked | None on L1 | A watcher-party duty. The signed lock and return records are the holder's evidence (§5.4). |
-| t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if the issuer wrapper's supply is broken, and the signed root is evidence against the operators (§11) |
+| t watcher members sign a misaccounting root | None on L1 | Holders detect it (§8.2), the conservation proof fails if the supply of wrapped scrip is broken, and the signed root is evidence against the operators (§11) |
 | The party key signs two successors of one root | None in RootChain | The RootChain accepts one successor per root. The party bond is slashed (§4.4). |
 
 ## 13. Hash function choice and cost

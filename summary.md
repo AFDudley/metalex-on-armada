@@ -78,7 +78,7 @@ On the same basis as MetaLeX's own cost tables, this design costs about $4,400 p
 
 [^parity]: **Interface parity, [I-65](invariants.md#I-65).** The party RPC is one standard, authority-scoped endpoint for MetaLeX's app and any other interface. System design §8.5, §8.6.
 
-[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the issuer wrapper's supply. System design §11.
+[^trust]: **Trust without the zkEVM, [R-7](invariants.md#R-7), [R-23](invariants.md#R-23), [R-28](invariants.md#R-28) and [R-44](invariants.md#R-44).** A zkEVM is not required for a reasonable level of safety. A conservation proof and a public verifier tool take its place for the supply of wrapped scrip. System design §11.
 
 [^data]: **Publishing, [R-8](invariants.md#R-8), [R-17](invariants.md#R-17), [R-18](invariants.md#R-18) and [R-43](invariants.md#R-43).** Once a day, one transaction posts all roots and the blinded data, packed by size. An issuer with no changes posts nothing. System design §6.2, §7, §13.
 
