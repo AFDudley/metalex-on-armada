@@ -119,7 +119,7 @@ Each issuer has one watcher party, and MetaLeX's whole platform is the set of th
 
 **Keys.** Each party has one FROST threshold key, the *party key*. Its threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2. So any two watcher members can sign, and no signing set needs MetaLeX's share.
 
-**Custodian.** On L1, the party acts through its *party custodian*: a `HubCustodian` under the party key (`nitro` `src/HubCustodian.sol`). It is a smart wallet: the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the FROST party key. A FROST signing round among the watcher members takes one network round trip, far less than Ethereum's 12-second block time.
+**Custodian.** On L1, the party acts through its *party custodian*: a `HubCustodian` under the party key (`nitro` `src/HubCustodian.sol`). It is a smart wallet: the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapped scrip. It signs every channel state with the FROST party key. A FROST signing round among the watcher members takes one network round trip, far less than Ethereum's 12-second block time.
 
 **Liveness.** The system's liveness never depends on the MetaLeX hub: any t watcher members continue the RootChain and the pay-outs without it. With n = 3 and MetaLeX core down, an issuer's RootChain advances only while that issuer's watcher member is up.
 
@@ -376,7 +376,7 @@ Scrip leaves the issuer state the way USDC enters it, in the opposite direction.
 1. The holder pays wrapped scrip back to the party custodian, which burns it.
 2. The watcher party unlocks the scrip to the holder in the issuer state.
 
-**In channels.** A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (`nitro` `src/ArmadaNitroAdjudicator.sol:44`). The list screens out tokens whose balances change other than by transfer (`p15` I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (`adr` ADR-0021 D21.2). A hub names the wrapper factory, so its channels accept every issuer's wrapper. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapper factory must therefore exist before the adjudicator that names it is deployed.
+**In channels.** A hub lists the assets that its channels hold: "The set of tokens the hub has configured for this adjudicator's channels" (`nitro` `src/ArmadaNitroAdjudicator.sol:44`). The list screens out tokens whose balances change other than by transfer (`p15` I1), and it is fixed at deployment to keep governance off the settlement path. The list may name factories (`adr` ADR-0021 D21.2). A hub names the wrapper factory, so its channels accept every issuer's wrapped scrip. Every such token is a plain ERC20 whose only minter is its party custodian, so it passes I1. The wrapper factory must therefore exist before the adjudicator that names it is deployed.
 
 **Accounting.** `mlx`'s identities apply unchanged: locked scrip K equals wrapped-scrip supply Q plus locks awaiting mint O plus returns awaiting unlock R. The lock and return records carry `BridgeMessageV1`'s bindings (§5.4).
 

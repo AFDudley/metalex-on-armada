@@ -14,7 +14,7 @@ The zkEVM is out of scope (§11). So every statement below holds with roots that
 - **MetaLeX hub:** an armada-nitro hub that routes payments and runs watchtowers for website users (§9). It is an entity distinct from MetaLeX. As MetaLeX core, it is a watcher member of every party.
 - **MetaLeX:** the company. It receives the platform fee through `getPlatformPayable()`. It is a named plaintext audience, through the MetaLeX hub.
 - **Recovery operator:** the independent watcher member that `mlx` names (§4.1).
-- **Holder of wrapped scrip:** a holder of the issuer's wrapper, as notes or unshielded (§10).
+- **Holder of wrapped scrip:** anyone who holds an issuer's scrip in its wrapped form on Ethereum, as notes or unshielded (§10).
 
 ## 2. What each party can check
 
