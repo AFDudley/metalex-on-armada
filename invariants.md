@@ -177,7 +177,7 @@ These are the design requirements that Armada sets for the system. Each is writt
 | <a id="R-31"></a>R-31 | The party RPC's standard endpoint and the browser absorb most changes to MetaLeX's web app. Each watcher party does its own indexing. | §8.6 |
 | <a id="R-32"></a>R-32 | MetaLeX accepts the invariants, and the invariants show which come from MetaLeX's plan and which from the operator's design requirements. | `metalex/invariants.md` |
 | <a id="R-33"></a>R-33 | Most users use the website. Users who want to keep their records use Armada's mobile app, which contains the website and a watcher. Browser storage holds the same data, but it is more easily deleted. | §7, §8.3 |
-| <a id="R-34"></a>R-34 | The party custodian has no hot delegate. Roots finalize daily, so a threshold signature on each channel state costs no time that matters. | §4.1 |
+| <a id="R-34"></a>R-34 | The party custodian signs every channel state with the FROST party key. A FROST signing round takes one network round trip, far less than Ethereum's 12-second block time. | §4.1 |
 | <a id="R-35"></a>R-35 | A buyer's USDC stays in armada-nitro. Paying in moves it to the watcher party's allocation in the buyer's own channel. No app reads an issuer root, because the signatures are binding. | §9.2 |
 | <a id="R-36"></a>R-36 | MetaLeX is a plaintext audience through the MetaLeX hub. | §4.1, §8.4 |
 | <a id="R-37"></a>R-37 | The MetaLeX hub runs watchtowers for website users by default. The recovery operator may run them too. The mobile app runs its own. | §9.1 |

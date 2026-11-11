@@ -72,7 +72,7 @@ The parts of the system are on Ethereum L1, in each watcher party, or with MetaL
 
 - **Issuer state:** One EVM state per issuer: its Cybercorps companies, its channel-balance contract and its payout records (§3).
 - **Watcher party:** An entity: the threshold signer that runs one issuer state and anchors it to L1. Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).
-- **Party custodian:** The watcher party's `HubCustodian`. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate (§4.1).
+- **Party custodian:** The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key (§4.1).
 - **Party RPC:** The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).
 - **Channel-balance contract:** A system contract in the issuer state with an ERC20 interface. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not yet withdrawn (§9.2).
 - **Party bond:** One armada-nitro channel per watcher party (§4.4).
@@ -119,7 +119,7 @@ Each issuer has one watcher party, and MetaLeX's whole platform is the set of th
 
 **Keys.** Each party has one FROST threshold key, the *party key*. Its threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2. So any two watcher members can sign, and no signing set needs MetaLeX's share.
 
-**Custodian.** On L1, the party acts through its *party custodian*: a `HubCustodian` under the party key (`nitro` `src/HubCustodian.sol`; `adr` ADR-0016 D16.2). It is the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the party key, and it has no hot delegate. A hot delegate would only save signing time. Roots finalize daily, so a threshold signature on each state costs no time that matters.
+**Custodian.** On L1, the party acts through its *party custodian*: a `HubCustodian` under the party key (`nitro` `src/HubCustodian.sol`). It is a smart wallet: the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the FROST party key. A FROST signing round among the watcher members takes one network round trip, far less than Ethereum's 12-second block time.
 
 **Liveness.** The system's liveness never depends on the MetaLeX hub: any t watcher members continue the RootChain and the pay-outs without it. With n = 3 and MetaLeX core down, an issuer's RootChain advances only while that issuer's watcher member is up.
 

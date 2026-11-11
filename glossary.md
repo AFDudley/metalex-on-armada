@@ -50,7 +50,7 @@ These are MetaLeX's terms. The definitions follow `mlx`.
 | **Party RPC** | A watcher party's own private, authenticated RPC, in MetaLeX's sense. The only interface to an issuer state. Every method is scoped by the contracts' authority. It gives holders their records, salts and proofs. |
 | **MetaLeX hub** | An armada-nitro hub. An entity distinct from MetaLeX, the company (R-27), through which MetaLeX is a plaintext audience. It routes Nitro payments, runs watchtowers for website users, and supplies user IDs to each issuer state. It is not in the path of a user's request to the party RPC. |
 | **Self-help** | A holder proving its own records against any root from its salts, its values and the public blob data, with no watcher member |
-| **Party custodian** | The watcher party's `HubCustodian`. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate. |
+| **Party custodian** | The watcher party's `HubCustodian`, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key. |
 | **Channel-balance contract** | A system contract in an issuer state with an ERC20 interface, and the `paymentToken` of every deal. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not withdrawn. The watcher party updates it from co-signed states it receives over Nitro p2p. |
 | **Verifier tool** | A tool that reads a root and the wrapper's supply from L1, and checks the conservation proof against them |
 | **Checkpoint** | Recording a channel's latest co-signed state on the adjudicator, as in any Nitro channel |

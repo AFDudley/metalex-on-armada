@@ -256,7 +256,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <ul>
 <li><strong>Issuer state:</strong> One EVM state per issuer: its Cybercorps companies, its channel-balance contract and its payout records (§3).</li>
 <li><strong>Watcher party:</strong> An entity: the threshold signer that runs one issuer state and anchors it to L1. Through its custodian it is also an armada-nitro participant and the minter of the issuer's wrapper (§4).</li>
-<li><strong>Party custodian:</strong> The watcher party's <code>HubCustodian</code>. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate (§4.1).</li>
+<li><strong>Party custodian:</strong> The watcher party's <code>HubCustodian</code>, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key (§4.1).</li>
 <li><strong>Party RPC:</strong> The watcher party's own private RPC, in MetaLeX's sense. The only interface to the issuer state (§8.1).</li>
 <li><strong>Channel-balance contract:</strong> A system contract in the issuer state with an ERC20 interface. Each balance is USDC that a holder committed to the watcher party in armada-nitro and has not yet withdrawn (§9.2).</li>
 <li><strong>Party bond:</strong> One armada-nitro channel per watcher party (§4.4).</li>
@@ -328,7 +328,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 <h3 id="system-design--41-composition"><a class="section-link" href="#system-design--41-composition">4.1 Composition</a></h3>
 <p>Each issuer has one watcher party, and MetaLeX's whole platform is the set of these parties. A watcher party has three watcher members: MetaLeX core, the recovery operator and the issuer (n = 3). MetaLeX core is the MetaLeX hub in its role as a watcher member of every party. It sequences by default, and MetaLeX is a plaintext audience through it.</p>
 <p><strong>Keys.</strong> Each party has one FROST threshold key, the <em>party key</em>. Its threshold t is a two-thirds majority of n, a parameter of the deployment. With n = 3, t = 2. So any two watcher members can sign, and no signing set needs MetaLeX's share.</p>
-<p><strong>Custodian.</strong> On L1, the party acts through its <em>party custodian</em>: a <code>HubCustodian</code> under the party key (<code>nitro</code> <code>src/HubCustodian.sol</code>; <code>adr</code> ADR-0016 D16.2). It is the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the party key, and it has no hot delegate. A hot delegate would only save signing time. Roots finalize daily, so a threshold signature on each state costs no time that matters.</p>
+<p><strong>Custodian.</strong> On L1, the party acts through its <em>party custodian</em>: a <code>HubCustodian</code> under the party key (<code>nitro</code> <code>src/HubCustodian.sol</code>). It is a smart wallet: the party's EIP-1271 identity in its channels, and the only minter of the issuer's wrapper. It signs every channel state with the FROST party key. A FROST signing round among the watcher members takes one network round trip, far less than Ethereum's 12-second block time.</p>
 <p><strong>Liveness.</strong> The system's liveness never depends on the MetaLeX hub: any t watcher members continue the RootChain and the pay-outs without it. With n = 3 and MetaLeX core down, an issuer's RootChain advances only while that issuer's watcher member is up.</p>
 <h3 id="system-design--42-duties"><a class="section-link" href="#system-design--42-duties">4.2 Duties</a></h3>
 <ol>
@@ -2273,7 +2273,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><a id="invariants--R-34"></a>R-34</td>
-<td>The party custodian has no hot delegate. Roots finalize daily, so a threshold signature on each channel state costs no time that matters.</td>
+<td>The party custodian signs every channel state with the FROST party key. A FROST signing round takes one network round trip, far less than Ethereum's 12-second block time.</td>
 <td>§4.1</td>
 </tr>
 <tr>
@@ -2740,7 +2740,7 @@ tr:has(a:target) td{background:rgba(218,255,0,.14)}
 </tr>
 <tr>
 <td><strong>Party custodian</strong></td>
-<td>The watcher party's <code>HubCustodian</code>. It signs the watcher party's channel states and wrapper mints with the party key only, with no hot delegate.</td>
+<td>The watcher party's <code>HubCustodian</code>, a smart wallet. It signs the watcher party's channel states and wrapper mints with the FROST party key.</td>
 </tr>
 <tr>
 <td><strong>Channel-balance contract</strong></td>
