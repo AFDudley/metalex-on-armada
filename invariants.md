@@ -1,14 +1,13 @@
 # Requirements of the system
 
-Status: draft for review, 2026-11-09.
+Status: draft for review, 2026-11-11.
 
-This document lists every requirement that the system must keep, in two parts:
-- **I-1 to I-65** come from MetaLeX's plan, *Build MetaLeX's private chain with recovery* (`mlx`), evidence as of 8 November 2026. Each row quotes the plan.
-- **R-1 to R-46** come from Armada's design.
-
-**Acceptance.** MetaLeX accepts both lists as the requirements of the system. An objection names the ID that it concerns. Section numbers in the last columns refer to `system-design.md`. Terms follow `glossary.md`.
+The system must keep 65 requirements from MetaLeX's plan (I-1 to I-65) and 46 from Armada's design (R-1 to R-46). MetaLeX accepts both lists as the requirements of the system, and an objection names the ID it concerns. Each group below has one sentence. Open a group to see its requirements. Section numbers refer to `system-design.md`.
 
 ## 1. From MetaLeX's plan (I-1 to I-65)
+
+<details markdown="1">
+<summary>How Armada extracted these, and the status counts</summary>
 
 **Method.** Armada extracted these from `mlx` in one reading. Each row quotes the `mlx` sentence that states the invariant. A script checked that every quotation occurs verbatim in the plan's text. The extraction can still have missed an invariant. A second, independent reading is the check for that.
 
@@ -23,7 +22,15 @@ This document lists every requirement that the system must keep, in two parts:
 | Build | 20 |
 | Partial | 1 |
 
+</details>
+
+
 ### Protocol and portability
+
+The unchanged Cybercorps contracts run in an embedded EVM with a pinned release, and each issuer state has its own chain ID.
+
+<details markdown="1">
+<summary>I-1 to I-9 (9 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -37,7 +44,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-8"></a>I-8 | The pilot creates fresh companies; no migration or silent upgrade of legacy flows | "it does not migrate existing companies or silently upgrade legacy/v4 flows" | §1, "Source capability and deployed capability remain separate" | Design | Deployment policy: fresh companies only. |
 | <a id="I-9"></a>I-9 | Upgrades are constrained by factory reference implementations; no arbitrary issuer recovery code | "Existing upgrade methods do not allow arbitrary issuer recovery code." | §2, Table 04 | Design | Enforced by the unchanged factory and beacon contracts. |
 
+</details>
+
+
 ### Authority
+
+Operator keys and data keys hold no corporate authority, and the recovery operator cannot create balances or sign for a user.
+
+<details markdown="1">
+<summary>I-10 to I-13 (4 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -46,7 +61,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-12"></a>I-12 | The recovery operator cannot invent balances, sign as users or choose beneficiaries | "No power to invent balances, sign as users or choose beneficiaries" | §4, Table 07 | Partial | The recovery operator alone cannot sign a root: the party key needs a two-thirds majority of shares (§4.1). With one other watcher member it can sign a root that misaccounts. That root binds them, holders detect it, and the conservation proof catches supply that is not backed (§11). Watcher members hold no user keys. |
 | <a id="I-13"></a>I-13 | Data keys never authorize transactions, registry signatures or bridge releases | "Data keys never authorize transactions, registry signatures or bridge releases." | §3, "Specify the bundle before building its exporter" | Design | No data keys exist: blob data is blinded, not encrypted (§7). |
 
+</details>
+
+
 ### LET and scrip
+
+Scrip is locked, not burned, when it leaves the issuer state, and LET custody and legal ownership stay as the contracts define them.
+
+<details markdown="1">
+<summary>I-14 to I-23 (10 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -61,7 +84,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-22"></a>I-22 | Preserve the raw pool state; attribution never exceeds the aggregate; ERC20 transfers do not move attribution | "ERC20 transfers do not transfer LET attribution." | §2, "Execute and reconcile the full round trip" | Design | Contract rule, unchanged. |
 | <a id="I-23"></a>I-23 | Do not assert exact equality between token supply and underlying units under floor rounding | "do not assert exact equality between all token supply and underlying units" | §2, "Execute and reconcile the full round trip" | Design | Accounting rule of `mlx`, unchanged. |
 
+</details>
+
+
 ### Bridge accounting
+
+Locked scrip equals wrapper supply plus pending locks and returns, and the conservation proof shows this at each root.
+
+<details markdown="1">
+<summary>I-24 to I-27 (4 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -70,7 +101,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-26"></a>I-26 | A donation raises B and X only, never mint authority or liabilities | "An unsolicited donation increases B and X, never wrapper mint authority or bridge liabilities." | §2, "Execute and reconcile the full round trip" | Build | Same. |
 | <a id="I-27"></a>I-27 | Keep explicit liabilities; never infer issuance from an escrow balance | "Maintain liabilities rather than inferring issuance from an escrow balance." | §2, "Execute and reconcile the full round trip" | Build | Same. |
 
+</details>
+
+
 ### Bridge messages
+
+Each lock and return record binds every message field, waits for finality, and has exactly one disposition.
+
+<details markdown="1">
+<summary>I-28 to I-33 (6 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -81,7 +120,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-32"></a>I-32 | Wait for source finality; no unbacked supply after a reorg | "Waits for finality; authenticated completion/refund; no unbacked supply." | §5, Table 10 | Design | The party custodian mints only for locks in hard-final batches, and the RootChain accepts one successor per root (§5.1, §5.4, §6.1). No L1 check enforces the first rule; the signed mint record binds the watcher party (§11). |
 | <a id="I-33"></a>I-33 | Message statuses are independent facts | "these are independent facts, not one green checkmark" | §2, "Execute and reconcile the full round trip" | Design | `mlx`'s six statuses map onto the scrip lock's states, with message-proven replaced by the watcher party's signed record (§5.4). |
 
+</details>
+
+
 ### Privacy and access
+
+Each issuer's records are in a separate state, and every read is scoped by the contracts' own authority.
+
+<details markdown="1">
+<summary>I-34 to I-41 (8 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -94,7 +141,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-40"></a>I-40 | No user credential in a shared client cache; fail closed | "fail closed on private-chain authentication failure" | §4, "Adapt actual application transports and call paths" | Build | MetaLeX app transport changes and the party RPC's request signatures (`mlx` A1, §8.1, §8.5). |
 | <a id="I-41"></a>I-41 | Promise protected record access, not zero observable information | "promise protected record access rather than zero observable information" | §4, "Isolate issuers without changing the EVM state model" | Design | Stated scope. Blob data reveals change counts, timing, and that the same position changed again (§7). |
 
+</details>
+
+
 ### Recovery
+
+A root is final only after t watcher members store its batch, and any t watcher members continue with no promotion step.
+
+<details markdown="1">
+<summary>I-42 to I-51 (10 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -109,7 +164,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-50"></a>I-50 | Pause new writes when independent recoverability falls behind | "Pause new writes operationally when independent recoverability falls behind its configured threshold" | §3, "P2 recovery is operational; P3 adds enforceable departure" | Design | Recoverability is a precondition of hard finality: t watcher members store a batch before it is signed (§4.2). Nothing outside the issuer state depends on a batch before that (§5.1). |
 | <a id="I-51"></a>I-51 | No atomicity between chain and database is implied | "Do not imply cross-chain/database atomicity." | §3, "Specify the bundle before building its exporter" | Design | Stated scope. |
 
+</details>
+
+
 ### Issuer records
+
+The issuer holds its full state and history, and completeness without the zkEVM is labelled attested.
+
+<details markdown="1">
+<summary>I-52 to I-58 (7 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -121,7 +184,15 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-57"></a>I-57 | A signature over a manifest hash does not prove the manifest is complete or matches accepted state | "does not prove that manifest is complete or corresponds to the accepted EVM state" | §3, "P2 recovery is operational; P3 adds enforceable departure" | Design | The party signs the state root, `eventsRoot` and the blob hashes (§6.1). The signature binds the data. It does not show that the state follows from the previous root (§11). |
 | <a id="I-58"></a>I-58 | Do not publish hashes of guessable personal data | "publishing hashes of guessable personal data can disclose information" | §3, "Specify the bundle before building its exporter" | Design | No hashes of unsalted data are published: every leaf and position is salted (§3, §7). |
 
+</details>
+
+
 ### Departure (P3)
+
+An issuer can move to a successor watcher party, and every outstanding item gets exactly one disposition.
+
+<details markdown="1">
+<summary>I-59 to I-64 (6 requirements)</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
@@ -132,61 +203,210 @@ This document lists every requirement that the system must keep, in two parts:
 | <a id="I-63"></a>I-63 | Old collateral is not released while successor backing is also created | "Old collateral cannot be released while successor backing is also created." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Build | The successor backs the outstanding wrapper notes. The old RootChain is Retired and unlocks nothing (§5.5, §10). |
 | <a id="I-64"></a>I-64 | New actions use fresh signature domains; old signatures remain evidence | "New actions use fresh signature domains; old signatures remain historical evidence." | §3, "P2 recovery is operational; P3 adds enforceable departure" | Design | A successor has a new `chainid`, so new signature domains (§3). |
 
+</details>
+
+
 ### Interface parity
+
+Every interface reads and writes through the same authority-scoped party RPC.
+
+<details markdown="1">
+<summary>I-65</summary>
 
 | ID | Invariant | `mlx` text | Location | Status | How this design holds it |
 |---|---|---|---|---|---|
 | <a id="I-65"></a>I-65 | An independently hosted interface gets equivalent reads, submission, fees and treatment | "Equivalent authorized reads/submission, fees and treatment." | §5, Table 10 | Design | The party RPC is the one authority-scoped interface, for MetaLeX's app and any other (§8.1, §8.5). |
 
+</details>
+
+
 ## 2. From Armada's design (R-1 to R-46)
 
-These are the design requirements that Armada sets for the system. Each is written in the terms of `glossary.md`.
+### Protocol and execution
+
+The contracts run unchanged in the nimbus EVM inside each watcher member's harness, with no fallback paths.
+
+<details markdown="1">
+<summary>R-1, R-12, R-45 (3 requirements)</summary>
 
 | ID | Requirement | Where the design holds it |
 |---|---|---|
 | <a id="R-1"></a>R-1 | Each watcher member runs the Cybercorps contracts in an EVM embedded in its harness. No external node. | §3 |
+| <a id="R-12"></a>R-12 | No fallbacks. Every component is a typed state machine with guarded transitions. | §5 |
+| <a id="R-45"></a>R-45 | The EVM is the nimbus EVM. The server, the browser and the mobile app run one EVM, on the same runtime as Armada's light client. | §3 |
+
+</details>
+
+
+### Operators and keys
+
+Each issuer has one watcher party with a two-thirds-majority FROST key, and liveness never depends on the MetaLeX hub.
+
+<details markdown="1">
+<summary>R-2, R-3, R-6, R-14, R-27, R-34, R-38, R-42 (8 requirements)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
 | <a id="R-2"></a>R-2 | Each issuer has its own watcher party, and the set of watcher parties holds I-46. | §4.1 |
 | <a id="R-3"></a>R-3 | Each party bond is an armada-nitro channel on L1. | §4.4 |
-| <a id="R-4"></a>R-4 | Confidentiality comes from one state per issuer, blinded blob data and the watcher parties, not from an access gateway. | §3, §7 |
-| <a id="R-5"></a>R-5 | Value moves into and out of an issuer state only through armada-nitro. | §9 |
 | <a id="R-6"></a>R-6 | The MetaLeX hub is a watcher member of every party, and the system's liveness never depends on it. Any t watcher members continue the RootChain and the pay-outs without it. | §4.1 |
-| <a id="R-7"></a>R-7 | ZisK stays a candidate zkVM. | §11 |
-| <a id="R-8"></a>R-8 | The tree hash is pluggable, and the documents state why each hash is better or worse. | §13 |
-| <a id="R-9"></a>R-9 | Blinded blob data on L1 lets holders use self-help without any watcher member. Plaintext availability rests on t watcher members. | §4.2, §7 |
-| <a id="R-10"></a>R-10 | Each batch commits to an events root. | §3, §8 |
-| <a id="R-11"></a>R-11 | No party other than an asset holder can start an action against that holder's assets. | §1 |
-| <a id="R-12"></a>R-12 | No fallbacks. Every component is a typed state machine with guarded transitions. | §5 |
-| <a id="R-13"></a>R-13 | Funding a channel with the watcher party needs a working hub: the MetaLeX hub or an issuer's hub. | §9.1 |
 | <a id="R-14"></a>R-14 | Each watcher party anchors one issuer RootChain. The issuer state holds only assets that the watcher party issues. All value is armada-nitro assets. | §2, §3, §9 |
-| <a id="R-15"></a>R-15 | The party RPC gives each holder its records and proofs. If the issuer, MetaLeX core and the recovery operator all fail, blob data on L1 lets the holder use self-help. | §7, §8 |
-| <a id="R-16"></a>R-16 | Blob data is blinded tree data, not ciphertext. Breaking it reveals no record. | §7 |
-| <a id="R-17"></a>R-17 | An issuer with no transactions publishes no blob. | §5.2, §6.2 |
-| <a id="R-18"></a>R-18 | Daily aggregation by MetaLeX core is the default. | §6.2 |
-| <a id="R-19"></a>R-19 | Delivery to holders is through the party RPC. | §8.1 |
-| <a id="R-20"></a>R-20 | The MetaLeX hub mediates authentication by supplying user IDs to each issuer state. | §8.1 |
-| <a id="R-21"></a>R-21 | A user signs its own requests to the party RPC, and the MetaLeX hub is not in the request path. | §8.1 |
-| <a id="R-22"></a>R-22 | The issuer sees every counterparty's private data. No counterparty sees another counterparty's private data. | §8.4 |
-| <a id="R-23"></a>R-23 | The zkEVM matters for completeness, but it is out of scope because of its operating cost. | §11 |
+| <a id="R-27"></a>R-27 | The watcher party is an entity. The MetaLeX hub is an entity distinct from MetaLeX, the company. | §2, §4 |
+| <a id="R-34"></a>R-34 | The party custodian signs every channel state with the FROST party key. A FROST signing round takes one network round trip, far less than Ethereum's 12-second block time. | §4.1 |
+| <a id="R-38"></a>R-38 | The party-key threshold is a two-thirds majority, a tunable parameter. Without MetaLeX core, an issuer's RootChain advances only while that issuer's watcher member is up. | §4.1 |
+| <a id="R-42"></a>R-42 | Equivocation is the standard rule: two signed successors of one root. | §4.4 |
+
+</details>
+
+
+### Authority
+
+Only an asset's holder can start an action against that asset.
+
+<details markdown="1">
+<summary>R-11 (1 requirement)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-11"></a>R-11 | No party other than an asset holder can start an action against that holder's assets. | §1 |
+
+</details>
+
+
+### Value and payments
+
+All value stays in armada-nitro, and the issuer state sees USDC only as channel balances.
+
+<details markdown="1">
+<summary>R-5, R-13, R-24, R-25, R-26, R-29, R-30, R-35, R-41, R-46 (10 requirements)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-5"></a>R-5 | Value moves into and out of an issuer state only through armada-nitro. | §9 |
+| <a id="R-13"></a>R-13 | Funding a channel with the watcher party needs a working hub: the MetaLeX hub or an issuer's hub. | §9.1 |
 | <a id="R-24"></a>R-24 | The ERC20 that the Cybercorps contracts pull is a view of armada-nitro. Each balance is USDC that a holder paid to the watcher party and has not withdrawn. | §9.2 |
 | <a id="R-25"></a>R-25 | A payment to the issuer ends as a note owned by the issuer's identity, and a payout record in the issuer state points to it. | §9.2, §9.4 |
 | <a id="R-26"></a>R-26 | Every signed act of the watcher party is a binding commitment, even if a later root fails to account for it. The zkEVM adds conservation; the signature already commits the watcher party to n shares for y USDC. | §9.2, §11 |
-| <a id="R-27"></a>R-27 | The watcher party is an entity. The MetaLeX hub is an entity distinct from MetaLeX, the company. | §2, §4 |
-| <a id="R-28"></a>R-28 | A conservation proof, verified off chain, shows conservation of the wrapper without the zkEVM. | §11 |
 | <a id="R-29"></a>R-29 | A hub names the wrapper factory in its asset list, so issuer wrappers need no per-token listing. | §10 |
 | <a id="R-30"></a>R-30 | Value moves as routed payments, which are atomic. No fronting and no hash lock. | §9.3 |
-| <a id="R-31"></a>R-31 | The party RPC's standard endpoint and the browser absorb most changes to MetaLeX's web app. Each watcher party does its own indexing. | §8.6 |
-| <a id="R-32"></a>R-32 | MetaLeX accepts the invariants, and the invariants show which come from MetaLeX's plan and which from the operator's design requirements. | `metalex/invariants.md` |
-| <a id="R-33"></a>R-33 | Most users use the website. Users who want to keep their records use Armada's mobile app, which contains the website and a watcher. Browser storage holds the same data, but it is more easily deleted. | §7, §8.3 |
-| <a id="R-34"></a>R-34 | The party custodian signs every channel state with the FROST party key. A FROST signing round takes one network round trip, far less than Ethereum's 12-second block time. | §4.1 |
 | <a id="R-35"></a>R-35 | A buyer's USDC stays in armada-nitro. Paying in moves it to the watcher party's allocation in the buyer's own channel. No app reads an issuer root, because the signatures are binding. | §9.2 |
-| <a id="R-36"></a>R-36 | MetaLeX is a plaintext audience through the MetaLeX hub. | §4.1, §8.4 |
-| <a id="R-37"></a>R-37 | The MetaLeX hub runs watchtowers for website users by default. The recovery operator may run them too. The mobile app runs its own. | §9.1 |
-| <a id="R-38"></a>R-38 | The party-key threshold is a two-thirds majority, a tunable parameter. Without MetaLeX core, an issuer's RootChain advances only while that issuer's watcher member is up. | §4.1 |
-| <a id="R-39"></a>R-39 | A departure uses the holders' own stores and the MetaLeX hub's copy of the state. Nothing is imported on L1. | §5.5 |
-| <a id="R-40"></a>R-40 | A payer whose write is refused gets no asset and has no L1 remedy. Its evidence goes to MetaLeX. | §8.5 |
 | <a id="R-41"></a>R-41 | The adjudicator works as normal, and no channel state is published. | §9.2 |
-| <a id="R-42"></a>R-42 | Equivocation is the standard rule: two signed successors of one root. | §4.4 |
-| <a id="R-43"></a>R-43 | Publishing is aggregated: once per day, one root of party roots and the blobs of all parties, packed by size. | §6.2, §7 |
-| <a id="R-44"></a>R-44 | Third parties verify the conservation proof independently, with a tool that reads a root and the wrapper's supply from L1. | §11 |
-| <a id="R-45"></a>R-45 | The EVM is the nimbus EVM. The server, the browser and the mobile app run one EVM, on the same runtime as Armada's light client. | §3 |
 | <a id="R-46"></a>R-46 | The issuer state reads armada-nitro through a system contract, the channel-balance contract. The watcher party updates it from co-signed states it receives over Nitro p2p. | §9.2 |
+
+</details>
+
+
+### Privacy
+
+Confidentiality comes from one state per issuer, blinded blob data and the watcher parties.
+
+<details markdown="1">
+<summary>R-4, R-16, R-22, R-36 (4 requirements)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-4"></a>R-4 | Confidentiality comes from one state per issuer, blinded blob data and the watcher parties, not from an access gateway. | §3, §7 |
+| <a id="R-16"></a>R-16 | Blob data is blinded tree data, not ciphertext. Breaking it reveals no record. | §7 |
+| <a id="R-22"></a>R-22 | The issuer sees every counterparty's private data. No counterparty sees another counterparty's private data. | §8.4 |
+| <a id="R-36"></a>R-36 | MetaLeX is a plaintext audience through the MetaLeX hub. | §4.1, §8.4 |
+
+</details>
+
+
+### Holder access and self-help
+
+Each holder reads and proves its own records against roots on Ethereum, with or without an operator.
+
+<details markdown="1">
+<summary>R-9, R-10, R-15, R-19, R-20, R-21, R-31, R-33, R-37 (9 requirements)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-9"></a>R-9 | Blinded blob data on L1 lets holders use self-help without any watcher member. Plaintext availability rests on t watcher members. | §4.2, §7 |
+| <a id="R-10"></a>R-10 | Each batch commits to an events root. | §3, §8 |
+| <a id="R-15"></a>R-15 | The party RPC gives each holder its records and proofs. If the issuer, MetaLeX core and the recovery operator all fail, blob data on L1 lets the holder use self-help. | §7, §8 |
+| <a id="R-19"></a>R-19 | Delivery to holders is through the party RPC. | §8.1 |
+| <a id="R-20"></a>R-20 | The MetaLeX hub mediates authentication by supplying user IDs to each issuer state. | §8.1 |
+| <a id="R-21"></a>R-21 | A user signs its own requests to the party RPC, and the MetaLeX hub is not in the request path. | §8.1 |
+| <a id="R-31"></a>R-31 | The party RPC's standard endpoint and the browser absorb most changes to MetaLeX's web app. Each watcher party does its own indexing. | §8.6 |
+| <a id="R-33"></a>R-33 | Most users use the website. Users who want to keep their records use Armada's mobile app, which contains the website and a watcher. Browser storage holds the same data, but it is more easily deleted. | §7, §8.3 |
+| <a id="R-37"></a>R-37 | The MetaLeX hub runs watchtowers for website users by default. The recovery operator may run them too. The mobile app runs its own. | §9.1 |
+
+</details>
+
+
+### Publishing
+
+Once a day, one transaction posts all roots and the blinded data, and an issuer with no changes posts nothing.
+
+<details markdown="1">
+<summary>R-8, R-17, R-18, R-43 (4 requirements)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-8"></a>R-8 | The tree hash is pluggable, and the documents state why each hash is better or worse. | §13 |
+| <a id="R-17"></a>R-17 | An issuer with no transactions publishes no blob. | §5.2, §6.2 |
+| <a id="R-18"></a>R-18 | Daily aggregation by MetaLeX core is the default. | §6.2 |
+| <a id="R-43"></a>R-43 | Publishing is aggregated: once per day, one root of party roots and the blobs of all parties, packed by size. | §6.2, §7 |
+
+</details>
+
+
+### Trust without the zkEVM
+
+The zkEVM is out of scope because of its operating cost, and a public conservation proof covers the wrapper.
+
+<details markdown="1">
+<summary>R-7, R-23, R-28, R-44 (4 requirements)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-7"></a>R-7 | ZisK stays a candidate zkVM. | §11 |
+| <a id="R-23"></a>R-23 | The zkEVM matters for completeness, but it is out of scope because of its operating cost. | §11 |
+| <a id="R-28"></a>R-28 | A conservation proof, verified off chain, shows conservation of the wrapper without the zkEVM. | §11 |
+| <a id="R-44"></a>R-44 | Third parties verify the conservation proof independently, with a tool that reads a root and the wrapper's supply from L1. | §11 |
+
+</details>
+
+
+### Departure
+
+A departure uses the holders' own stores and imports nothing on Ethereum.
+
+<details markdown="1">
+<summary>R-39 (1 requirement)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-39"></a>R-39 | A departure uses the holders' own stores and the MetaLeX hub's copy of the state. Nothing is imported on L1. | §5.5 |
+
+</details>
+
+
+### Limits
+
+A refused write has no remedy on Ethereum.
+
+<details markdown="1">
+<summary>R-40 (1 requirement)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-40"></a>R-40 | A payer whose write is refused gets no asset and has no L1 remedy. Its evidence goes to MetaLeX. | §8.5 |
+
+</details>
+
+
+### Acceptance
+
+MetaLeX accepts both lists, and each requirement shows where it comes from.
+
+<details markdown="1">
+<summary>R-32 (1 requirement)</summary>
+
+| ID | Requirement | Where the design holds it |
+|---|---|---|
+| <a id="R-32"></a>R-32 | MetaLeX accepts the invariants, and the invariants show which come from MetaLeX's plan and which from the operator's design requirements. | `metalex/invariants.md` |
+
+</details>
+
